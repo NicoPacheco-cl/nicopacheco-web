@@ -1,5 +1,7 @@
 import Image from 'next/image';
 import ContactForm from './ContactForm';
+import Mosaico from './Mosaico';
+import Garabatos from './Garabatos';
 import {
   respaldo,
   servicios,
@@ -132,33 +134,13 @@ export default function Home() {
         {/* SERVICIOS */}
         <section id="servicios" className="servicios" aria-labelledby="titulo-servicios">
           <div className="contenedor">
-            <div className="seccion-cabeza">
-              <Titulo id="titulo-servicios" fuerte="MIS" suave="servicios" />
-              <p>Elige según lo que quieres lograr. Si no sabes por dónde partir, parte por el Diagnóstico Pyme.</p>
-            </div>
-            {servicios.map((grupo) => (
-              <div className="grupo" key={grupo.id}>
-                <h3 className="grupo-titulo">{grupo.necesidad}</h3>
-                <ul className="tarjetas">
-                  {grupo.items.map((s) => (
-                    <li key={s.id} id={s.id} className="tarjeta">
-                      <h4>{s.nombre}</h4>
-                      <p className="tarjeta-resena">{s.resena}</p>
-                      <div className="tarjeta-importancia">
-                        <span>Por qué importa</span>
-                        <p>{s.importancia}</p>
-                      </div>
-                      <div className="tarjeta-pie">
-                        <span className="precio">{s.precio}</span>
-                        <a href={s.href ?? contacto(s.id)} className="btn btn-negro btn-chico">
-                          {s.accion}
-                        </a>
-                      </div>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
+            <p className="rotulo">Líneas de negocio</p>
+            <Titulo id="titulo-servicios" fuerte="MIS" suave="servicios" claro />
+            <Mosaico items={servicios.flatMap((g) => g.items).filter((i) => i.mosaico)} />
+            <p className="servicios-nota">
+              Toca un servicio para ver el detalle y el valor. Si no sabes por dónde partir, parte por el
+              Diagnóstico Pyme.
+            </p>
           </div>
         </section>
 
@@ -309,26 +291,32 @@ export default function Home() {
 
         {/* SOBRE MÍ */}
         <section id="sobre-mi" className="sobre" aria-labelledby="titulo-sobre">
-          <div className="contenedor sobre-grilla">
-            <div className="sobre-foto">
-              <Image
-                src="/fotos/recortes/nico-sentado.png"
-                alt="Nico Pacheco sentado, con chaqueta azul de terciopelo"
-                width={1100}
-                height={1482}
-                sizes="(max-width: 860px) 70vw, 340px"
-              />
-            </div>
-            <div className="sobre-texto">
-              <Titulo id="titulo-sobre" fuerte="SOBRE" suave="mí" />
+          <div className="sobre-escena">
+            <Garabatos />
+            <Image
+              src="/fotos/sobre-mi-azul-mesa.jpg"
+              alt="Nico Pacheco con chaqueta azul, sonriendo"
+              width={1800}
+              height={1617}
+              sizes="(max-width: 860px) 100vw, 720px"
+              className="sobre-retrato"
+            />
+          </div>
+          <div className="contenedor sobre-texto">
+            <p className="rotulo" id="titulo-sobre">
+              Sobre mí
+            </p>
+            <p className="sobre-grande">
+              Dueños de pymes que trabajan todo el día y aun así no ven crecer su negocio. No por falta
+              de esfuerzo, sino por números que nadie les enseñó a leer. Por eso hago lo que hago:
+              ayudar a que tu negocio gane más, valga más y se pueda vender.
+            </p>
+            <div className="sobre-detalle">
               <p>
                 Soy director de empresas, mentor y conferencista. He dirigido negocios de gastronomía,
-                hotelería y turismo en el sur de Chile, y llevé una cadena de comida rápida saludable
-                a 14 franquicias.
-              </p>
-              <p>
-                Tengo un MBA de la Universidad Europea de Madrid y un Mágister en Dirección Comercial,
-                Marketing e Innovación de la Universidad Andrés Bello.
+                hotelería y turismo en el sur de Chile, y llevé una cadena de comida rápida saludable a
+                14 franquicias. Tengo un MBA de la Universidad Europea de Madrid y un Mágister en
+                Dirección Comercial, Marketing e Innovación de la Universidad Andrés Bello.
               </p>
               <p className="sobre-medios">
                 Me han entrevistado en {medios.slice(0, -1).join(', ')} y {medios.at(-1)}.

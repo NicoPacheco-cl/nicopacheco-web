@@ -51,6 +51,7 @@ export const servicios = [
     items: [
       {
         id: 'diagnostico',
+        mosaico: { titulo: 'Diagnóstico Pyme', etiqueta: 'Diagnóstico', fondo: '#123a2c', marca: '90 DÍAS' },
         nombre: 'Diagnóstico Pyme',
         resena:
           'En una sesión revisamos tus ventas, costos, márgenes y flujo de caja. Te entrego un informe con lo que está funcionando, lo que se está perdiendo y las tres prioridades para los próximos 90 días.',
@@ -62,6 +63,7 @@ export const servicios = [
       },
       {
         id: 'mentoring',
+        mosaico: { titulo: 'Mentoring', etiqueta: 'Asesoría 1 a 1', fondo: '#0f2a6b', marca: '1 A 1' },
         nombre: 'Mentoring para dueños y gerentes',
         resena:
           'Sesiones uno a uno para trabajar tu propuesta de valor, tu modelo de negocio, tus finanzas y la gestión de tu equipo, con tareas concretas entre una sesión y otra.',
@@ -72,6 +74,7 @@ export const servicios = [
       },
       {
         id: 'directorio-pyme',
+        mosaico: { titulo: 'Directorio PYME', etiqueta: 'Gobierno corporativo', fondo: '#2a2a2a', marca: 'DIRECTORIO' },
         nombre: 'Directorio PYME',
         resena:
           'Un directorio externo para tu empresa: una reunión mensual para revisar metas, números y decisiones clave, como en las grandes compañías.',
@@ -88,6 +91,7 @@ export const servicios = [
     items: [
       {
         id: 'valorizacion',
+        mosaico: { titulo: 'Valorización', etiqueta: 'Compraventa', fondo: '#5a5a5a', marca: 'VALOR' },
         nombre: 'Valorización de empresa',
         resena:
           'Un informe con el valor de mercado de tu negocio, calculado con el mismo método que usamos en Portal Comercios, y lo que puedes mejorar para que valga más.',
@@ -99,6 +103,7 @@ export const servicios = [
       },
       {
         id: 'derecho-de-llave',
+        mosaico: { titulo: 'Derechos de llave', etiqueta: 'Compraventa', fondo: '#151b2b', marca: 'LLAVE' },
         nombre: 'Venta de derechos de llave',
         resena:
           'Preparo tu negocio para la venta, fijamos un precio defendible, buscamos compradores y te acompaño en la negociación hasta el cierre.',
@@ -115,6 +120,7 @@ export const servicios = [
     items: [
       {
         id: 'franquicias',
+        mosaico: { titulo: 'Franquicias', etiqueta: 'Expansión', fondo: '#4a4a4a', marca: 'FRANQUICIA' },
         nombre: 'Asesoría en franquicias',
         resena:
           'Evaluamos si tu negocio es franquiciable y construimos el modelo completo: números del franquiciado, manuales de operación, contrato y plan de expansión.',
