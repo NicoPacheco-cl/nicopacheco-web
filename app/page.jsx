@@ -294,10 +294,10 @@ export default function Home() {
           <div className="sobre-escena">
             <Garabatos />
             <Image
-              src="/fotos/sobre-mi-azul-mesa.jpg"
-              alt="Nico Pacheco con chaqueta azul, sonriendo"
+              src="/fotos/servicios-azul-frontal.jpg"
+              alt="Nico Pacheco con chaqueta azul, de frente y con las manos sobre la mesa"
               width={1800}
-              height={1617}
+              height={1553}
               sizes="(max-width: 860px) 100vw, 720px"
               className="sobre-retrato"
             />

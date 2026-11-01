@@ -1171,8 +1171,12 @@ a {
   z-index: 1;
   width: min(78%, 620px);
   margin-inline: auto;
-  -webkit-mask-image: radial-gradient(ellipse 58% 62% at 50% 40%, #000 55%, transparent 100%);
-  mask-image: radial-gradient(ellipse 58% 62% at 50% 40%, #000 55%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 12%, #000 58%, transparent 82%),
+    linear-gradient(to right, transparent 2%, #000 22%, #000 78%, transparent 98%);
+  -webkit-mask-composite: source-in;
+  mask-image: linear-gradient(to bottom, transparent 0%, #000 12%, #000 58%, transparent 82%),
+    linear-gradient(to right, transparent 2%, #000 22%, #000 78%, transparent 98%);
+  mask-composite: intersect;
 }
 
 .garabatos {
@@ -1280,7 +1284,7 @@ a {
     padding-top: 3rem;
   }
   .sobre-retrato {
-    width: 82%;
+    width: 100%;
   }
   .g {
     width: 22%;
