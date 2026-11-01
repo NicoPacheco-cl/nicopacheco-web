@@ -2,15 +2,15 @@ import Image from 'next/image';
 import ContactForm from './ContactForm';
 import {
   nav,
-  medios,
-  cifras,
-  resultados,
+  respaldo,
+  problemas,
   servicios,
+  pasos,
   tienda,
   charlas,
   entradas,
   trayectoria,
-  prensa,
+  medios,
   LINKEDIN,
   wa,
 } from './data';
@@ -58,86 +58,52 @@ export default function Home() {
         <section id="inicio" className="portada">
           <div className="contenedor portada-grilla">
             <div className="portada-texto">
-              <p className="portada-quien">Mentor de pymes, director de empresas y conferencista</p>
-              <h1>Hago que tu pyme gane más, valga más y se pueda vender.</h1>
+              <h1>Tu pyme puede ganar más, valer más y venderse mejor.</h1>
               <p className="portada-bajada">
-                Llevé una cadena de comida a 14 franquicias y una valorización de USD 12 millones.
-                Hoy acompaño a dueños de negocios en Chile a ordenar sus números, crecer y salir
-                bien parados cuando venden.
+                Mentoring, finanzas y estrategia para dueños de negocios en Chile, con
+                especialidad en gastronomía, compraventa de negocios y franquicias.
               </p>
               <div className="botones">
                 <a href={contacto('diagnostico')} className="btn btn-verde">
                   Agenda tu Diagnóstico Pyme
                 </a>
-                <a href={contacto('planilla-gratis')} className="btn btn-linea-clara">
+                <a href={contacto('planilla-gratis')} className="btn btn-linea">
                   Pide gratis la planilla de flujo de caja
                 </a>
               </div>
             </div>
-            <figure className="portada-foto">
+            <div className="portada-foto">
               <Image
-                src="/fotos/hero-movil.jpg"
-                alt="Retrato de Nico Pacheco con chaqueta azul de terciopelo"
-                width={1200}
-                height={1800}
+                src="/fotos/recortes/nico-brazos-cruzados.png"
+                alt="Nico Pacheco, mentor de pymes"
+                width={1067}
+                height={1600}
                 priority
-                sizes="(max-width: 860px) 70vw, 420px"
+                sizes="(max-width: 860px) 60vw, 380px"
               />
-            </figure>
-          </div>
-          <div className="medios">
-            <div className="contenedor medios-fila">
-              <p>Me han entrevistado en</p>
-              <ul>
-                {medios.map((m) => (
-                  <li key={m}>{m}</li>
-                ))}
-              </ul>
             </div>
+          </div>
+          <div className="respaldo">
+            <ul className="contenedor">
+              {respaldo.map((r) => (
+                <li key={r}>{r}</li>
+              ))}
+            </ul>
           </div>
         </section>
 
-        {/* RESULTADOS */}
-        <section className="resultados" aria-labelledby="titulo-resultados">
+        {/* PROBLEMAS */}
+        <section className="problemas" aria-labelledby="titulo-problemas">
           <div className="contenedor">
-            <div className="resultados-encabezado">
-              <h2 id="titulo-resultados">Lo que pasó en los negocios que dirigí</h2>
-              <p>
-                No vengo de la teoría: estos son resultados de empresas donde fui gerente o director.
-              </p>
-            </div>
-            <div className="libro" role="table" aria-label="Resultados por empresa">
-              <div className="libro-fila libro-cabeza" role="row">
-                <span role="columnheader">Empresa</span>
-                <span role="columnheader">Indicador</span>
-                <span role="columnheader" className="num">Antes</span>
-                <span role="columnheader" className="num">Después</span>
-                <span role="columnheader" className="num">Plazo</span>
-              </div>
-              {resultados.map((r) => (
-                <div className="libro-fila" role="row" key={r.empresa + r.indicador}>
-                  <span role="cell" className="libro-empresa">
-                    <strong>{r.empresa}</strong>
-                    <small>{r.rubro}</small>
-                  </span>
-                  <span role="cell">{r.indicador}</span>
-                  <span role="cell" className="num libro-antes">
-                    {r.antes || '—'}
-                  </span>
-                  <span role="cell" className="num libro-despues">
-                    {r.despues}
-                  </span>
-                  <span role="cell" className="num libro-plazo">
-                    {r.plazo}
-                  </span>
-                </div>
-              ))}
-            </div>
-            <ul className="cifras">
-              {cifras.map((c) => (
-                <li key={c.texto}>
-                  <span className="cifra-valor">{c.valor}</span>
-                  <span className="cifra-texto">{c.texto}</span>
+            <h2 id="titulo-problemas">¿Te suena alguna de estas?</h2>
+            <ul className="problemas-lista">
+              {problemas.map((p) => (
+                <li key={p.frase}>
+                  <p className="problema-frase">{p.frase}</p>
+                  <p className="problema-respuesta">{p.respuesta}</p>
+                  <a href={p.href} className="enlace">
+                    {p.accion}
+                  </a>
                 </li>
               ))}
             </ul>
@@ -146,49 +112,56 @@ export default function Home() {
 
         {/* SERVICIOS */}
         <section id="servicios" className="servicios" aria-labelledby="titulo-servicios">
-          <div className="contenedor servicios-grilla">
-            <div className="servicios-intro">
-              <h2 id="titulo-servicios">¿Qué necesita tu negocio?</h2>
+          <div className="contenedor">
+            <div className="encabezado">
+              <h2 id="titulo-servicios">Servicios</h2>
               <p>Elige según lo que quieres lograr. Si no sabes por dónde partir, parte por el Diagnóstico Pyme.</p>
-              <Image
-                src="/fotos/servicios-azul-frontal.jpg"
-                alt="Nico Pacheco sentado a la mesa, de frente"
-                width={1800}
-                height={1553}
-                sizes="(max-width: 860px) 100vw, 360px"
-                className="servicios-foto"
-              />
             </div>
-            <div className="servicios-lista">
-              {servicios.map((grupo) => (
-                <div className="grupo" key={grupo.id} id={grupo.id}>
-                  <h3>{grupo.necesidad}</h3>
-                  <ul>
-                    {grupo.items.map((s) => (
-                      <li key={s.id} className="servicio">
-                        <div>
-                          <h4>{s.nombre}</h4>
-                          <p>{s.detalle}</p>
-                        </div>
-                        <div className="servicio-accion">
-                          <span className="precio">{s.precio}</span>
-                          <a href={s.href ?? contacto(s.id)} className="btn btn-oscuro btn-chico">
-                            {s.accion}
-                          </a>
-                        </div>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+            {servicios.map((grupo) => (
+              <div className="grupo" key={grupo.id}>
+                <h3 className="grupo-titulo">{grupo.necesidad}</h3>
+                <ul className="tarjetas">
+                  {grupo.items.map((s) => (
+                    <li key={s.id} id={s.id} className={s.destacado ? 'tarjeta tarjeta-destacada' : 'tarjeta'}>
+                      <h4>{s.nombre}</h4>
+                      <p className="tarjeta-resena">{s.resena}</p>
+                      <div className="tarjeta-importancia">
+                        <span>Por qué importa</span>
+                        <p>{s.importancia}</p>
+                      </div>
+                      <div className="tarjeta-pie">
+                        <span className="precio">{s.precio}</span>
+                        <a href={s.href ?? contacto(s.id)} className="btn btn-oscuro btn-chico">
+                          {s.accion}
+                        </a>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* CÓMO TRABAJAMOS */}
+        <section className="pasos" aria-labelledby="titulo-pasos">
+          <div className="contenedor">
+            <h2 id="titulo-pasos">Cómo trabajamos</h2>
+            <ol className="pasos-lista">
+              {pasos.map((p) => (
+                <li key={p.titulo}>
+                  <h3>{p.titulo}</h3>
+                  <p>{p.texto}</p>
+                </li>
               ))}
-            </div>
+            </ol>
           </div>
         </section>
 
         {/* TIENDA */}
         <section id="tienda" className="tienda" aria-labelledby="titulo-tienda">
           <div className="contenedor">
-            <div className="tienda-encabezado">
+            <div className="encabezado">
               <h2 id="titulo-tienda">Tienda</h2>
               <p>Herramientas para ordenar los números de tu negocio desde hoy. Compras por WhatsApp y pagas con Mercado Pago.</p>
             </div>
@@ -214,7 +187,7 @@ export default function Home() {
             <aside className="regalo">
               <div>
                 <h3>Planilla de flujo de caja, gratis</h3>
-                <p>La misma que uso para partir cualquier diagnóstico. Te la envío a tu correo.</p>
+                <p>Para que veas mes a mes cuánta plata entra, cuánta sale y cuánta te queda.</p>
               </div>
               <a href={contacto('planilla-gratis')} className="btn btn-oscuro">
                 Quiero la planilla
@@ -228,7 +201,7 @@ export default function Home() {
           <div className="conferencias-foto">
             <Image
               src="/fotos/conferencias/duoc-arauco-auditorio-lleno.jpg"
-              alt="Nico Pacheco dando una conferencia ante un auditorio lleno en Duoc UC Campus Arauco"
+              alt="Conferencia ante un auditorio lleno en Duoc UC Campus Arauco"
               fill
               sizes="100vw"
             />
@@ -238,8 +211,8 @@ export default function Home() {
             <div>
               <h2 id="titulo-conferencias">Conferencias y seminarios</h2>
               <p className="conferencias-bajada">
-                Más de 50 conferencias en 10 años, en Chile, México, Argentina y Perú. Charlas con
-                historias reales de negocios, pensadas para que el público salga con un plan.
+                Charlas para empresas, universidades y gremios, con historias reales de negocios,
+                pensadas para que el público salga con un plan.
               </p>
               <ul className="charlas">
                 {charlas.map((c) => (
@@ -256,8 +229,8 @@ export default function Home() {
             <div className="seminarios">
               <h3>Seminarios para dueños de pymes</h3>
               <p>
-                Tres veces al año organizo un seminario presencial para dueños de pymes: una jornada
-                de finanzas, ventas y crecimiento, con casos reales.
+                Tres veces al año: una jornada presencial de finanzas, ventas y crecimiento, con
+                casos reales y tiempo para tus preguntas.
               </p>
               <ul className="entradas">
                 {entradas.map((e) => (
@@ -280,84 +253,67 @@ export default function Home() {
 
         {/* PODCAST */}
         <section id="podcast" className="podcast" aria-labelledby="titulo-podcast">
-          <div className="contenedor podcast-grilla">
-            <Image
-              src="/fotos/podcast-cafe-pensativo.jpg"
-              alt="Nico Pacheco pensativo, con la mano en el mentón"
-              width={1800}
-              height={1200}
-              sizes="(max-width: 860px) 100vw, 50vw"
-              className="podcast-foto"
-            />
+          <div className="contenedor podcast-caja">
             <div>
-              <h2 id="titulo-podcast">EmprendeBien, el podcast</h2>
+              <p className="podcast-nombre" aria-hidden="true">EmprendeBien</p>
+              <h2 id="titulo-podcast">El podcast para emprender con los números claros</h2>
+            </div>
+            <div>
               <p>
                 Conversaciones con dueños de negocios sobre lo que de verdad pasa al emprender: los
                 números, los errores y las decisiones que hacen crecer una empresa.
               </p>
               <p className="podcast-estado">El primer episodio se estrena pronto en YouTube.</p>
-              <a href={contacto('podcast')} className="btn btn-oscuro">
+              <a href={contacto('podcast')} className="btn btn-claro">
                 Avísame del estreno
               </a>
             </div>
           </div>
         </section>
 
-        {/* SOBRE MÍ */}
-        <section id="sobre-mi" className="sobre" aria-labelledby="titulo-sobre">
+        {/* SOBRE NICO */}
+        <section id="sobre-nico" className="sobre" aria-labelledby="titulo-sobre">
           <div className="contenedor sobre-grilla">
+            <div className="sobre-foto">
+              <Image
+                src="/fotos/recortes/nico-sentado.png"
+                alt="Nico Pacheco sentado, con chaqueta azul de terciopelo"
+                width={1100}
+                height={1482}
+                sizes="(max-width: 860px) 60vw, 300px"
+              />
+            </div>
             <div className="sobre-texto">
-              <h2 id="titulo-sobre">Sobre mí</h2>
-              <p className="sobre-lead">
-                Soy Maximiliano Pacheco, Nico para todos. Llevo 14 años dirigiendo y dando vuelta
-                negocios reales en gastronomía, hotelería y turismo.
+              <h2 id="titulo-sobre">Sobre Nico</h2>
+              <p>
+                Maximiliano “Nico” Pacheco es director de empresas, mentor y conferencista. Ha
+                dirigido negocios de gastronomía, hotelería y turismo en el sur de Chile, y llevó
+                una cadena de comida rápida saludable a 14 franquicias.
               </p>
               <p>
-                Rescaté un hotel con pérdidas, convertí un hostal en un grupo de turismo y llevé una
-                cadena de comida rápida saludable a 14 franquicias. Hoy soy director en siete
-                empresas, dirijo el programa Directorio PYME y escribo sobre emprendimiento en el
-                Diario El Llanquihue.
+                Tiene un MBA de la Universidad Europea de Madrid y un Mágister en Dirección
+                Comercial, Marketing e Innovación de la Universidad Andrés Bello.
               </p>
-              <p>
-                Tengo un MBA de la Universidad Europea de Madrid y un Mágister en Dirección
-                Comercial, Marketing e Innovación de la Universidad Andrés Bello, y curso una
-                Maestría en Economía.
+              <p className="sobre-medios">
+                Ha sido entrevistado en {medios.slice(0, -1).join(', ')} y {medios.at(-1)}.
               </p>
+              <details className="trayectoria">
+                <summary>Ver trayectoria</summary>
+                <ol>
+                  {trayectoria.map((t) => (
+                    <li key={t.periodo + t.lugar}>
+                      <span className="periodo">{t.periodo}</span>
+                      <span>
+                        <strong>{t.cargo}</strong>, {t.lugar}
+                      </span>
+                    </li>
+                  ))}
+                </ol>
+              </details>
               <a href={LINKEDIN} className="enlace" target="_blank" rel="noopener noreferrer">
-                Ver mi perfil en LinkedIn
+                Perfil en LinkedIn
               </a>
             </div>
-            <Image
-              src="/fotos/sobre-mi-azul-mesa.jpg"
-              alt="Nico Pacheco apoyado en una mesa, sonriendo"
-              width={1800}
-              height={1617}
-              sizes="(max-width: 860px) 100vw, 45vw"
-              className="sobre-foto"
-            />
-          </div>
-
-          <div className="contenedor">
-            <h3 className="subtitulo">Trayectoria</h3>
-            <ol className="linea-tiempo">
-              {trayectoria.map((t) => (
-                <li key={t.periodo + t.lugar}>
-                  <span className="periodo">{t.periodo}</span>
-                  <span className="cargo">{t.cargo}</span>
-                  <span className="lugar">{t.lugar}</span>
-                </li>
-              ))}
-            </ol>
-
-            <h3 className="subtitulo">En los medios</h3>
-            <ul className="prensa">
-              {prensa.map((p) => (
-                <li key={p.src}>
-                  <Image src={p.src} alt={p.alt} width={p.w} height={p.h} sizes="(max-width: 600px) 50vw, 220px" />
-                  <span>{p.medio}</span>
-                </li>
-              ))}
-            </ul>
           </div>
         </section>
 
@@ -367,8 +323,8 @@ export default function Home() {
             <div>
               <h2 id="titulo-contacto">Hablemos de tu negocio</h2>
               <p>
-                Cuéntame en qué estás y te respondo personalmente con el siguiente paso. Para
-                conferencias, indica ciudad, fecha y tamaño del público.
+                Cuéntame en qué estás y te respondo con el siguiente paso. Para conferencias,
+                indica ciudad, fecha y tamaño del público.
               </p>
             </div>
             <ContactForm />

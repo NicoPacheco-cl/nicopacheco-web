@@ -5,65 +5,42 @@ export const nav = [
   { href: '#tienda', label: 'Tienda' },
   { href: '#conferencias', label: 'Conferencias y seminarios' },
   { href: '#podcast', label: 'Podcast' },
-  { href: '#sobre-mi', label: 'Sobre mí' },
+  { href: '#sobre-nico', label: 'Sobre Nico' },
 ];
 
-export const medios = [
-  'Diario Financiero',
-  'TVN',
-  'Radio La Clave 92.9',
-  'El Conquistador FM',
-  'Programa Sabores',
+// Respaldo discreto bajo la portada
+export const respaldo = [
+  '+100 pymes acompañadas',
+  '14 franquicias creadas',
+  'Director en 7 empresas',
+  'Entrevistado en Diario Financiero y TVN',
 ];
 
-export const cifras = [
-  { valor: '+100', texto: 'pymes asesoradas en Chile' },
-  { valor: '7', texto: 'empresas donde soy director' },
-  { valor: '14', texto: 'franquicias en la cadena que dirigí' },
-  { valor: '+50', texto: 'conferencias en 10 años' },
-];
-
-// Casos reales del CV. "antes" vacío = no hay cifra de partida publicable.
-export const resultados = [
+// Problemas típicos del visitante y qué servicio los resuelve
+export const problemas = [
   {
-    empresa: 'Kingdom Food',
-    rubro: 'Gastronomía',
-    indicador: 'Ventas mensuales',
-    antes: '500 UF',
-    despues: '1.500 UF',
-    plazo: '12 meses',
+    frase: 'Vendo bien, pero a fin de mes no queda plata.',
+    respuesta: 'Ordenamos tu estado de resultados y tu flujo de caja para encontrar dónde se va el margen.',
+    href: '#diagnostico',
+    accion: 'Ver Diagnóstico Pyme',
   },
   {
-    empresa: 'Hotel Millahue',
-    rubro: 'Hotelería',
-    indicador: 'Margen EBITDA',
-    antes: '−5%',
-    despues: '12%',
-    plazo: '8 meses',
+    frase: 'No sé cuánto vale mi negocio.',
+    respuesta: 'Calculamos su valor con un método claro, para negociar con números y no a ojo.',
+    href: '#valorizacion',
+    accion: 'Ver Valorización',
   },
   {
-    empresa: 'Pacific Rental',
-    rubro: 'Turismo',
-    indicador: 'Negocios en operación',
-    antes: '1 hostal',
-    despues: '5 negocios',
-    plazo: '2 años',
+    frase: 'Quiero vender mi local y no sé por dónde partir.',
+    respuesta: 'Te acompaño en la venta del derecho de llave, desde el precio hasta la firma.',
+    href: '#derecho-de-llave',
+    accion: 'Ver venta de derechos de llave',
   },
   {
-    empresa: 'Mammaterra',
-    rubro: 'Comida rápida saludable',
-    indicador: 'Red de locales',
-    antes: '',
-    despues: '14 franquicias',
-    plazo: '5 años',
-  },
-  {
-    empresa: 'Mammaterra',
-    rubro: 'Comida rápida saludable',
-    indicador: 'Valorización de mercado',
-    antes: '',
-    despues: 'USD 12 MM',
-    plazo: '2020',
+    frase: 'Mi marca funciona y quiero replicarla.',
+    respuesta: 'Evaluamos si tu negocio es franquiciable y armamos el modelo para crecer con socios.',
+    href: '#franquicias',
+    accion: 'Ver asesoría en franquicias',
   },
 ];
 
@@ -75,25 +52,32 @@ export const servicios = [
       {
         id: 'diagnostico',
         nombre: 'Diagnóstico Pyme',
-        detalle:
-          'Una sesión para revisar tu estado de resultados, flujo de caja y modelo de negocio, y un informe con las prioridades para los próximos 90 días.',
+        resena:
+          'En una sesión revisamos tus ventas, costos, márgenes y flujo de caja. Te entrego un informe con lo que está funcionando, lo que se está perdiendo y las tres prioridades para los próximos 90 días.',
+        importancia:
+          'La mayoría de las pymes no tiene un problema de ventas, sino de números que nadie mira. Este es el punto de partida.',
         precio: '$149.990',
         accion: 'Agendar diagnóstico',
+        destacado: true,
       },
       {
         id: 'mentoring',
         nombre: 'Mentoring para dueños y gerentes',
-        detalle:
-          'Sesiones uno a uno sobre propuesta de valor, estudio de mercado, finanzas y gestión directiva.',
-        precio: '$90.000 la hora\n$320.000 pack de 4 horas',
+        resena:
+          'Sesiones uno a uno para trabajar tu propuesta de valor, tu modelo de negocio, tus finanzas y la gestión de tu equipo, con tareas concretas entre una sesión y otra.',
+        importancia:
+          'Decidir solo es lo más difícil de tener una empresa. Un mentor con experiencia acorta el camino y evita errores caros.',
+        precio: '$90.000 la hora, o $320.000 el pack de 4 horas',
         accion: 'Agendar mentoring',
       },
       {
         id: 'directorio-pyme',
         nombre: 'Directorio PYME',
-        detalle:
-          'Un directorio externo para tu empresa: seguimiento mensual de metas, números y decisiones, para pasar de emprendimiento a compañía sólida.',
-        precio: 'A cotizar',
+        resena:
+          'Un directorio externo para tu empresa: una reunión mensual para revisar metas, números y decisiones clave, como en las grandes compañías.',
+        importancia:
+          'Es lo que transforma un emprendimiento que depende de su dueño en una empresa sólida y sostenible.',
+        precio: 'A cotizar según tamaño de la empresa',
         accion: 'Pedir cotización',
       },
     ],
@@ -105,17 +89,22 @@ export const servicios = [
       {
         id: 'valorizacion',
         nombre: 'Valorización de empresa',
-        detalle:
-          'Cuánto vale tu negocio hoy, con el mismo método que usamos en Portal Comercios. Ideal antes de vender, buscar socio o pedir financiamiento.',
+        resena:
+          'Un informe con el valor de mercado de tu negocio, calculado con el mismo método que usamos en Portal Comercios, y lo que puedes mejorar para que valga más.',
+        importancia:
+          'Antes de vender, buscar un socio o pedir un crédito, necesitas saber cuánto vale lo que construiste.',
         precio: '$99.990',
         accion: 'Valorizar mi negocio',
+        destacado: true,
       },
       {
         id: 'derecho-de-llave',
         nombre: 'Venta de derechos de llave',
-        detalle:
-          'Te acompaño desde el precio hasta el cierre: preparación del negocio, búsqueda de compradores y negociación.',
-        precio: 'Desde $490.000 + comisión de éxito',
+        resena:
+          'Preparo tu negocio para la venta, fijamos un precio defendible, buscamos compradores y te acompaño en la negociación hasta el cierre.',
+        importancia:
+          'Un local bien presentado y con números ordenados se vende más rápido y a mejor precio.',
+        precio: 'Desde $490.000 más comisión de éxito',
         accion: 'Pedir cotización',
       },
     ],
@@ -127,20 +116,41 @@ export const servicios = [
       {
         id: 'franquicias',
         nombre: 'Asesoría en franquicias',
-        detalle:
-          'Modelo de franquicia, manuales, contrato y plan de expansión, desde la experiencia de llevar una cadena a 14 franquicias.',
+        resena:
+          'Evaluamos si tu negocio es franquiciable y construimos el modelo completo: números del franquiciado, manuales de operación, contrato y plan de expansión.',
+        importancia:
+          'Una franquicia mal diseñada quema la marca y a los socios. Bien hecha, es la forma más rápida de crecer sin poner todo el capital.',
         precio: 'Desde $2.500.000 por proyecto',
         accion: 'Pedir cotización',
+        destacado: true,
       },
       {
         id: 'libro',
         nombre: 'Libro Franquicia Justa',
-        detalle: 'Lo que tiene que saber un franquiciador y un franquiciado antes de firmar.',
+        resena:
+          'Una guía práctica sobre cómo funciona una franquicia por dentro: qué se paga, qué se recibe y cómo se construye una relación sana entre marca y franquiciado.',
+        importancia:
+          'Si vas a comprar o a ofrecer una franquicia, conviene leerlo antes de firmar.',
         precio: 'Desde $14.990',
         accion: 'Ver en la tienda',
         href: '#tienda',
       },
     ],
+  },
+];
+
+export const pasos = [
+  {
+    titulo: 'Conversamos',
+    texto: 'Me cuentas en qué está tu negocio y qué quieres lograr. Te digo con honestidad si te puedo ayudar.',
+  },
+  {
+    titulo: 'Diagnóstico y plan',
+    texto: 'Revisamos tus números y definimos un plan concreto, con prioridades y plazos.',
+  },
+  {
+    titulo: 'Acompañamiento',
+    texto: 'Trabajamos juntos el plan, con seguimiento hasta que los resultados se vean en tus números.',
   },
 ];
 
@@ -154,7 +164,7 @@ export const tienda = [
   {
     id: 'pack-planillas',
     nombre: 'Pack completo de planillas',
-    detalle: 'Las tres planillas, con guía de uso para tu negocio.',
+    detalle: 'Las tres planillas, con una guía de uso para tu negocio.',
     precio: '$49.990',
   },
   {
@@ -166,8 +176,8 @@ export const tienda = [
   {
     id: 'libro-impreso',
     nombre: 'Franquicia Justa, libro impreso',
-    detalle: 'Envío a todo Chile.',
-    precio: '$24.990 + envío',
+    detalle: 'Con envío a todo Chile.',
+    precio: '$24.990 más envío',
   },
 ];
 
@@ -175,12 +185,12 @@ export const charlas = [
   {
     titulo: 'Motivación y liderazgo',
     detalle:
-      'Cómo pasar de la idea al plan y del plan a los resultados, con historias reales de negocios que se levantaron.',
+      'Para equipos que necesitan pasar de la idea al plan y del plan a los resultados, con historias reales de negocios que se levantaron.',
   },
   {
     titulo: 'Innovación y emprendimiento',
     detalle:
-      'Modelos de negocio, propuesta de valor y cómo hacer crecer una empresa en mercados regionales y de Latinoamérica.',
+      'Para emprendedores, estudiantes y gremios: modelos de negocio, propuesta de valor y cómo crecer desde regiones.',
   },
 ];
 
@@ -191,51 +201,21 @@ export const entradas = [
 ];
 
 export const trayectoria = [
-  { periodo: '2012–2015', cargo: 'Gerente comercial', lugar: 'Hotel Millahue' },
-  { periodo: '2015–2017', cargo: 'Gerente general', lugar: 'Inversiones Pacific Rental' },
-  { periodo: '2017–2022', cargo: 'CEO y líder de expansión de franquicias', lugar: 'Inversiones Mammaterra' },
-  { periodo: '2019–hoy', cargo: 'Secretario ejecutivo y director de empresas', lugar: 'Fair Consulting' },
-  { periodo: '2023–hoy', cargo: 'Director comercial', lugar: 'Kingdom Food' },
-  { periodo: '2025–hoy', cargo: 'Columnista de emprendimiento e innovación', lugar: 'Diario El Llanquihue' },
   { periodo: '2025–hoy', cargo: 'Director ejecutivo', lugar: 'Plan Innova, Puerto Montt' },
+  { periodo: '2025–hoy', cargo: 'Columnista de emprendimiento e innovación', lugar: 'Diario El Llanquihue' },
+  { periodo: '2023–hoy', cargo: 'Director comercial', lugar: 'Kingdom Food' },
+  { periodo: '2019–hoy', cargo: 'Secretario ejecutivo y director de empresas', lugar: 'Fair Consulting' },
+  { periodo: '2017–2022', cargo: 'CEO y líder de expansión de franquicias', lugar: 'Inversiones Mammaterra' },
+  { periodo: '2015–2017', cargo: 'Gerente general', lugar: 'Inversiones Pacific Rental' },
+  { periodo: '2012–2015', cargo: 'Gerente comercial', lugar: 'Hotel Millahue' },
 ];
 
-export const prensa = [
-  {
-    src: '/fotos/medios/prensa-mammaterra-franquicias.jpg',
-    w: 750,
-    h: 750,
-    medio: 'Diario Financiero, 2019',
-    alt: 'Nota de prensa sobre la expansión de Mammaterra en franquicias',
-  },
-  {
-    src: '/fotos/medios/tv-hacedor-de-hambre-mammaterra.jpg',
-    w: 1080,
-    h: 1080,
-    medio: 'TVN, Hacedor de Hambre',
-    alt: 'Grabación del programa Hacedor de Hambre en un local Mammaterra',
-  },
-  {
-    src: '/fotos/medios/radio-la-clave.jpg',
-    w: 1800,
-    h: 1013,
-    medio: 'Radio La Clave 92.9',
-    alt: 'Entrevista en Radio La Clave 92.9',
-  },
-  {
-    src: '/fotos/medios/radio-el-conquistador.jpg',
-    w: 720,
-    h: 960,
-    medio: 'El Conquistador FM',
-    alt: 'Nico Pacheco en el estudio de El Conquistador FM',
-  },
-  {
-    src: '/fotos/medios/tv-sabores.jpg',
-    w: 1080,
-    h: 1080,
-    medio: 'Programa Sabores',
-    alt: 'En el set del programa Sabores',
-  },
+export const medios = [
+  'Diario Financiero',
+  'TVN',
+  'Radio La Clave 92.9',
+  'El Conquistador FM',
+  'Programa Sabores',
 ];
 
 export const intereses = [
@@ -256,7 +236,5 @@ export const intereses = [
 
 export const CORREO = 'nikolaspacheco@gmail.com';
 export const WHATSAPP = '56990871663';
-export const wa = (texto) =>
-  `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(texto)}`;
-
+export const wa = (texto) => `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(texto)}`;
 export const LINKEDIN = 'https://www.linkedin.com/in/maximiliano-pacheco-o/';
