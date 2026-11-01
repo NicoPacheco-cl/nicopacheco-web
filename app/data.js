@@ -255,4 +255,8 @@ export const intereses = [
 ];
 
 export const CORREO = 'nikolaspacheco@gmail.com';
+export const WHATSAPP = '56990871663';
+export const wa = (texto) =>
+  `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(texto)}`;
+
 export const LINKEDIN = 'https://www.linkedin.com/in/maximiliano-pacheco-o/';

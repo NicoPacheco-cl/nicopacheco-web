@@ -1095,3 +1095,38 @@ a {
   color: var(--blanco);
   text-decoration: underline;
 }
+
+/* WhatsApp flotante */
+.whatsapp {
+  position: fixed;
+  right: 1.25rem;
+  bottom: 1.25rem;
+  z-index: 60;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.7rem 1.1rem 0.7rem 0.9rem;
+  border-radius: 999px;
+  background: #1fa855;
+  color: #ffffff;
+  font-weight: 650;
+  text-decoration: none;
+  box-shadow: 0 6px 20px rgba(19, 35, 59, 0.28);
+}
+
+.whatsapp:hover {
+  background: #178a45;
+}
+
+@media (max-width: 600px) {
+  .whatsapp span {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+  }
+  .whatsapp {
+    padding: 0.85rem;
+  }
+}
