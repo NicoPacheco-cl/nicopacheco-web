@@ -187,44 +187,79 @@ export default function Home() {
           </div>
         </section>
 
-        {/* LIBRO Y TIENDA */}
+        {/* LIBRO */}
         <section id="libro" className="libro" aria-labelledby="titulo-libro">
-          <div className="contenedor">
-            <div className="libro-grilla">
-              <div className="libro-portada" aria-hidden="true">
-                <span className="libro-portada-titulo">FRANQUICIA</span>
-                <span className="libro-portada-suave">justa</span>
-                <span className="libro-portada-autor">Nico Pacheco</span>
+          <div className="contenedor libro-grilla">
+            <div className="libro-texto">
+              <svg className="libro-corona" viewBox="0 0 40 28" aria-hidden="true">
+                <path d="M4 24 L6 8 L14 16 L20 4 L26 16 L34 8 L36 24 Z" />
+                <circle cx="6" cy="7" r="2" />
+                <circle cx="20" cy="3" r="2" />
+                <circle cx="34" cy="7" r="2" />
+              </svg>
+              <h2 id="titulo-libro" className="libro-titulo">
+                <span>FRANQUICIA</span>
+                <span className="libro-rojo">JUSTA.</span>
+              </h2>
+              <p className="libro-bajada">
+                Lo que todo franquiciador y franquiciado debería saber antes de firmar.
+              </p>
+              <div className="libro-botones">
+                <a
+                  href={wa('Hola Nico, quiero comprar el libro Franquicia Justa (digital, $14.990).')}
+                  className="libro-btn"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Comprar digital · $14.990
+                </a>
+                <a
+                  href={wa('Hola Nico, quiero comprar el libro Franquicia Justa (impreso, $24.990 más envío).')}
+                  className="libro-btn libro-btn-linea"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Impreso · $24.990
+                </a>
               </div>
-              <div>
-                <Titulo id="titulo-libro" fuerte="LEE MI" suave="libro" />
-                <p className="libro-texto">
-                  <strong>Franquicia Justa</strong> explica cómo funciona una franquicia por dentro:
-                  qué se paga, qué se recibe y cómo se construye una relación sana entre la marca y el
-                  franquiciado. Si vas a comprar o a ofrecer una franquicia, léelo antes de firmar.
-                </p>
-                <div className="botones">
-                  <a
-                    href={wa('Hola Nico, quiero comprar el libro Franquicia Justa (digital, $14.990).')}
-                    className="btn btn-negro"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Digital, $14.990
-                  </a>
-                  <a
-                    href={wa('Hola Nico, quiero comprar el libro Franquicia Justa (impreso, $24.990 más envío).')}
-                    className="btn btn-linea"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Impreso, $24.990
-                  </a>
-                </div>
-              </div>
+              <ul className="libro-puntos">
+                <li>Qué se paga y qué se recibe en una franquicia.</li>
+                <li>Cómo saber si tu negocio es franquiciable.</li>
+                <li>Las cláusulas que protegen a ambas partes.</li>
+              </ul>
             </div>
 
-            <h3 className="tienda-titulo">Planillas para tu negocio</h3>
+            <div className="libro-escena" aria-hidden="true">
+              <div className="libro-mancha" />
+              <span className="libro-firma">Nico Pacheco</span>
+              <span className="libro-nota">
+                Antes de
+                <br />
+                firmar
+              </span>
+              <svg className="libro-flecha" viewBox="0 0 60 50">
+                <path d="M54 4 C40 8 26 18 14 40 M14 40 L12 28 M14 40 L25 35" />
+              </svg>
+              <span className="libro-peso">$</span>
+              <div className="libro-3d">
+                <div className="libro-sombra" />
+                <div className="libro-roja" />
+                <div className="libro-tapa">
+                  <span className="libro-lomo">NICO PACHECO · FRANQUICIA JUSTA</span>
+                  <span className="libro-tapa-1">Franquicia</span>
+                  <span className="libro-tapa-2">Justa.</span>
+                  <span className="libro-tapa-autor">Nico Pacheco</span>
+                </div>
+              </div>
+              <span className="libro-nuevo">Nuevo</span>
+            </div>
+          </div>
+        </section>
+
+        {/* TIENDA */}
+        <section id="tienda" className="tienda" aria-labelledby="titulo-tienda">
+          <div className="contenedor">
+            <Titulo id="titulo-tienda" fuerte="PLANILLAS PARA" suave="tu negocio" />
             <ul className="productos">
               {tienda
                 .filter((p) => !p.id.startsWith('libro'))

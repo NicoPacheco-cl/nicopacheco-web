@@ -551,70 +551,272 @@ a {
   }
 }
 
-/* Libro y tienda */
+/* Libro: estilo manuscrito sobre crema */
 .libro {
-  padding-block: 6rem;
-  background: var(--hueso);
+  --crema: #f6f0e4;
+  --rojo: #e3225b;
+  --rosa: #eba3b3;
+  --mano: 'Rock Salt', 'Segoe Print', cursive;
+  --mono: 'IBM Plex Mono', ui-monospace, monospace;
+  background: var(--crema);
+  color: #000;
+  font-family: var(--mono);
+  padding-block: 5.5rem;
+  overflow: hidden;
 }
 
 .libro-grilla {
   display: grid;
-  grid-template-columns: 0.7fr 1.3fr;
-  gap: 4rem;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
   align-items: center;
-  margin-bottom: 4.5rem;
 }
 
-.libro-portada {
-  aspect-ratio: 2 / 3;
-  max-width: 300px;
-  width: 100%;
-  margin-inline: auto;
-  background: var(--negro);
-  color: var(--blanco);
-  padding: 2rem 1.75rem;
+.libro-corona {
+  width: 2.4rem;
+  fill: none;
+  stroke: var(--rojo);
+  stroke-width: 2;
+  stroke-linejoin: round;
+  margin-bottom: 1rem;
+}
+
+.libro-corona circle {
+  fill: none;
+}
+
+.libro-titulo {
   display: flex;
   flex-direction: column;
-  box-shadow: 14px 14px 0 var(--acento);
-}
-
-.libro-portada-titulo {
-  font-family: var(--display);
-  font-size: 2.6rem;
-  line-height: 0.9;
-  margin-top: auto;
-}
-
-.libro-portada-suave {
-  font-family: var(--cursiva);
-  font-style: italic;
-  font-size: 3.2rem;
-  line-height: 1;
-}
-
-.libro-portada-autor {
-  margin-top: auto;
-  font-family: var(--display);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  font-size: 0.875rem;
-}
-
-.libro-texto {
-  margin: 1.5rem 0 2rem;
-  max-width: 54ch;
-  font-size: 1.125rem;
-}
-
-.tienda-titulo {
-  font-family: var(--display);
+  font-family: var(--mano);
   font-weight: 400;
+  font-size: clamp(2.4rem, 5.4vw, 4.4rem);
+  line-height: 1.35;
+  letter-spacing: 0.01em;
+}
+
+.libro-rojo {
+  color: var(--rojo);
+  text-decoration: underline;
+  text-decoration-thickness: 3px;
+  text-underline-offset: 10px;
+}
+
+.libro-bajada {
+  margin: 1.75rem 0 2rem;
+  max-width: 38ch;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.libro-botones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.libro-btn {
+  display: inline-block;
+  padding: 0.85rem 1.4rem;
+  background: #000;
+  color: var(--crema);
+  border: 2px solid #000;
+  font-family: var(--mono);
+  font-size: 0.875rem;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
-  letter-spacing: 0.03em;
-  font-size: 1.5rem;
-  padding-bottom: 0.9rem;
-  margin-bottom: 1.5rem;
-  border-bottom: 2px solid var(--negro);
+  text-decoration: none;
+}
+
+.libro-btn:hover {
+  background: var(--rojo);
+  border-color: var(--rojo);
+}
+
+.libro-btn-linea {
+  background: transparent;
+  color: #000;
+}
+
+.libro-btn-linea:hover {
+  color: var(--crema);
+}
+
+.libro-puntos {
+  margin: 2.25rem 0 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.9375rem;
+}
+
+.libro-puntos li {
+  padding: 0.55rem 0 0.55rem 1.6rem;
+  border-top: 1px dashed rgba(0, 0, 0, 0.25);
+  position: relative;
+}
+
+.libro-puntos li::before {
+  content: '✕';
+  position: absolute;
+  left: 0;
+  color: var(--rojo);
+}
+
+/* Escena del libro en 3D */
+.libro-escena {
+  position: relative;
+  aspect-ratio: 1.05;
+  max-width: 560px;
+  width: 100%;
+  margin-inline: auto;
+}
+
+.libro-mancha {
+  position: absolute;
+  inset: 8% 2% 6% 4%;
+  background: var(--rosa);
+  border-radius: 58% 42% 55% 45% / 48% 60% 40% 52%;
+  opacity: 0.85;
+}
+
+.libro-3d {
+  position: absolute;
+  left: 30%;
+  top: 14%;
+  width: 46%;
+  aspect-ratio: 0.68;
+  transform: rotate(-4deg);
+}
+
+.libro-sombra,
+.libro-roja,
+.libro-tapa {
+  position: absolute;
+  inset: 0;
+}
+
+.libro-sombra {
+  background: #000;
+  transform: translate(18%, 10%) skewY(8deg);
+}
+
+.libro-roja {
+  background: var(--rojo);
+  transform: translate(7%, 4%);
+}
+
+.libro-tapa {
+  background: #fbfaf7;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  box-shadow: inset 10px 0 0 #ece7dc;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 12% 10% 12% 18%;
+  font-family: var(--mano);
+  color: #000;
+}
+
+.libro-lomo {
+  position: absolute;
+  left: 2%;
+  top: 8%;
+  bottom: 8%;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  font-family: var(--mono);
+  font-size: clamp(0.4rem, 0.7vw, 0.55rem);
+  letter-spacing: 0.08em;
+  color: #555;
+  text-align: center;
+}
+
+.libro-tapa-1 {
+  font-size: clamp(0.9rem, 2.1vw, 1.55rem);
+  line-height: 1.5;
+}
+
+.libro-tapa-2 {
+  font-size: clamp(1.2rem, 2.8vw, 2.1rem);
+  line-height: 1.4;
+  color: var(--rojo);
+}
+
+.libro-tapa-autor {
+  margin-top: auto;
+  font-family: var(--mono);
+  font-size: clamp(0.5rem, 0.9vw, 0.7rem);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.libro-firma {
+  position: absolute;
+  left: 2%;
+  top: 14%;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: 30%;
+  aspect-ratio: 1;
+  border: 3px solid var(--rojo);
+  border-radius: 50%;
+  font-family: var(--mano);
+  font-size: clamp(0.75rem, 1.5vw, 1.05rem);
+  transform: rotate(-6deg);
+}
+
+.libro-nota {
+  position: absolute;
+  right: 0;
+  top: 0;
+  font-family: var(--mano);
+  font-size: clamp(0.75rem, 1.4vw, 1rem);
+  line-height: 1.3;
+  transform: rotate(-4deg);
+}
+
+.libro-flecha {
+  position: absolute;
+  right: 12%;
+  top: 6%;
+  width: 11%;
+  fill: none;
+  stroke: #000;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.libro-peso {
+  position: absolute;
+  left: 12%;
+  bottom: 14%;
+  font-family: var(--mano);
+  font-size: clamp(1.5rem, 3vw, 2.25rem);
+}
+
+.libro-nuevo {
+  position: absolute;
+  right: 6%;
+  bottom: 12%;
+  z-index: 2;
+  padding: 0.35rem 0.9rem;
+  background: #000;
+  color: var(--crema);
+  font-family: var(--mano);
+  font-size: clamp(0.75rem, 1.4vw, 1rem);
+  border: 2px solid var(--rojo);
+}
+
+/* Tienda de planillas */
+.tienda {
+  padding-block: 5.5rem;
+  background: var(--blanco);
+}
+
+.tienda .titulo {
+  margin-bottom: 2.25rem;
 }
 
 .productos {
@@ -658,10 +860,10 @@ a {
 @media (max-width: 860px) {
   .libro-grilla {
     grid-template-columns: 1fr;
-    gap: 2.5rem;
+    gap: 2rem;
   }
-  .libro-portada {
-    max-width: 230px;
+  .libro-escena {
+    max-width: 420px;
   }
   .productos {
     grid-template-columns: 1fr;
