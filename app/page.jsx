@@ -12,6 +12,7 @@ import {
   medios,
   LINKEDIN,
   YOUTUBE,
+  LIBRO_COMPRA,
   wa,
 } from './data';
 
@@ -188,71 +189,105 @@ export default function Home() {
         </section>
 
         {/* LIBRO */}
-        <section id="libro" className="libro" aria-labelledby="titulo-libro">
-          <div className="contenedor libro-grilla">
-            <div className="libro-texto">
-              <svg className="libro-corona" viewBox="0 0 40 28" aria-hidden="true">
-                <path d="M4 24 L6 8 L14 16 L20 4 L26 16 L34 8 L36 24 Z" />
-                <circle cx="6" cy="7" r="2" />
-                <circle cx="20" cy="3" r="2" />
-                <circle cx="34" cy="7" r="2" />
-              </svg>
-              <h2 id="titulo-libro" className="libro-titulo">
-                <span>FRANQUICIA</span>
-                <span className="libro-rojo">JUSTA.</span>
-              </h2>
-              <p className="libro-bajada">
-                Lo que todo franquiciador y franquiciado debería saber antes de firmar.
-              </p>
-              <div className="libro-botones">
-                <a
-                  href={wa('Hola Nico, quiero comprar el libro Franquicia Justa (digital, $14.990).')}
-                  className="libro-btn"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Comprar digital · $14.990
-                </a>
-                <a
-                  href={wa('Hola Nico, quiero comprar el libro Franquicia Justa (impreso, $24.990 más envío).')}
-                  className="libro-btn libro-btn-linea"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Impreso · $24.990
+        <section id="libro" className="lb" aria-labelledby="titulo-libro">
+          <div className="lb-hero">
+            <div className="contenedor lb-in">
+              <a href={LIBRO_COMPRA} className="l3d" aria-label="Ver el libro Franquicia Justa">
+                <div className="l3d-cuerpo">
+                  <div className="l3d-contra" />
+                  <div className="l3d-paginas" />
+                  <div className="l3d-lomo" aria-hidden="true">
+                    <span>
+                      FRANQUICIA <b>JUSTA</b>
+                    </span>
+                    <small>M. PACHECO ORTIZ</small>
+                  </div>
+                  <div className="l3d-tapa">
+                    <Image
+                      src="/fotos/libro/franquicia-justa-portada.jpg"
+                      alt="Portada del libro Franquicia Justa, de Maximiliano Pacheco Ortiz"
+                      width={900}
+                      height={1350}
+                      sizes="(max-width: 760px) 200px, 300px"
+                    />
+                  </div>
+                </div>
+                <div className="l3d-sombra" />
+              </a>
+
+              <div className="lb-texto">
+                <span className="lb-pill">PREVENTA · NUEVO LIBRO</span>
+                <h2 id="titulo-libro" className="lb-titulo">
+                  Franquicia Justa
+                </h2>
+                <p className="lb-sub">Reemplazando la subordinación por la colaboración</p>
+                <p className="lb-desc">
+                  Los 7 pilares para crear, elegir y hacer crecer franquicias donde todos ganan. Por
+                  Maximiliano Pacheco Ortiz.
+                </p>
+                <p className="lb-meta">Prólogo de Gerardo Wijnant S.M. · 15 × 24 cm · ISBN 978-956-03-1419-2</p>
+                <div className="lb-precios">
+                  <div className="lb-precio">
+                    <small>FÍSICO · PREVENTA</small>
+                    <div>
+                      <s>$29.990</s> <strong>$14.990</strong>
+                    </div>
+                  </div>
+                  <div className="lb-precio">
+                    <small>DIGITAL</small>
+                    <div>
+                      <strong>$7.990</strong>
+                    </div>
+                    <span>Kindle · Apple Books · PDF</span>
+                  </div>
+                </div>
+                <a href={LIBRO_COMPRA} className="lb-btn" target="_blank" rel="noopener noreferrer">
+                  Comprar ahora
                 </a>
               </div>
-              <ul className="libro-puntos">
-                <li>Qué se paga y qué se recibe en una franquicia.</li>
-                <li>Cómo saber si tu negocio es franquiciable.</li>
-                <li>Las cláusulas que protegen a ambas partes.</li>
-              </ul>
+            </div>
+          </div>
+
+          <div className="contenedor lb-cuerpo">
+            <h3 className="lb-h">Para quién es</h3>
+            <p className="lb-p">
+              Para quien está pensando en invertir en una franquicia, para el emprendedor que quiere
+              franquiciar su marca y transformarla en una cadena, y para quienes ya están dentro del
+              sistema y sienten que algo no está funcionando como debería.
+            </p>
+            <div className="lb-rutas">
+              <div>
+                <strong>Ruta del franquiciado</strong>
+                <p>Distingue una franquicia real de una que solo se hace llamar así, y elige sin equivocarte.</p>
+              </div>
+              <div>
+                <strong>Ruta del franquiciador</strong>
+                <p>Transforma tu marca en una Franquicia Justa, paso a paso.</p>
+              </div>
             </div>
 
-            <div className="libro-escena" aria-hidden="true">
-              <div className="libro-mancha" />
-              <span className="libro-firma">Nico Pacheco</span>
-              <span className="libro-nota">
-                Antes de
-                <br />
-                firmar
-              </span>
-              <svg className="libro-flecha" viewBox="0 0 60 50">
-                <path d="M54 4 C40 8 26 18 14 40 M14 40 L12 28 M14 40 L25 35" />
-              </svg>
-              <span className="libro-peso">$</span>
-              <div className="libro-3d">
-                <div className="libro-sombra" />
-                <div className="libro-roja" />
-                <div className="libro-tapa">
-                  <span className="libro-lomo">NICO PACHECO · FRANQUICIA JUSTA</span>
-                  <span className="libro-tapa-1">Franquicia</span>
-                  <span className="libro-tapa-2">Justa.</span>
-                  <span className="libro-tapa-autor">Nico Pacheco</span>
-                </div>
-              </div>
-              <span className="libro-nuevo">Nuevo</span>
-            </div>
+            <h3 className="lb-h">Los 7 pilares de la Franquicia Justa</h3>
+            <ol className="lb-pilares">
+              {[
+                'Transparencia financiera',
+                'Una estructura que respalda',
+                'El franquiciado como socio',
+                'Propósito compartido',
+                'Proveedores que suman',
+                'Un contrato que se adapta',
+                'Una salida digna',
+              ].map((p, i) => (
+                <li key={p}>
+                  <span>{i + 1}</span>
+                  {p}
+                </li>
+              ))}
+            </ol>
+            <p className="lb-nota">
+              Incluye el autodiagnóstico «¿Es justa tu franquicia?», las proformas de los 8 negocios más
+              franquiciados, 10 casos reales, plantilla de proforma financiera y checklist de due
+              diligence.
+            </p>
           </div>
         </section>
 

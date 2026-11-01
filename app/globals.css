@@ -551,262 +551,367 @@ a {
   }
 }
 
-/* Libro: estilo manuscrito sobre crema */
-.libro {
-  --crema: #f6f0e4;
-  --rojo: #e3225b;
-  --rosa: #eba3b3;
-  --mano: 'Rock Salt', 'Segoe Print', cursive;
-  --mono: 'IBM Plex Mono', ui-monospace, monospace;
-  background: var(--crema);
-  color: #000;
-  font-family: var(--mono);
-  padding-block: 5.5rem;
-  overflow: hidden;
+/* Libro: mismo estilo que portalcomercios.cl/franquicias/libro */
+.lb {
+  --lb-rojo: #c0262d;
+  --lb-tinta: #0f1b2d;
+  --lb-display: 'Bricolage Grotesque Variable', 'Bricolage Grotesque', system-ui, sans-serif;
+  --lb-cuerpo: 'Public Sans Variable', 'Public Sans', system-ui, sans-serif;
+  font-family: var(--lb-cuerpo);
+  color: var(--lb-tinta);
+  background: #f5f6f9;
 }
 
-.libro-grilla {
+.lb-hero {
+  background: linear-gradient(135deg, #f4efe4, #fbf9f4 60%, #efe7d6);
+  padding-block: 4.5rem;
+  border-bottom: 1px solid #e8e1d0;
+}
+
+.lb-in {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 3rem;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 3.5rem;
   align-items: center;
+  max-width: 1000px;
 }
 
-.libro-corona {
-  width: 2.4rem;
-  fill: none;
-  stroke: var(--rojo);
-  stroke-width: 2;
-  stroke-linejoin: round;
-  margin-bottom: 1rem;
+/* Libro en 3D */
+.l3d {
+  --w: 280px;
+  --h: 420px;
+  --t: 38px;
+  display: block;
+  width: var(--w);
+  height: var(--h);
+  perspective: 1400px;
+  margin-inline: auto;
+  position: relative;
 }
 
-.libro-corona circle {
-  fill: none;
+.l3d-cuerpo {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+  transform: rotateY(32deg) rotateX(4deg);
+  transition: transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
 }
 
-.libro-titulo {
+.l3d:hover .l3d-cuerpo,
+.l3d:focus-visible .l3d-cuerpo {
+  transform: rotateY(14deg) rotateX(2deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .l3d-cuerpo {
+    transition: none;
+  }
+}
+
+.l3d-tapa,
+.l3d-lomo,
+.l3d-paginas,
+.l3d-contra {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  backface-visibility: hidden;
+}
+
+.l3d-tapa {
+  left: 0;
+  width: 100%;
+  transform: translateZ(calc(var(--t) / 2));
+  border-radius: 2px 5px 5px 2px;
+  overflow: hidden;
+  box-shadow: inset 4px 0 8px rgba(0, 0, 0, 0.25);
+}
+
+.l3d-tapa img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.l3d-tapa::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0.28) 0, rgba(255, 255, 255, 0.16) 3%, rgba(0, 0, 0, 0) 7%, rgba(255, 255, 255, 0.06) 60%, rgba(0, 0, 0, 0.08) 100%);
+}
+
+.l3d-lomo {
+  left: calc(var(--t) / -2);
+  width: var(--t);
   display: flex;
   flex-direction: column;
-  font-family: var(--mano);
-  font-weight: 400;
-  font-size: clamp(2.4rem, 5.4vw, 4.4rem);
-  line-height: 1.35;
-  letter-spacing: 0.01em;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 0;
+  color: #fff;
+  background: linear-gradient(90deg, #0d0d0f, #26262a 45%, #121214);
+  border-radius: 3px 0 0 3px;
+  transform: rotateY(-90deg);
 }
 
-.libro-rojo {
-  color: var(--rojo);
-  text-decoration: underline;
-  text-decoration-thickness: 3px;
-  text-underline-offset: 10px;
+.l3d-lomo span,
+.l3d-lomo small {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  letter-spacing: 1px;
 }
 
-.libro-bajada {
-  margin: 1.75rem 0 2rem;
-  max-width: 38ch;
-  font-size: 1rem;
-  line-height: 1.5;
+.l3d-lomo span {
+  font-family: var(--lb-display);
+  font-weight: 800;
+  font-size: calc(var(--t) * 0.42);
 }
 
-.libro-botones {
+.l3d-lomo b {
+  color: #d7262e;
+}
+
+.l3d-lomo small {
+  font-size: calc(var(--t) * 0.24);
+  opacity: 0.75;
+}
+
+.l3d-paginas {
+  left: calc(var(--w) - var(--t) / 2);
+  top: 3px;
+  width: var(--t);
+  height: calc(100% - 6px);
+  background: repeating-linear-gradient(90deg, #f6f3ea 0, #f6f3ea 2px, #e4dfd2 2px, #e4dfd2 3px);
+  transform: rotateY(90deg);
+}
+
+.l3d-contra {
+  left: 0;
+  width: 100%;
+  background: #111;
+  transform: rotateY(180deg) translateZ(calc(var(--t) / 2));
+}
+
+.l3d-sombra {
+  position: absolute;
+  left: 8%;
+  right: -6%;
+  bottom: -16px;
+  height: 26px;
+  z-index: -1;
+  background: radial-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0) 70%);
+  filter: blur(4px);
+  transform: skew(-18deg);
+}
+
+/* Texto y precios */
+.lb-pill {
+  display: inline-block;
+  padding: 0.3rem 0.8rem;
+  border-radius: 99px;
+  background: var(--lb-rojo);
+  color: #fff;
+  font-size: 0.8125rem;
+  font-weight: 800;
+}
+
+.lb-titulo {
+  margin: 1rem 0 0.75rem;
+  font-family: var(--lb-display);
+  font-weight: 800;
+  font-size: clamp(2.5rem, 5vw, 3.75rem);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: #111;
+}
+
+.lb-sub {
+  color: var(--lb-rojo);
+  font-style: italic;
+  font-weight: 600;
+  font-size: 1.125rem;
+}
+
+.lb-desc {
+  margin-top: 1rem;
+  font-size: 1.0625rem;
+  line-height: 1.55;
+  max-width: 52ch;
+}
+
+.lb-meta {
+  margin-top: 0.75rem;
+  font-size: 0.85rem;
+  color: #5a6678;
+}
+
+.lb-precios {
   display: flex;
   flex-wrap: wrap;
   gap: 0.75rem;
+  margin: 1.5rem 0 1.25rem;
 }
 
-.libro-btn {
-  display: inline-block;
-  padding: 0.85rem 1.4rem;
-  background: #000;
-  color: var(--crema);
-  border: 2px solid #000;
-  font-family: var(--mono);
+.lb-precio {
+  flex: 0 1 230px;
+  padding: 0.85rem 1.1rem;
+  background: #fff;
+  border: 1px solid #e3dccb;
+  border-radius: 14px;
+  box-shadow: 0 6px 18px rgba(60, 40, 0, 0.06);
+}
+
+.lb-precio small {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  color: #6b6355;
+}
+
+.lb-precio s {
+  color: #6b6355;
+  font-weight: 600;
+}
+
+.lb-precio strong {
+  font-family: var(--lb-display);
+  font-weight: 700;
+  font-size: 1.9rem;
+  line-height: 1.5;
+  color: var(--lb-rojo);
+}
+
+.lb-precio span {
+  display: block;
   font-size: 0.875rem;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
+  color: #5a6678;
+}
+
+.lb-btn {
+  display: inline-block;
+  padding: 0.9rem 1.5rem;
+  border-radius: 10px;
+  background: var(--lb-rojo);
+  color: #fff;
+  font-weight: 700;
+  font-size: 1.0625rem;
   text-decoration: none;
 }
 
-.libro-btn:hover {
-  background: var(--rojo);
-  border-color: var(--rojo);
+.lb-btn:hover {
+  background: #a11f25;
 }
 
-.libro-btn-linea {
-  background: transparent;
-  color: #000;
+/* Para quién es y pilares */
+.lb-cuerpo {
+  max-width: 900px;
+  padding-block: 4rem 5rem;
 }
 
-.libro-btn-linea:hover {
-  color: var(--crema);
+.lb-h {
+  font-family: var(--lb-display);
+  font-weight: 800;
+  font-size: clamp(1.6rem, 3vw, 2rem);
+  letter-spacing: -0.02em;
+  color: #111;
+  margin-bottom: 0.75rem;
 }
 
-.libro-puntos {
-  margin: 2.25rem 0 0;
+.lb-h + .lb-p,
+.lb-h + .lb-pilares {
+  margin-top: 0;
+}
+
+.lb-rutas + .lb-h {
+  margin-top: 4rem;
+}
+
+.lb-p {
+  line-height: 1.6;
+}
+
+.lb-rutas {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+  margin-top: 1.25rem;
+}
+
+.lb-rutas div {
+  padding: 1rem 1.1rem;
+  background: #fff;
+  border: 1px solid #d8dee8;
+  border-radius: 12px;
+}
+
+.lb-rutas p {
+  margin-top: 0.3rem;
+}
+
+.lb-pilares {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+  margin: 1.25rem 0 0;
   padding: 0;
   list-style: none;
+}
+
+.lb-pilares li {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.85rem 1rem;
+  background: #fff;
+  border: 1px solid #d8dee8;
+  border-radius: 12px;
+  font-weight: 600;
+}
+
+.lb-pilares span {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 1.9rem;
+  height: 1.9rem;
+  border-radius: 50%;
+  background: var(--lb-rojo);
+  color: #fff;
+  font-weight: 700;
   font-size: 0.9375rem;
 }
 
-.libro-puntos li {
-  padding: 0.55rem 0 0.55rem 1.6rem;
-  border-top: 1px dashed rgba(0, 0, 0, 0.25);
-  position: relative;
+.lb-nota {
+  margin-top: 1rem;
+  font-size: 0.875rem;
+  color: #5a6678;
 }
 
-.libro-puntos li::before {
-  content: '✕';
-  position: absolute;
-  left: 0;
-  color: var(--rojo);
+@media (max-width: 860px) {
+  .lb-in {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+  .lb-pilares {
+    grid-template-columns: 1fr 1fr;
+  }
 }
 
-/* Escena del libro en 3D */
-.libro-escena {
-  position: relative;
-  aspect-ratio: 1.05;
-  max-width: 560px;
-  width: 100%;
-  margin-inline: auto;
-}
-
-.libro-mancha {
-  position: absolute;
-  inset: 8% 2% 6% 4%;
-  background: var(--rosa);
-  border-radius: 58% 42% 55% 45% / 48% 60% 40% 52%;
-  opacity: 0.85;
-}
-
-.libro-3d {
-  position: absolute;
-  left: 30%;
-  top: 14%;
-  width: 46%;
-  aspect-ratio: 0.68;
-  transform: rotate(-4deg);
-}
-
-.libro-sombra,
-.libro-roja,
-.libro-tapa {
-  position: absolute;
-  inset: 0;
-}
-
-.libro-sombra {
-  background: #000;
-  transform: translate(18%, 10%) skewY(8deg);
-}
-
-.libro-roja {
-  background: var(--rojo);
-  transform: translate(7%, 4%);
-}
-
-.libro-tapa {
-  background: #fbfaf7;
-  border: 1px solid rgba(0, 0, 0, 0.12);
-  box-shadow: inset 10px 0 0 #ece7dc;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 12% 10% 12% 18%;
-  font-family: var(--mano);
-  color: #000;
-}
-
-.libro-lomo {
-  position: absolute;
-  left: 2%;
-  top: 8%;
-  bottom: 8%;
-  writing-mode: vertical-rl;
-  transform: rotate(180deg);
-  font-family: var(--mono);
-  font-size: clamp(0.4rem, 0.7vw, 0.55rem);
-  letter-spacing: 0.08em;
-  color: #555;
-  text-align: center;
-}
-
-.libro-tapa-1 {
-  font-size: clamp(0.9rem, 2.1vw, 1.55rem);
-  line-height: 1.5;
-}
-
-.libro-tapa-2 {
-  font-size: clamp(1.2rem, 2.8vw, 2.1rem);
-  line-height: 1.4;
-  color: var(--rojo);
-}
-
-.libro-tapa-autor {
-  margin-top: auto;
-  font-family: var(--mono);
-  font-size: clamp(0.5rem, 0.9vw, 0.7rem);
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-}
-
-.libro-firma {
-  position: absolute;
-  left: 2%;
-  top: 14%;
-  z-index: 2;
-  display: grid;
-  place-items: center;
-  width: 30%;
-  aspect-ratio: 1;
-  border: 3px solid var(--rojo);
-  border-radius: 50%;
-  font-family: var(--mano);
-  font-size: clamp(0.75rem, 1.5vw, 1.05rem);
-  transform: rotate(-6deg);
-}
-
-.libro-nota {
-  position: absolute;
-  right: 0;
-  top: 0;
-  font-family: var(--mano);
-  font-size: clamp(0.75rem, 1.4vw, 1rem);
-  line-height: 1.3;
-  transform: rotate(-4deg);
-}
-
-.libro-flecha {
-  position: absolute;
-  right: 12%;
-  top: 6%;
-  width: 11%;
-  fill: none;
-  stroke: #000;
-  stroke-width: 2.5;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-
-.libro-peso {
-  position: absolute;
-  left: 12%;
-  bottom: 14%;
-  font-family: var(--mano);
-  font-size: clamp(1.5rem, 3vw, 2.25rem);
-}
-
-.libro-nuevo {
-  position: absolute;
-  right: 6%;
-  bottom: 12%;
-  z-index: 2;
-  padding: 0.35rem 0.9rem;
-  background: #000;
-  color: var(--crema);
-  font-family: var(--mano);
-  font-size: clamp(0.75rem, 1.4vw, 1rem);
-  border: 2px solid var(--rojo);
+@media (max-width: 600px) {
+  .l3d {
+    --w: 200px;
+    --h: 300px;
+    --t: 28px;
+  }
+  .lb-rutas,
+  .lb-pilares {
+    grid-template-columns: 1fr;
+  }
+  .lb-precio {
+    flex: 1 1 150px;
+  }
 }
 
 /* Tienda de planillas */
@@ -858,13 +963,6 @@ a {
 }
 
 @media (max-width: 860px) {
-  .libro-grilla {
-    grid-template-columns: 1fr;
-    gap: 2rem;
-  }
-  .libro-escena {
-    max-width: 420px;
-  }
   .productos {
     grid-template-columns: 1fr;
   }

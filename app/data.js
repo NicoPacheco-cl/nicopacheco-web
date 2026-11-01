@@ -137,8 +137,8 @@ export const servicios = [
           'Una guía práctica sobre cómo funciona una franquicia por dentro: qué se paga, qué se recibe y cómo se construye una relación sana entre marca y franquiciado.',
         importancia:
           'Si vas a comprar o a ofrecer una franquicia, conviene leerlo antes de firmar.',
-        precio: 'Desde $14.990',
-        accion: 'Ver en la tienda',
+        precio: 'Desde $7.990',
+        accion: 'Ver el libro',
         href: '#tienda',
       },
     ],
@@ -176,14 +176,14 @@ export const tienda = [
   {
     id: 'libro-digital',
     nombre: 'Franquicia Justa, libro digital',
-    detalle: 'Formato PDF para leer en cualquier dispositivo.',
-    precio: '$14.990',
+    detalle: 'Kindle, Apple Books y PDF, con descarga inmediata.',
+    precio: '$7.990',
   },
   {
     id: 'libro-impreso',
     nombre: 'Franquicia Justa, libro impreso',
-    detalle: 'Con envío a todo Chile.',
-    precio: '$24.990 más envío',
+    detalle: 'Preventa con despacho a todo Chile o retiro gratis.',
+    precio: '$14.990',
   },
 ];
 
@@ -246,4 +246,7 @@ export const WHATSAPP = '56990871663';
 export const wa = (texto) => `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(texto)}`;
 // Pega aquí el enlace del canal cuando exista y aparecerá el botón en el sitio
 export const YOUTUBE = '';
+// Página de compra del libro (pago con Mercado Pago en Portal Comercios)
+export const LIBRO_COMPRA = 'https://www.portalcomercios.cl/franquicias/libro';
+
 export const LINKEDIN = 'https://www.linkedin.com/in/maximiliano-pacheco-o/';

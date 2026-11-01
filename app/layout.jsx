@@ -1,9 +1,9 @@
 import '@fontsource-variable/archivo/wdth.css';
 import '@fontsource/instrument-serif/400-italic.css';
 import '@fontsource/anton/400.css';
-import '@fontsource/rock-salt/400.css';
-import '@fontsource/ibm-plex-mono/400.css';
-import '@fontsource/ibm-plex-mono/700.css';
+import '@fontsource-variable/bricolage-grotesque/wght.css';
+import '@fontsource-variable/public-sans/wght.css';
+import '@fontsource-variable/public-sans/wght-italic.css';
 import './globals.css';
 
 export const metadata = {
