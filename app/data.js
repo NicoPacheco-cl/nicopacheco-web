@@ -1,11 +1,11 @@
 // Contenido del sitio. Edita precios y textos aquí.
 
 export const nav = [
+  { href: '#sobre-mi', label: 'Sobre mí' },
   { href: '#servicios', label: 'Servicios' },
   { href: '#tienda', label: 'Tienda' },
-  { href: '#conferencias', label: 'Conferencias y seminarios' },
   { href: '#podcast', label: 'Podcast' },
-  { href: '#sobre-nico', label: 'Sobre Nico' },
+  { href: '#libro', label: 'Libro' },
 ];
 
 // Respaldo discreto bajo la portada
@@ -231,10 +231,13 @@ export const intereses = [
   { value: 'conferencia', label: 'Conferencia para mi empresa o evento' },
   { value: 'seminario', label: 'Entradas a seminarios' },
   { value: 'podcast', label: 'Podcast EmprendeBien' },
+  { value: 'boletin', label: 'Suscribirme a La Bitácora Pyme' },
   { value: 'otro', label: 'Otro tema' },
 ];
 
 export const CORREO = 'nikolaspacheco@gmail.com';
 export const WHATSAPP = '56990871663';
 export const wa = (texto) => `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(texto)}`;
+// Pega aquí el enlace del canal cuando exista y aparecerá el botón en el sitio
+export const YOUTUBE = '';
 export const LINKEDIN = 'https://www.linkedin.com/in/maximiliano-pacheco-o/';

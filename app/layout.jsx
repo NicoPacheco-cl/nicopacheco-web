@@ -1,4 +1,6 @@
 import '@fontsource-variable/archivo/wdth.css';
+import '@fontsource/instrument-serif/400-italic.css';
+import '@fontsource/anton/400.css';
 import './globals.css';
 
 export const metadata = {
@@ -17,7 +19,7 @@ export const metadata = {
 };
 
 export const viewport = {
-  themeColor: '#13233B',
+  themeColor: '#0D0D0D',
 };
 
 export default function RootLayout({ children }) {
