@@ -2,6 +2,7 @@ import Image from 'next/image';
 import ContactForm from './ContactForm';
 import Mosaico from './Mosaico';
 import Garabatos from './Garabatos';
+import LibroCompra from './LibroCompra';
 import {
   cifras,
   servicios,
@@ -12,7 +13,6 @@ import {
   medios,
   LINKEDIN,
   YOUTUBE,
-  LIBRO_COMPRA,
   wa,
 } from './data';
 
@@ -192,7 +192,7 @@ export default function Home() {
         <section id="libro" className="lb" aria-labelledby="titulo-libro">
           <div className="lb-hero">
             <div className="contenedor lb-in">
-              <a href={LIBRO_COMPRA} className="l3d" aria-label="Ver el libro Franquicia Justa">
+              <a href="#comprar-libro" className="l3d" aria-label="Comprar el libro Franquicia Justa">
                 <div className="l3d-cuerpo">
                   <div className="l3d-contra" />
                   <div className="l3d-paginas" />
@@ -241,7 +241,7 @@ export default function Home() {
                     <span>Kindle · Apple Books · PDF</span>
                   </div>
                 </div>
-                <a href={LIBRO_COMPRA} className="lb-btn" target="_blank" rel="noopener noreferrer">
+                <a href="#comprar-libro" className="lb-btn">
                   Comprar ahora
                 </a>
               </div>
@@ -288,6 +288,10 @@ export default function Home() {
               franquiciados, 10 casos reales, plantilla de proforma financiera y checklist de due
               diligence.
             </p>
+
+            <div id="comprar-libro" className="lc-ancla">
+              <LibroCompra />
+            </div>
           </div>
         </section>
 

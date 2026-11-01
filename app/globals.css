@@ -914,6 +914,258 @@ a {
   }
 }
 
+/* Formulario de compra del libro */
+.lc-ancla {
+  scroll-margin-top: 80px;
+  margin-top: 4rem;
+}
+
+.lc {
+  padding: 1.75rem;
+  background: #fff;
+  border: 1px solid #d8dee8;
+  border-radius: 16px;
+  display: grid;
+  gap: 1.1rem;
+}
+
+.lc-titulo {
+  font-family: var(--lb-display);
+  font-weight: 800;
+  font-size: clamp(1.6rem, 3vw, 2rem);
+  letter-spacing: -0.02em;
+  color: #111;
+}
+
+.lc-opciones {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.9rem;
+}
+
+.lc-opcion {
+  position: relative;
+  display: grid;
+  gap: 0.35rem;
+  align-content: start;
+  padding: 1.1rem 1.25rem 1.1rem 2.75rem;
+  border: 2px solid #d8dee8;
+  border-radius: 14px;
+  cursor: pointer;
+}
+
+.lc-opcion.activa {
+  border-color: var(--lb-rojo);
+  background: #fdf6f5;
+}
+
+.lc-opcion input,
+.lc-op-entrega input {
+  position: absolute;
+  left: 1.1rem;
+  top: 1.35rem;
+  accent-color: var(--lb-rojo);
+}
+
+.lc-op-nombre {
+  font-weight: 700;
+}
+
+.lc-pill {
+  justify-self: start;
+  font-size: 0.6875rem;
+  padding: 0.15rem 0.55rem;
+}
+
+.lc-op-precio s {
+  color: #6b6355;
+  font-weight: 600;
+}
+
+.lc-op-precio strong {
+  font-family: var(--lb-display);
+  font-size: 1.6rem;
+  color: var(--lb-rojo);
+}
+
+.lc-op-nota {
+  font-size: 0.875rem;
+  color: #5a6678;
+}
+
+.lc-fila {
+  display: grid;
+  gap: 0.9rem;
+}
+
+.lc-fila-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.lc-campo {
+  display: grid;
+  gap: 0.35rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.lc-campo input,
+.lc-campo select,
+.lc-campo textarea {
+  font: inherit;
+  font-weight: 400;
+  font-size: 1rem;
+  padding: 0.7rem 0.8rem;
+  border: 1px solid #d8dee8;
+  border-radius: 10px;
+  background: #f5f6f9;
+  color: var(--lb-tinta);
+  width: 100%;
+}
+
+.lc-campo input:focus,
+.lc-campo select:focus,
+.lc-campo textarea:focus {
+  outline: 2px solid var(--lb-rojo);
+  outline-offset: 1px;
+  background: #fff;
+}
+
+.lc-cantidad {
+  max-width: 280px;
+}
+
+.lc-entrega {
+  display: grid;
+  gap: 0.75rem;
+  margin: 0;
+  padding: 1rem;
+  border: 1px solid #d8dee8;
+  border-radius: 14px;
+}
+
+.lc-entrega legend {
+  padding: 0 0.4rem;
+  font-weight: 700;
+}
+
+.lc-op-entrega {
+  position: relative;
+  display: block;
+  padding: 0.9rem 1rem 0.9rem 2.6rem;
+  border: 1px solid #d8dee8;
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+.lc-op-entrega.activa {
+  border-color: var(--lb-rojo);
+}
+
+.lc-op-entrega input {
+  top: 1.15rem;
+  left: 1rem;
+}
+
+.lc-op-entrega strong,
+.lc-op-entrega small {
+  display: block;
+}
+
+.lc-op-entrega small {
+  margin-top: 0.15rem;
+  font-size: 0.875rem;
+  color: #5a6678;
+}
+
+.lc-acepto {
+  display: flex;
+  gap: 0.6rem;
+  align-items: flex-start;
+  font-size: 0.9375rem;
+}
+
+.lc-acepto input {
+  margin-top: 0.3rem;
+  accent-color: var(--lb-rojo);
+}
+
+.lc-error {
+  padding: 0.75rem 1rem;
+  border-radius: 10px;
+  background: #fdecec;
+  color: #8f1c22;
+  font-weight: 600;
+}
+
+.lc-pagar {
+  width: 100%;
+  border: 0;
+  cursor: pointer;
+  font-family: inherit;
+  padding-block: 1.05rem;
+}
+
+.lc-pagar:disabled {
+  opacity: 0.7;
+  cursor: wait;
+}
+
+@media (max-width: 700px) {
+  .lc {
+    padding: 1.25rem;
+  }
+  .lc-opciones,
+  .lc-fila-3 {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Página de gracias */
+.gracias {
+  min-height: 70vh;
+  display: grid;
+  place-items: center;
+  padding: 4rem 1.25rem;
+  background: linear-gradient(135deg, #f4efe4, #fbf9f4 60%, #efe7d6);
+}
+
+.gracias-caja {
+  max-width: 560px;
+  padding: 2.5rem;
+  background: #fff;
+  border: 1px solid #e3dccb;
+  border-radius: 16px;
+  box-shadow: 0 6px 18px rgba(60, 40, 0, 0.06);
+}
+
+.gracias-libro {
+  color: var(--lb-rojo);
+  font-weight: 700;
+}
+
+.gracias h1 {
+  margin: 0.5rem 0 1rem;
+  font-family: var(--lb-display);
+  font-weight: 800;
+  font-size: clamp(1.8rem, 4vw, 2.4rem);
+  letter-spacing: -0.02em;
+  color: #111;
+}
+
+.gracias-botones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+  margin-top: 1.75rem;
+}
+
+.gracias-wa {
+  font-weight: 700;
+  color: var(--lb-tinta);
+}
+
 /* Tienda de planillas */
 .tienda {
   padding-block: 5.5rem;
