@@ -85,7 +85,7 @@ export const servicios = [
         nombre: 'Mentoring para dueños y gerentes',
         detalle:
           'Sesiones uno a uno sobre propuesta de valor, estudio de mercado, finanzas y gestión directiva.',
-        precio: '$90.000 la hora · $320.000 pack de 4 horas',
+        precio: '$90.000 la hora\n$320.000 pack de 4 horas',
         accion: 'Agendar mentoring',
       },
       {
