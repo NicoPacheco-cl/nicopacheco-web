@@ -1153,6 +1153,27 @@ a {
   color: #111;
 }
 
+.gracias-descargas {
+  display: grid;
+  gap: 0.6rem;
+  margin: 1.5rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.gracias-descargas .lb-btn {
+  display: block;
+  text-align: center;
+}
+
+.gracias-aviso {
+  padding: 0.9rem 1rem;
+  border-radius: 10px;
+  background: #fdf6f5;
+  color: #8f1c22;
+  font-weight: 600;
+}
+
 .gracias-botones {
   display: flex;
   flex-wrap: wrap;

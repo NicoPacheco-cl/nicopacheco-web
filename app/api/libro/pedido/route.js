@@ -71,9 +71,9 @@ export async function POST(request) {
         payer: { name: nombre, email: correo },
         external_reference: referencia,
         back_urls: {
-          success: `${origen}/libro/gracias`,
-          pending: `${origen}/libro/gracias`,
-          failure: `${origen}/libro/gracias`,
+          success: `${origen}/libro/gracias?pedido=${referencia}`,
+          pending: `${origen}/libro/gracias?pedido=${referencia}`,
+          failure: `${origen}/libro/gracias?pedido=${referencia}`,
         },
         auto_return: 'approved',
         notification_url: `${origen}/api/libro/webhook`,

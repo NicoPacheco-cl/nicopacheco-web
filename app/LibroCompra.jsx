@@ -73,7 +73,7 @@ export default function LibroCompra() {
           <span className="lc-op-precio">
             <strong>$7.990</strong>
           </span>
-          <span className="lc-op-nota">Kindle, Apple Books y PDF · te llega a tu correo</span>
+          <span className="lc-op-nota">Kindle, Apple Books y PDF · descarga inmediata</span>
         </label>
       </div>
 
