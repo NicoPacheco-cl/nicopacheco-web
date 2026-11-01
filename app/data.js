@@ -9,11 +9,11 @@ export const nav = [
 ];
 
 // Respaldo discreto bajo la portada
-export const respaldo = [
-  '+100 pymes acompañadas',
-  '14 franquicias creadas',
-  'Director en 7 empresas',
-  'Entrevistado en Diario Financiero y TVN',
+export const cifras = [
+  { valor: '+100', texto: 'pymes acompañadas' },
+  { valor: '14', texto: 'franquicias creadas' },
+  { valor: '7', texto: 'empresas donde soy director' },
+  { valor: '+50', texto: 'conferencias en 10 años' },
 ];
 
 // Problemas típicos del visitante y qué servicio los resuelve

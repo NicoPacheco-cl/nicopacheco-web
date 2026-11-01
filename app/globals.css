@@ -354,60 +354,125 @@ a {
 
 .portada-foto {
   position: relative;
-}
-
-.portada-foto::before {
-  content: '';
-  position: absolute;
-  left: 8%;
-  right: 0;
-  bottom: 0;
-  height: 78%;
-  background: var(--acento);
+  align-self: end;
 }
 
 .portada-foto img {
-  position: relative;
   width: 100%;
-  max-width: 460px;
+  max-width: 520px;
   margin-left: auto;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 14%, #000 70%, transparent 98%),
+    linear-gradient(to right, transparent 0%, #000 20%, #000 80%, transparent 100%);
+  -webkit-mask-composite: source-in;
+  mask-image: linear-gradient(to bottom, transparent 0%, #000 14%, #000 70%, transparent 98%),
+    linear-gradient(to right, transparent 0%, #000 20%, #000 80%, transparent 100%);
+  mask-composite: intersect;
 }
 
-.cinta {
+/* Cifras de respaldo */
+.cifras {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  margin: 0;
+  padding: 2.5rem 0 3rem;
+  list-style: none;
   border-top: 1px solid var(--linea-oscura);
 }
 
-.cinta ul {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 0.5rem 2rem;
-  margin: 0 auto;
-  padding-block: 1.1rem;
-  list-style: none;
+.cifra-valor {
+  display: block;
   font-family: var(--display);
-  letter-spacing: 0.06em;
+  font-size: clamp(2.75rem, 5vw, 4rem);
+  line-height: 1;
+  color: var(--blanco);
+}
+
+.cifra-texto {
+  display: block;
+  margin-top: 0.5rem;
+  font-size: 0.975rem;
+  color: var(--gris-claro);
+  max-width: 18ch;
+}
+
+/* Medios en cinta continua */
+.medios {
+  border-top: 1px solid var(--linea-oscura);
+  padding-block: 1.75rem 2rem;
+  overflow: hidden;
+}
+
+.medios-rotulo {
+  font-size: 0.875rem;
+  letter-spacing: 0.32em;
   text-transform: uppercase;
-  font-size: 0.9375rem;
-  color: #d9d9d9;
+  color: #8a8a8a;
+  margin-bottom: 1.25rem;
+}
+
+.medios-pista {
+  display: flex;
+  width: max-content;
+}
+
+.medios-pista ul {
+  display: flex;
+  align-items: center;
+  gap: 4rem;
+  margin: 0;
+  padding: 0 2rem;
+  list-style: none;
+}
+
+.medio {
+  font-family: var(--display);
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: #9a9a9a;
+  white-space: nowrap;
+}
+
+.medio-serif {
+  font-family: var(--cursiva);
+  font-style: italic;
+  text-transform: none;
+  font-size: clamp(2rem, 3.4vw, 2.9rem);
+  letter-spacing: 0;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .medios-pista {
+    animation: cinta 32s linear infinite;
+  }
+}
+
+@keyframes cinta {
+  to {
+    transform: translateX(-50%);
+  }
 }
 
 @media (max-width: 860px) {
   .portada-grilla {
     grid-template-columns: 1fr;
     padding-top: 2.5rem;
+    gap: 0;
   }
   .portada-texto {
     padding-bottom: 0;
   }
   .portada-foto {
-    max-width: 320px;
-    margin-inline: auto;
-    width: 100%;
+    margin-top: 1rem;
   }
-  .cinta ul {
-    display: grid;
+  .portada-foto img {
+    max-width: none;
+  }
+  .cifras {
     grid-template-columns: 1fr 1fr;
+    gap: 1.75rem 1.25rem;
+    padding-top: 2rem;
   }
 }
 

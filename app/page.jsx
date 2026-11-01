@@ -3,7 +3,7 @@ import ContactForm from './ContactForm';
 import Mosaico from './Mosaico';
 import Garabatos from './Garabatos';
 import {
-  respaldo,
+  cifras,
   servicios,
   tienda,
   charlas,
@@ -81,9 +81,8 @@ export default function Home() {
                 PACHECO.
               </h1>
               <p className="portada-mision">
-                Hay dueños de pymes que trabajan todo el día y aun así no ven crecer su negocio. No
-                por falta de esfuerzo, sino por números que nadie les enseñó a leer. Por eso ayudo a
-                que tu negocio gane más, valga más y se pueda vender.
+                Mentor de pymes, director de empresas y conferencista. Te ayudo a que tu negocio gane
+                más, valga más y se pueda vender.
               </p>
               <div className="botones">
                 <a href="#servicios" className="btn btn-blanco">
@@ -96,21 +95,38 @@ export default function Home() {
             </div>
             <div className="portada-foto">
               <Image
-                src="/fotos/recortes/nico-brazos-cruzados.png"
+                src="/fotos/hero-movil.jpg"
                 alt="Nico Pacheco, mentor de pymes y conferencista"
-                width={1067}
-                height={1600}
+                width={1200}
+                height={1800}
                 priority
-                sizes="(max-width: 860px) 70vw, 460px"
+                sizes="(max-width: 860px) 100vw, 520px"
               />
             </div>
           </div>
-          <div className="cinta">
-            <ul className="contenedor">
-              {respaldo.map((r) => (
-                <li key={r}>{r}</li>
+          <div className="contenedor">
+            <ul className="cifras">
+              {cifras.map((c) => (
+                <li key={c.texto}>
+                  <span className="cifra-valor">{c.valor}</span>
+                  <span className="cifra-texto">{c.texto}</span>
+                </li>
               ))}
             </ul>
+          </div>
+          <div className="medios" aria-label="Medios donde ha sido entrevistado">
+            <p className="contenedor medios-rotulo">Me han entrevistado en</p>
+            <div className="medios-pista">
+              {[0, 1].map((copia) => (
+                <ul key={copia} aria-hidden={copia === 1 ? 'true' : undefined}>
+                  {medios.map((m, i) => (
+                    <li key={m} className={i % 2 ? 'medio medio-serif' : 'medio'}>
+                      {m}
+                    </li>
+                  ))}
+                </ul>
+              ))}
+            </div>
           </div>
         </section>
 
