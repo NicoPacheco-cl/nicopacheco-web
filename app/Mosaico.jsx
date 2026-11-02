@@ -124,7 +124,7 @@ export default function Mosaico({ items }) {
               <span>Por qué importa</span>
               <p>{s.importancia}</p>
             </div>
-            {s.ficha && <Ficha ficha={s.ficha} />}
+            {(s.ficha?.sesiones || s.ficha?.testimonio || s.ficha?.informe) && <Ficha ficha={s.ficha} />}
             {s.opciones?.length ? (
               <div className="detalle-pago">
                 <PagoServicio key={s.id} opciones={s.opciones} />

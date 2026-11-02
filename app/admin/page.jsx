@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { createClient } from '@supabase/supabase-js';
+import Certificados from './Certificados';
 import './admin.css';
 
 const ADMIN = 'nikolaspacheco@gmail.com';
@@ -818,6 +819,7 @@ const PESTANAS = [
   ['clientes', 'Clientes'],
   ['programas', 'Programas y precios'],
   ['codigos', 'Códigos de descuento'],
+  ['certificados', 'Certificados'],
 ];
 
 function Panel({ sesion }) {
@@ -913,6 +915,8 @@ function Panel({ sesion }) {
           <Clientes pedidos={datos.pedidos} />
         ) : pestana === 'programas' ? (
           <Programas productos={datos.productos} onCambio={cargar} />
+        ) : pestana === 'certificados' ? (
+          <Certificados token={sesion.access_token} />
         ) : (
           <Codigos codigos={datos.codigos} productos={datos.productos} onCambio={cargar} />
         )}

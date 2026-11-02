@@ -102,6 +102,17 @@ export const servicios = [
         destacado: true,
       },
       {
+        id: 'valorizacion-pyme',
+        mosaico: { titulo: 'Valorización Pyme', etiqueta: 'En línea', fondo: '#3e6f8a', marca: 'CERTIFICADO' },
+        nombre: 'Valorización Pyme',
+        resena:
+          'Responde paso a paso sobre tu negocio y calcula gratis una primera estimación de cuánto vale. Si lo necesitas, pide un certificado en PDF con folio, el detalle del cálculo y lo que puedes mejorar para que valga más.',
+        importancia:
+          'El sobreprecio es la razón N° 1 por la que un negocio no se vende. Con un valor de referencia pones un precio que puedas demostrar.',
+        precio: 'Estimación gratis. Certificado desde $50.000',
+        accion: 'Valorizar mi negocio',
+      },
+      {
         id: 'derecho-de-llave',
         mosaico: { titulo: 'Derechos de llave', etiqueta: 'Compraventa', fondo: '#151b2b', marca: 'LLAVE' },
         nombre: 'Venta de derechos de llave',
@@ -148,6 +159,7 @@ export const servicios = [
 // Detalle ampliado de cada servicio, por id. Se muestra en su ventana de detalle.
 // Cuando tengas los archivos, completa testimonio.video e informe.href.
 export const fichas = {
+  'valorizacion-pyme': { href: '/valoriza' },
   diagnostico: {
     sesiones: [
       {

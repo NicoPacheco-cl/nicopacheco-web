@@ -5,7 +5,7 @@ import { useState } from 'react';
 const pesos = (n) => `$${Number(n).toLocaleString('es-CL')}`;
 
 // Campo "¿Tienes un código de descuento?" que consulta el servidor y avisa el nuevo total.
-export default function CampoCodigo({ productoId, cantidad = 1, onCambio, claro = false }) {
+export default function CampoCodigo({ productoId, cantidad = 1, onCambio, claro = false, ruta = '/api/codigo' }) {
   const [abierto, setAbierto] = useState(false);
   const [codigo, setCodigo] = useState('');
   const [estado, setEstado] = useState(null); // { ok, mensaje }
@@ -16,7 +16,7 @@ export default function CampoCodigo({ productoId, cantidad = 1, onCambio, claro 
     if (!c) return;
     setCargando(true);
     try {
-      const r = await fetch(`/api/codigo?codigo=${encodeURIComponent(c)}&producto=${encodeURIComponent(productoId)}&cantidad=${cantidad}`);
+      const r = await fetch(`${ruta}?codigo=${encodeURIComponent(c)}&producto=${encodeURIComponent(productoId)}&cantidad=${cantidad}`);
       const j = await r.json();
       if (j.valido) {
         setEstado({ ok: true, mensaje: `Código aplicado: −${pesos(j.descuento)}` });
