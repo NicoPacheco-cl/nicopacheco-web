@@ -506,6 +506,9 @@ export default async function Home() {
           </nav>
           <p className="pie-lugar">Puerto Varas, Chile</p>
         </div>
+        <div className="contenedor pie-admin">
+          <a href="/admin" rel="nofollow">ADMINISTRADOR</a>
+        </div>
       </footer>
     </>
   );

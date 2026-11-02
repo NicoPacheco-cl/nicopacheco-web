@@ -2142,3 +2142,22 @@ a {
 .cc-claro .cc-error {
   color: #a11f25;
 }
+
+/* Acceso discreto al panel */
+.pie-admin {
+  padding-top: 16px;
+  margin-top: 16px;
+  padding-bottom: 28px;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+.pie-admin a {
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  color: inherit;
+  opacity: 0.45;
+  text-decoration: none;
+}
+.pie-admin a:hover {
+  opacity: 1;
+  text-decoration: underline;
+}
