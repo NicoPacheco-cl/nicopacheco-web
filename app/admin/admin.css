@@ -558,3 +558,31 @@ tr.inactivo td {
     padding: 16px;
   }
 }
+
+/* Clave */
+.adm-clave {
+  display: flex;
+  gap: 8px;
+}
+.adm-clave button,
+.adm-link {
+  background: none;
+  border: 0;
+  padding: 4px;
+  text-decoration: underline;
+  cursor: pointer;
+  color: var(--a-suave) !important;
+  font-size: 14px;
+  white-space: nowrap;
+}
+.adm-link {
+  justify-self: center;
+}
+.adm-cabecera-fila .adm-salir + .adm-salir {
+  margin-left: -8px;
+}
+@media (max-width: 560px) {
+  .adm-cabecera-fila .adm-salir + .adm-salir {
+    margin-left: 0;
+  }
+}

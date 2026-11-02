@@ -51,22 +51,29 @@ const ENTREGA = {
 
 function Acceso() {
   const [correo, setCorreo] = useState('');
-  const [enviado, setEnviado] = useState(false);
+  const [clave, setClave] = useState('');
+  const [ver, setVer] = useState(false);
+  const [entrando, setEntrando] = useState(false);
   const [error, setError] = useState('');
+  const [aviso, setAviso] = useState('');
 
   async function entrar(e) {
     e.preventDefault();
     setError('');
-    if (correo.trim().toLowerCase() !== ADMIN) {
-      setError('Este correo no tiene acceso al panel.');
-      return;
-    }
-    const { error } = await supabase.auth.signInWithOtp({
-      email: ADMIN,
-      options: { emailRedirectTo: `${location.origin}/admin` },
-    });
-    if (error) setError(`No pudimos enviar el enlace: ${error.message}`);
-    else setEnviado(true);
+    setAviso('');
+    if (correo.trim().toLowerCase() !== ADMIN) return setError('Este correo no tiene acceso al panel.');
+    setEntrando(true);
+    const { error } = await supabase.auth.signInWithPassword({ email: ADMIN, password: clave });
+    setEntrando(false);
+    if (error) setError('Correo o clave incorrectos.');
+  }
+
+  async function recuperar() {
+    setError('');
+    setAviso('');
+    const { error } = await supabase.auth.resetPasswordForEmail(ADMIN, { redirectTo: `${location.origin}/admin` });
+    if (error) setError(`No pudimos enviar el correo: ${error.message}`);
+    else setAviso(`Te enviamos un correo a ${ADMIN} para crear una clave nueva.`);
   }
 
   return (
@@ -74,21 +81,81 @@ function Acceso() {
       <form onSubmit={entrar} className="adm-acceso-caja">
         <p className="adm-marca">NICO PACHECO®</p>
         <h1>Panel de administración</h1>
-        {enviado ? (
-          <p className="adm-ok">
-            Te enviamos un enlace a <strong>{ADMIN}</strong>. Ábrelo desde este mismo navegador para entrar.
-          </p>
-        ) : (
-          <>
-            <label>
-              <span>Tu correo</span>
-              <input type="email" value={correo} onChange={(e) => setCorreo(e.target.value)} required autoFocus />
-            </label>
-            {error && <p className="adm-error">{error}</p>}
-            <button type="submit" className="adm-btn">
-              Enviarme el enlace de acceso
+        <label>
+          <span>Correo</span>
+          <input type="email" autoComplete="username" value={correo} onChange={(e) => setCorreo(e.target.value)} required autoFocus />
+        </label>
+        <label>
+          <span>Clave</span>
+          <span className="adm-clave">
+            <input
+              type={ver ? 'text' : 'password'}
+              autoComplete="current-password"
+              value={clave}
+              onChange={(e) => setClave(e.target.value)}
+              required
+            />
+            <button type="button" onClick={() => setVer(!ver)}>
+              {ver ? 'Ocultar' : 'Ver'}
             </button>
-          </>
+          </span>
+        </label>
+        {error && <p className="adm-error">{error}</p>}
+        {aviso && <p className="adm-ok">{aviso}</p>}
+        <button type="submit" className="adm-btn" disabled={entrando}>
+          {entrando ? 'Entrando…' : 'Entrar'}
+        </button>
+        <button type="button" className="adm-link" onClick={recuperar}>
+          Olvidé mi clave
+        </button>
+      </form>
+    </main>
+  );
+}
+
+function CrearClave({ titulo = 'Crea tu clave', alListo, alCancelar }) {
+  const [clave, setClave] = useState('');
+  const [repite, setRepite] = useState('');
+  const [error, setError] = useState('');
+  const [guardando, setGuardando] = useState(false);
+
+  async function guardar(e) {
+    e.preventDefault();
+    setError('');
+    if (clave.length < 8) return setError('La clave debe tener al menos 8 caracteres.');
+    if (clave !== repite) return setError('Las dos claves no coinciden.');
+    setGuardando(true);
+    const { error } = await supabase.auth.updateUser({ password: clave });
+    setGuardando(false);
+    if (error) setError(error.message.includes('different') ? 'La clave nueva debe ser distinta de la anterior.' : error.message);
+    else alListo();
+  }
+
+  return (
+    <main className="adm-acceso">
+      <form onSubmit={guardar} className="adm-acceso-caja">
+        <p className="adm-marca">NICO PACHECO®</p>
+        <h1>{titulo}</h1>
+        <p className="adm-ayuda" style={{ margin: 0 }}>
+          Desde ahora entrarás con {ADMIN} y esta clave. Usa al menos 8 caracteres.
+        </p>
+        <input type="email" autoComplete="username" value={ADMIN} readOnly hidden />
+        <label>
+          <span>Clave nueva</span>
+          <input type="password" autoComplete="new-password" value={clave} onChange={(e) => setClave(e.target.value)} required autoFocus />
+        </label>
+        <label>
+          <span>Repite la clave</span>
+          <input type="password" autoComplete="new-password" value={repite} onChange={(e) => setRepite(e.target.value)} required />
+        </label>
+        {error && <p className="adm-error">{error}</p>}
+        <button type="submit" className="adm-btn" disabled={guardando}>
+          {guardando ? 'Guardando…' : 'Guardar clave'}
+        </button>
+        {alCancelar && (
+          <button type="button" className="adm-link" onClick={alCancelar}>
+            Volver al panel
+          </button>
         )}
       </form>
     </main>
@@ -797,6 +864,9 @@ function Panel({ sesion }) {
             NICO PACHECO®
           </a>
           <span className="adm-quien">{sesion.user.email}</span>
+          <button type="button" className="adm-salir" onClick={() => window.dispatchEvent(new Event('adm-clave'))}>
+            Mi clave
+          </button>
           <button type="button" className="adm-salir" onClick={() => supabase.auth.signOut()}>
             Salir
           </button>
@@ -853,11 +923,20 @@ function Panel({ sesion }) {
 
 export default function Admin() {
   const [sesion, setSesion] = useState(undefined);
+  const [cambiarClave, setCambiarClave] = useState(false);
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data }) => setSesion(data.session));
-    const { data } = supabase.auth.onAuthStateChange((_e, s) => setSesion(s));
-    return () => data.subscription.unsubscribe();
+    const { data } = supabase.auth.onAuthStateChange((evento, s) => {
+      setSesion(s);
+      if (evento === 'PASSWORD_RECOVERY') setCambiarClave(true);
+    });
+    const f = () => setCambiarClave(true);
+    window.addEventListener('adm-clave', f);
+    return () => {
+      data.subscription.unsubscribe();
+      window.removeEventListener('adm-clave', f);
+    };
   }, []);
 
   if (sesion === undefined) return <main className="adm-acceso"><p className="adm-vacio">Cargando…</p></main>;
@@ -874,6 +953,9 @@ export default function Admin() {
         </div>
       </main>
     );
+  }
+  if (cambiarClave) {
+    return <CrearClave alListo={() => setCambiarClave(false)} alCancelar={() => setCambiarClave(false)} />;
   }
   return <Panel sesion={sesion} />;
 }
