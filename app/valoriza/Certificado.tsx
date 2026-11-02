@@ -106,7 +106,7 @@ export function Certificado({ datos, cobro, premium = true, pagado }: { datos: D
     const pl = new URLSearchParams(window.location.search).get("plan");
     let guardado: string | null = null;
     try { guardado = localStorage.getItem(CLAVE_PLAN); } catch { /* nada */ }
-    if (esPlan(pl)) setPlan(pl); else if (esPlan(guardado)) setPlan(guardado);
+    if (esPlan(pl)) { setPlan(pl); try { localStorage.setItem(CLAVE_PLAN, pl); } catch { /* nada */ } } else if (esPlan(guardado)) setPlan(guardado);
     const elegir = (e: Event) => { const x = (e as CustomEvent).detail; if (esPlan(x)) { setPlan(x); setDesc(null); } };
     window.addEventListener(EVENTO_PLAN, elegir);
     return () => window.removeEventListener(EVENTO_PLAN, elegir);

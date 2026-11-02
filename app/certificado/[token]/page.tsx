@@ -13,6 +13,7 @@ import { BotonReintentar } from "./BotonReintentar";
 import { avisosDocumentos, procesarPendientes } from "@/lib/lectura-servidor";
 import { after } from "next/server";
 import { iaActiva } from "@/lib/ia";
+import { DescargaAuto } from "./DescargaAuto";
 import { Refrescar } from "./Refrescar";
 
 export const dynamic = "force-dynamic";
@@ -30,7 +31,7 @@ export default async function PaginaCertificado({ params, searchParams }: { para
   const pagoId = q.payment_id || q.collection_id;
   if (c.estado === "pendiente" && pagoId && (q.status === "approved" || q.collection_status === "approved")) {
     // Se recarga la página: dentro de una misma carga, una segunda lectura devolvería el estado anterior.
-    if (await verificarPagoCertificado(pagoId, sitio())) redirect(`/certificado/${token}`);
+    if (await verificarPagoCertificado(pagoId, sitio())) redirect(`/certificado/${token}?descargar=1`);
   }
   const listo = disponible(c);
   const a = listo ? analisisDe(c) : null;
@@ -51,6 +52,7 @@ export default async function PaginaCertificado({ params, searchParams }: { para
     <Marco>
       <main className="wrap pg">
         {leyendo && <Refrescar segundos={6} />}
+        {listo && plan === "standard" && q.descargar === "1" && <DescargaAuto url={`/api/certificado/pdf?t=${c.token}`} />}
         <span className="eyebrow">Certificado de valorización N° {c.folio}</span>
         <h1>{c.negocio}</h1>
 

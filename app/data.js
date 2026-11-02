@@ -159,7 +159,7 @@ export const servicios = [
 // Detalle ampliado de cada servicio, por id. Se muestra en su ventana de detalle.
 // Cuando tengas los archivos, completa testimonio.video e informe.href.
 export const fichas = {
-  'valorizacion-pyme': { href: '/valoriza' },
+  'valorizacion-pyme': { href: '/valoriza', planes: true },
   diagnostico: {
     sesiones: [
       {

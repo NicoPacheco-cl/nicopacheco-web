@@ -13,6 +13,42 @@ function Flecha() {
   );
 }
 
+// Valorización Pyme: al elegir un certificado se abre su formulario.
+function Planes({ planes, href }) {
+  return (
+    <section className="ficha" aria-labelledby="ficha-planes">
+      <h4 id="ficha-planes" className="ficha-rotulo">
+        Elige tu certificado
+      </h4>
+      <ul className="ficha-planes">
+        {planes.map((p) => {
+          const contenido = (
+            <>
+              <span className="ficha-plan-cabeza">
+                <strong>{p.nombre}</strong>
+                {p.recomendado && p.activo && <em>Recomendada</em>}
+                <b>{p.activo ? p.precio : 'Muy pronto'}</b>
+              </span>
+              <span>{p.resumen}</span>
+            </>
+          );
+          return (
+            <li key={p.id}>
+              {p.activo ? (
+                <a className="ficha-plan" href={`${href}?plan=${p.id}`}>
+                  {contenido}
+                </a>
+              ) : (
+                <div className="ficha-plan ficha-plan-inactivo">{contenido}</div>
+              )}
+            </li>
+          );
+        })}
+      </ul>
+    </section>
+  );
+}
+
 function Ficha({ ficha }) {
   const { sesiones, testimonio, informe } = ficha;
   return (
@@ -125,7 +161,9 @@ export default function Mosaico({ items }) {
               <p>{s.importancia}</p>
             </div>
             {(s.ficha?.sesiones || s.ficha?.testimonio || s.ficha?.informe) && <Ficha ficha={s.ficha} />}
-            {s.opciones?.length ? (
+            {s.ficha?.planes ? (
+              <Planes planes={s.ficha.planes} href={s.href} />
+            ) : s.opciones?.length ? (
               <div className="detalle-pago">
                 <PagoServicio key={s.id} opciones={s.opciones} />
               </div>

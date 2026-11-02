@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { iaActiva } from "@/lib/ia";
 import { pagosActivos } from "@/lib/pagos-valoriza";
+import { esPlan, PLANES_CERT } from "@/lib/certificado";
 import { PlanesCabecera, PlanesMovil } from "./Certificado";
 import { Marco } from "./Marco";
 import { Valorizador } from "./Valorizador";
@@ -13,8 +14,11 @@ export const metadata: Metadata = {
 // Se decide al abrir la página: al agregar una clave en Vercel, Gold y Platinum se activan sin recompilar.
 export const dynamic = "force-dynamic";
 
-export default function Valoriza() {
+export default async function Valoriza({ searchParams }: { searchParams: Promise<Record<string, string>> }) {
   const premium = iaActiva();
+  const pedido = (await searchParams).plan;
+  // Si eligió un certificado en la ventana del servicio, va directo al formulario.
+  const plan = esPlan(pedido) && (premium || pedido === "standard") ? pedido : null;
   return (
     <Marco>
       <main className="wrap publicar">
@@ -22,8 +26,17 @@ export default function Valoriza() {
           <span className="eyebrow">Valorización Pyme · la primera estimación es gratis</span>
           <h1>El sobreprecio es la razón N° 1 por la que un negocio no se vende.</h1>
           <p className="va-frase2">Con precio de mercado se vende en semanas. Calcula gratis cuánto vale y pon un precio que puedas demostrar.</p>
-          <PlanesCabecera premium={premium} />
-          <PlanesMovil premium={premium} />
+          {plan ? (
+            <p className="va-elegido">
+              Elegiste el certificado <strong>{PLANES_CERT[plan].nombre}</strong>. Completa el formulario: al terminar pagas y descargas tu certificado.{" "}
+              <a href="/#servicios">Cambiar de certificado</a>
+            </p>
+          ) : (
+            <>
+              <PlanesCabecera premium={premium} />
+              <PlanesMovil premium={premium} />
+            </>
+          )}
         </header>
         <Valorizador cobro={pagosActivos()} premium={premium} />
       </main>
