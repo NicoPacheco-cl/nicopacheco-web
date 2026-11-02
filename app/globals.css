@@ -477,6 +477,33 @@ a {
 }
 
 /* Herramienta gratuita */
+.dg {
+  background: #a9dcf2; /* celeste */
+  color: var(--negro);
+  padding-block: 5rem;
+}
+
+.dg-grilla {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 3rem;
+  align-items: end;
+}
+
+.dg .dg-rotulo {
+  color: var(--negro);
+}
+
+@media (max-width: 860px) {
+  .dg-grilla {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  .dg .btn {
+    justify-self: start;
+  }
+}
+
 .test {
   background: var(--hueso);
   padding-block: 5rem;

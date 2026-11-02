@@ -141,6 +141,19 @@ export default async function Home() {
           </div>
         </section>
 
+        {/* DIAGNÓSTICO FINANCIERO GRATIS */}
+        <section id="diagnostico-gratis" className="dg" aria-labelledby="titulo-dg">
+          <div className="contenedor dg-grilla">
+            <div>
+              <p className="rotulo dg-rotulo">Diagnóstico financiero gratis</p>
+              <Titulo id="titulo-dg" fuerte="SABER LOS NÚMEROS DE TU NEGOCIO NO ES IMPORTANTE," suave="es imprescindible." />
+            </div>
+            <a href={contacto('diagnostico-gratis')} className="btn btn-negro">
+              Realiza este diagnóstico gratis
+            </a>
+          </div>
+        </section>
+
         {/* HERRAMIENTA GRATUITA */}
         <section id="planilla-gratis" className="test" aria-labelledby="titulo-test">
           <div className="contenedor test-grilla">

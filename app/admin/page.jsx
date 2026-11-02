@@ -32,6 +32,7 @@ const NOMBRE_ESTADO = {
 const PAGADOS = new Set(['pagado', 'entregado']);
 const NOMBRE_SECCION = {
   inicio: 'Portada',
+  'diagnostico-gratis': 'Diagnóstico gratis',
   'planilla-gratis': 'Planilla gratis',
   servicios: 'Servicios',
   podcast: 'Podcast',

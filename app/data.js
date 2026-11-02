@@ -260,6 +260,7 @@ export const medios = [
 ];
 
 export const intereses = [
+  { value: 'diagnostico-gratis', label: 'Diagnóstico financiero gratis' },
   { value: 'diagnostico', label: 'Diagnóstico Pyme' },
   { value: 'mentoring', label: 'Mentoring' },
   { value: 'directorio-pyme', label: 'Directorio PYME' },
