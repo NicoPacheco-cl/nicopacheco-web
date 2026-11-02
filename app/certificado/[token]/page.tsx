@@ -64,7 +64,7 @@ export default async function PaginaCertificado({ params, searchParams }: { para
               <p className="fi-nota" style={{ margin: "2px 0 0" }}>
                 {plan === "standard" && "Basada en la información que declaraste."}
                 {plan !== "standard" && c.revision === "pendiente_docs" && "Falta que subas tus documentos. Mientras tanto puedes descargar la versión Standard."}
-                {c.revision === "en_revision" && (iaActiva() ? "Recibimos tus documentos y los estamos leyendo. Normalmente el resultado llega en minutos; te avisamos por correo (como máximo en 48 horas hábiles)." : "Recibimos tus documentos: los revisamos en 48 horas hábiles y te avisamos por correo.")}
+                {c.revision === "en_revision" && (iaActiva() ? "Recibimos tus documentos y los estamos leyendo. Normalmente el resultado llega en minutos; te avisamos por correo (como máximo en 48 horas hábiles)." : `Recibimos tus documentos: los revisamos en 48 horas hábiles${correoActivo() ? " y te avisamos por correo" : ". Vuelve a este enlace para ver el resultado"}.`)}
                 {nivel && `Documentos verificados el ${fecha(c.revisado_en!)}. El valor incluye ${Math.round(PLANES_CERT[nivel].prima * 100)}% de prima por información verificada.`}
                 {c.revision === "rechazado" && "No pudimos verificar los documentos: el certificado se emitió como Standard."}
                 {vence && ` Vigente hasta el ${fecha(vence.toISOString())}.`}
@@ -99,7 +99,7 @@ export default async function PaginaCertificado({ params, searchParams }: { para
             </ul>
             <a className="btn btn-grande" href={`/api/certificado/pdf?t=${c.token}`} download>{plan !== "standard" && !nivel ? "Descargar versión Standard (PDF)" : `Descargar certificado ${PLANES_CERT[nivel ?? "standard"].nombre} (PDF)`}</a>
             <a className="btn ghost" href={`/valoriza?certificado=${c.token}`}>Ver el detalle en el valorizador</a>
-            {iaActiva() && superiores.length > 0 && c.revision !== "en_revision" && <MejorarPlan token={c.token} opciones={superiores} />}
+            {superiores.length > 0 && c.revision !== "en_revision" && <MejorarPlan token={c.token} opciones={superiores} />}
             <p className="fi-nota">
               Guarda este enlace: es privado y te permite descargar el certificado cuando quieras. {correoActivo() ? `También te lo enviamos a ${c.correo}. ` : ""}
               {nivel ? "Es un valor de referencia contrastado con tus documentos" : "Es un valor de referencia basado en la información que declaraste"}; no es una tasación pericial.
@@ -109,7 +109,7 @@ export default async function PaginaCertificado({ params, searchParams }: { para
           <div className="pg-caja">
             <h2>Falta confirmar el pago</h2>
             {rechazado && <p className="pg-alerta">Mercado Pago no aprobó el pago. Puedes intentarlo de nuevo.</p>}
-            {enProceso && <p>Tu pago está en proceso. Apenas Mercado Pago lo confirme te enviaremos el certificado por correo; puedes recargar esta página en unos minutos.</p>}
+            {enProceso && <p>Tu pago está en proceso. Apenas Mercado Pago lo confirme podrás descargar tu certificado aquí; recarga esta página en unos minutos.</p>}
             {!rechazado && !enProceso && <p>Cuando Mercado Pago confirme el pago podrás descargar tu certificado desde esta página.</p>}
             <BotonReintentar token={c.token} monto={c.monto} />
             <p className="fi-nota">Pago seguro en Mercado Pago. Nico Pacheco no ve ni guarda los datos de tu tarjeta.</p>

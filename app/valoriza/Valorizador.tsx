@@ -38,7 +38,7 @@ const f1 = (x: number) => (Math.round(x * 100) / 100).toFixed(2).replace(".", ",
 
 // `cobro`: con Mercado Pago activo, el valor se ve en la etapa 1 (estimación inicial) y se nubla desde la etapa 2
 // hasta pagar el certificado. Sin cobro (lanzamiento) todo se ve.
-export function Valorizador({ cobro = false, premium = true }: { cobro?: boolean; premium?: boolean }) {
+export function Valorizador({ cobro = false }: { cobro?: boolean }) {
   const [d, setD] = useState<DatosValorizacion>(VALORIZACION_VACIA);
   const [uf, setUf] = useState<{ valor: number; fecha: string | null }>({ valor: 40000, fecha: null });
   useEffect(() => {
@@ -610,7 +610,7 @@ export function Valorizador({ cobro = false, premium = true }: { cobro?: boolean
             <button type="button" className="btn ghost" onClick={imprimir}>Imprimir o guardar PDF</button>
           </div>
         )}
-        {r.listo && <Certificado datos={d} cobro={cobro} premium={premium} pagado={cobro && pagadoEstos ? pagado!.token : null} />}
+        {r.listo && <Certificado datos={d} cobro={cobro} pagado={cobro && pagadoEstos ? pagado!.token : null} />}
         <MultiplosEbitda rubro={d.rubro} />
         <p className="va-nota">
           Valor referencial: múltiplo de mercado del rubro ajustado por un puntaje de calidad de 0 a 100. No reemplaza una

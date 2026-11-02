@@ -25,10 +25,10 @@ export const URL_EJEMPLO = "/api/certificado/ejemplo?v=20261024"; // cambiar «v
 // Elegir uno lo deja marcado en el formulario del certificado (que aparece al final de la valorización).
 const CLAVE_PLAN = "np-plan-certificado";
 const EVENTO_PLAN = "np-plan";
-export function PlanesCabecera({ premium = true }: { premium?: boolean }) {
-  const [plan, setPlan] = useState<PlanCert>(premium ? "gold" : "standard");
+export function PlanesCabecera() {
+  const [plan, setPlan] = useState<PlanCert>("gold");
   const [aviso, setAviso] = useState(false);
-  useEffect(() => { try { const g = localStorage.getItem(CLAVE_PLAN); if (esPlan(g) && (premium || g === "standard")) setPlan(g); } catch { /* nada */ } }, [premium]);
+  useEffect(() => { try { const g = localStorage.getItem(CLAVE_PLAN); if (esPlan(g)) setPlan(g); } catch { /* nada */ } }, []);
   function elegir(k: PlanCert) {
     setPlan(k);
     try { localStorage.setItem(CLAVE_PLAN, k); } catch { /* nada */ }
@@ -50,7 +50,7 @@ export function PlanesCabecera({ premium = true }: { premium?: boolean }) {
               <p className="pc3-precio"><strong>{clp(P.lista)}</strong></p>
               {P.prima > 0 ? <p className="pc3-prima">+{Math.round(P.prima * 100)}% al valor si tus documentos coinciden</p> : <p className="pc3-prima neutro">Solo lo que declaras</p>}
               <div className="pc3-acc">
-                <button type="button" role="radio" aria-checked={plan === k} disabled={!premium && k !== "standard"} className={`btn${plan === k ? "" : " ghost"}`} onClick={() => elegir(k)}>{!premium && k !== "standard" ? "Muy pronto" : plan === k ? "✓ Elegida" : `Elegir ${P.nombre}`}</button>
+                <button type="button" role="radio" aria-checked={plan === k} className={`btn${plan === k ? "" : " ghost"}`} onClick={() => elegir(k)}>{plan === k ? "✓ Elegida" : `Elegir ${P.nombre}`}</button>
                 <a className="pc3-ej" href={`${URL_EJEMPLO}&plan=${k}`} target="_blank" rel="noopener">Ver ejemplo</a>
               </div>
               {k !== "standard" && <span className="pc3-sii" title="Verificado con información del SII"><SelloSii tam={64} /></span>}
@@ -64,8 +64,8 @@ export function PlanesCabecera({ premium = true }: { premium?: boolean }) {
 }
 
 // Celular: los tres certificados como tres botones; al tocar uno se explica en pocas líneas.
-export function PlanesMovil({ premium = true }: { premium?: boolean }) {
-  const [plan, setPlan] = useState<PlanCert>(premium ? "gold" : "standard");
+export function PlanesMovil() {
+  const [plan, setPlan] = useState<PlanCert>("gold");
   const P = PLANES_CERT[plan];
   return (
     <div className="pm">
@@ -78,7 +78,7 @@ export function PlanesMovil({ premium = true }: { premium?: boolean }) {
               {X.recomendado && <span className="pm-reco">Recomendada</span>}
               <span className="pm-est" aria-hidden="true">{X.estrellas ? "★".repeat(X.estrellas) : "—"}</span>
               <b>{X.nombre}</b>
-              <span className="pm-precio">{!premium && k !== "standard" ? "Muy pronto" : clp(X.lista)}</span>
+              <span className="pm-precio">{clp(X.lista)}</span>
             </button>
           );
         })}
@@ -95,14 +95,13 @@ export function PlanesMovil({ premium = true }: { premium?: boolean }) {
   );
 }
 
-export function Certificado({ datos, cobro, premium = true, pagado }: { datos: DatosValorizacion; cobro: boolean; premium?: boolean; pagado: string | null }) {
+export function Certificado({ datos, cobro, pagado }: { datos: DatosValorizacion; cobro: boolean; pagado: string | null }) {
   const [f, setF] = useState({ nombre: "", correo: "", negocio: "", acepta: false, sitio_web: "" });
   const [enviando, setEnviando] = useState(false);
   const [error, setError] = useState("");
   const [desc, setDesc] = useState<{ codigo: string; monto: number } | null>(null);
-  const [plan, setPlan] = useState<PlanCert>(premium ? "gold" : "standard"); // Gold preseleccionada: es la recomendada
+  const [plan, setPlan] = useState<PlanCert>("gold"); // Gold preseleccionada: es la recomendada
   useEffect(() => {
-    if (!premium) return;
     const pl = new URLSearchParams(window.location.search).get("plan");
     let guardado: string | null = null;
     try { guardado = localStorage.getItem(CLAVE_PLAN); } catch { /* nada */ }
@@ -110,7 +109,7 @@ export function Certificado({ datos, cobro, premium = true, pagado }: { datos: D
     const elegir = (e: Event) => { const x = (e as CustomEvent).detail; if (esPlan(x)) { setPlan(x); setDesc(null); } };
     window.addEventListener(EVENTO_PLAN, elegir);
     return () => window.removeEventListener(EVENTO_PLAN, elegir);
-  }, [premium]);
+  }, []);
   const final = desc ? desc.monto : precioCertificado(false, plan);
 
   if (pagado) {
@@ -160,20 +159,20 @@ export function Certificado({ datos, cobro, premium = true, pagado }: { datos: D
           <span>Certificado por Nico Pacheco, en PDF</span>
         </div>
       </div>
-      <EjemploGold url={`${URL_EJEMPLO}&plan=${premium ? "gold" : "standard"}`} />
+      <EjemploGold url={`${URL_EJEMPLO}&plan=gold`} />
       <div className="cvp-mini" role="radiogroup" aria-label="Elige tu certificado">
         {ORDEN_PLANES.map((k) => {
           const P = PLANES_CERT[k];
           return (
-            <button key={k} type="button" role="radio" aria-checked={plan === k} disabled={!premium && k !== "standard"} className={`cvp-mini-b cvp-mini-${k}${plan === k ? " on" : ""}`} onClick={() => { setPlan(k); setDesc(null); }}>
+            <button key={k} type="button" role="radio" aria-checked={plan === k} className={`cvp-mini-b cvp-mini-${k}${plan === k ? " on" : ""}`} onClick={() => { setPlan(k); setDesc(null); }}>
               {P.recomendado && <span className="cvp-mini-reco">Recomendada</span>}
               <b>{P.nombre}</b>
-              <span>{!premium && k !== "standard" ? "Muy pronto" : !cobro ? "Gratis" : clp(P.lista)}</span>
+              <span>{!cobro ? "Gratis" : clp(P.lista)}</span>
             </button>
           );
         })}
       </div>
-      {plan !== "standard" && <p className="cv-nota">Después de pagar subes los documentos desde tu enlace privado; una inteligencia artificial los lee y los contrasta con lo que declaraste, normalmente en minutos (máximo 48 horas hábiles). Mientras tanto puedes descargar la versión Standard.</p>}
+      {plan !== "standard" && <p className="cv-nota">Después de pagar subes los documentos desde tu enlace privado; los revisamos y los contrastamos con lo que declaraste en un máximo de 48 horas hábiles. Mientras tanto puedes descargar la versión Standard.</p>}
       {!cobro && <p className="cv-gratis">Gratis durante el lanzamiento</p>}
       <ul className="cv-incluye">
         <li>Valor de referencia con timbre y folio de Nico Pacheco</li>

@@ -146,7 +146,7 @@ export async function pdfCertificado(c: Certificado, o: { ejemplo?: boolean; per
     const venceTxt = vence ? `Vigente hasta ${fecha(vence.toISOString())}` : "";
     if (venceTxt) derecha(venceTxt, W - MX - 8, y - 13.2, { f: fb, s: 7.6, c: colorTit });
     const maxDet = W - MX - 8 - (venceTxt ? ancho(venceTxt, fb, 7.6) + 12 : 0) - xDet;
-    // Si el texto largo no cabe en la franja, va solo la etiqueta (p. ej. «Validada con un modelo generativo de IA»).
+    // Si el texto largo no cabe en la franja, va solo la etiqueta (p. ej. «Validada con tus documentos»).
     const base = !enRevision && ancho(det, f, 7.6) > maxDet ? P.etiqueta : det;
     const tam = base !== det && ancho(base, f, 7.6) > maxDet ? 6.8 : 7.6; // la etiqueta cabe entera con letra algo menor
     let t = base;
@@ -326,7 +326,7 @@ export async function pdfCertificado(c: Certificado, o: { ejemplo?: boolean; per
   if (planPedido !== "standard") {
     titulo(nivel ? `Documentos verificados (${PLANES_CERT[planPedido].nombre})` : `Documentos (${PLANES_CERT[planPedido].nombre}, sin verificar)`);
     parrafo(nivel
-      ? `Nico Pacheco revisó estos documentos el ${fecha(c.revisado_en!)}: una inteligencia artificial los leyó página por página, extrajo sus cifras y las contrastó con lo declarado según reglas fijas; las diferencias se corrigieron con la cifra del documento. Por eso el valor incluye ${pctTxt(PLANES_CERT[planPedido].prima)} de prima por información verificada.`
+      ? `Nico Pacheco revisó estos documentos el ${fecha(c.revisado_en!)}: ${c.lectura?.estado === "listo" ? "una inteligencia artificial los leyó página por página, extrajo sus cifras y las contrastó" : "se revisaron sus cifras y se contrastaron"} con lo declarado según reglas fijas; las diferencias se corrigieron con la cifra del documento. Por eso el valor incluye ${pctTxt(PLANES_CERT[planPedido].prima)} de prima por información verificada.`
       : c.revision === "rechazado" ? "Los documentos no se pudieron verificar: el certificado se emite como Standard, sin prima." : "La revisión de los documentos está en curso: esta versión se calcula solo con lo declarado.", { s: 8.8, c: GRIS, lh: 1.4 });
     for (const tipo of PLANES_CERT[planPedido].docs) {
       const it = c.verificacion?.items?.[tipo];
@@ -493,7 +493,7 @@ export async function pdfCertificado(c: Certificado, o: { ejemplo?: boolean; per
   titulo("Aviso legal");
   for (const l of AVISO_LEGAL) {
     const t = nivel && l.startsWith("El cálculo se basa exclusivamente")
-      ? "El cálculo se basa en la información declarada por el solicitante, contrastada con los documentos de la sección «Documentos verificados». Las ventas se verifican con lo declarado al SII; la utilidad no se verifica: se revisa que sea coherente con lo tributario. La lectura de los documentos se apoya en herramientas automáticas y no es una auditoría: si los documentos entregados son falsos o incompletos, el valor también lo será."
+      ? "El cálculo se basa en la información declarada por el solicitante, contrastada con los documentos de la sección «Documentos verificados». Las ventas se verifican con lo declarado al SII; la utilidad no se verifica: se revisa que sea coherente con lo tributario. La revisión de los documentos no es una auditoría: si los documentos entregados son falsos o incompletos, el valor también lo será."
       : l;
     parrafo(t, { s: 8.8, c: TINTA, lh: 1.4 }); y -= 3;
   }
@@ -617,10 +617,6 @@ function selloPlan(pg: PDFPage, plan: PlanCert, cx: number, cy: number, r: numbe
   const nombre = plan === "gold" ? "GOLD" : "PLATINUM";
   centrado(nombre, -r * 0.1, fb, r * (plan === "gold" ? 0.32 : 0.2), oscuro);
   centrado("VERIFICADA", -r * 0.34, fb, r * 0.12, oscuro);
-  // Distintivo IA: documentos leídos y contrastados con inteligencia artificial.
-  const tIA = "IA", sIA = r * 0.17, wIA = fb.widthOfTextAtSize(tIA, sIA) + r * 0.22;
-  pg.drawRectangle({ x: cx - wIA / 2, y: cy - r * 0.74, width: wIA, height: sIA * 1.25, color: AZUL });
-  centrado(tIA, -r * 0.74 + sIA * 0.3, fb, sIA, rgb(1, 1, 1));
 }
 
 // Sello «Verificado con información del SII» (diseño propio de Nico Pacheco: círculo verde con visto bueno).

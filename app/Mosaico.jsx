@@ -22,25 +22,16 @@ function Planes({ planes, href }) {
       </h4>
       <ul className="ficha-planes">
         {planes.map((p) => {
-          const contenido = (
-            <>
-              <span className="ficha-plan-cabeza">
-                <strong>{p.nombre}</strong>
-                {p.recomendado && p.activo && <em>Recomendada</em>}
-                <b>{p.activo ? p.precio : 'Muy pronto'}</b>
-              </span>
-              <span>{p.resumen}</span>
-            </>
-          );
           return (
             <li key={p.id}>
-              {p.activo ? (
-                <a className="ficha-plan" href={`${href}?plan=${p.id}`}>
-                  {contenido}
-                </a>
-              ) : (
-                <div className="ficha-plan ficha-plan-inactivo">{contenido}</div>
-              )}
+              <a className="ficha-plan" href={`${href}?plan=${p.id}`}>
+                <span className="ficha-plan-cabeza">
+                  <strong>{p.nombre}</strong>
+                  {p.recomendado && <em>Recomendada</em>}
+                  <b>{p.precio}</b>
+                </span>
+                <span>{p.resumen}</span>
+              </a>
             </li>
           );
         })}

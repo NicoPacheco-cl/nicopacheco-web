@@ -1,7 +1,6 @@
 import "server-only";
 import { BUCKET, cliente } from "./base-servidor";
 import { enviarCorreo, escapar } from "./correo";
-import { iaActiva } from "./ia";
 import { consultarPago, pagosActivos, plantilla, preferenciaMP } from "./pagos-valoriza";
 import { evaluarCodigo, sumarUsoCodigo } from "./servidor";
 import { analizar, DOCS_CERT, ORDEN_PLANES, PLANES_CERT, PRECIO_CERTIFICADO, precioCertificado, type PlanCert, type TipoDocCert } from "./certificado";
@@ -124,8 +123,6 @@ export async function crearCertificado(s: Solicitud, base: string, codigo?: stri
   if (!a.r.listo) return { error: "Faltan la venta, la utilidad o los meses de contrato." } as const;
   const cobro = cobroCertificado();
   const plan: PlanCert = s.plan ?? "standard";
-  // Gold y Platinum prometen lectura con IA: sin la clave no se venden.
-  if (plan !== "standard" && !iaActiva()) return { error: "Las valorizaciones Gold y Platinum se activan muy pronto. Mientras tanto puedes pedir la Standard." } as const;
   const precio = precioCertificado(false, plan);
   let monto = cobro ? precio : 0;
   let codigoAplicado: string | null = null;
@@ -357,7 +354,6 @@ export async function mejorarCertificado(c: Certificado, plan: PlanCert, base: s
   if (!disponible(c)) return { error: "Primero completa el pago de tu certificado." } as const;
   if (ORDEN_PLANES.indexOf(plan) <= ORDEN_PLANES.indexOf(planDe(c))) return { error: "Elige un plan superior." } as const;
   if (c.revision === "en_revision") return { error: "Espera el resultado de la revisión en curso." } as const;
-  if (!iaActiva()) return { error: "Las valorizaciones Gold y Platinum se activan muy pronto." } as const;
   const sb = cliente();
   if (!sb) return { error: "No disponible por ahora." } as const;
   const monto = diferenciaMejora(c, plan);

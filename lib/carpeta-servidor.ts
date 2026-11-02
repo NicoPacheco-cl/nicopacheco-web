@@ -46,7 +46,8 @@ export async function subirCarpeta(archivo: File, extra: { correo?: string; codi
   const buf = await archivo.arrayBuffer();
   if (new TextDecoder().decode(buf.slice(0, 5)) !== "%PDF-") return { error: "Sube el PDF de la carpeta tributaria que entrega el SII." } as const;
   let l: Lectura;
-  try { l = leerCarpeta(await textoPdf(buf)); }
+  // Copia: la lectura del PDF consume el buffer que recibe y el original se sube después.
+  try { l = leerCarpeta(await textoPdf(buf.slice(0))); }
   catch (e) { console.error("No se pudo leer el PDF de la carpeta", e); l = resumen([]); l.motivo = "No se pudo leer el texto del PDF."; }
   const { data, error } = await sb.from("carpetas_tributarias").insert({
     nombre_archivo: archivo.name.slice(0, 120), correo: extra.correo?.slice(0, 160) || null,

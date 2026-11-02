@@ -27,8 +27,8 @@ export const problemas = [
   {
     frase: 'No sé cuánto vale mi negocio.',
     respuesta: 'Calculamos su valor con un método claro, para negociar con números y no a ojo.',
-    href: '#valorizacion',
-    accion: 'Ver Valorización',
+    href: '#valorizacion-pyme',
+    accion: 'Ver Valorización Pyme',
   },
   {
     frase: 'Quiero vender mi local y no sé por dónde partir.',
@@ -90,18 +90,6 @@ export const servicios = [
     necesidad: 'Quiero valorizar o vender mi negocio',
     items: [
       {
-        id: 'valorizacion',
-        mosaico: { titulo: 'Valorización', etiqueta: 'Compraventa', fondo: '#5a5a5a', marca: 'VALOR' },
-        nombre: 'Valorización de empresa',
-        resena:
-          'Un informe con el valor de mercado de tu negocio, calculado con el mismo método que usamos en Portal Comercios, y lo que puedes mejorar para que valga más.',
-        importancia:
-          'Antes de vender, buscar un socio o pedir un crédito, necesitas saber cuánto vale lo que construiste.',
-        precio: '$99.990',
-        accion: 'Valorizar mi negocio',
-        destacado: true,
-      },
-      {
         id: 'valorizacion-pyme',
         mosaico: { titulo: 'Valorización Pyme', etiqueta: 'En línea', fondo: '#3e6f8a', marca: 'CERTIFICADO' },
         nombre: 'Valorización Pyme',
@@ -111,6 +99,7 @@ export const servicios = [
           'El sobreprecio es la razón N° 1 por la que un negocio no se vende. Con un valor de referencia pones un precio que puedas demostrar.',
         precio: 'Estimación gratis. Certificado desde $50.000',
         accion: 'Valorizar mi negocio',
+        destacado: true,
       },
       {
         id: 'derecho-de-llave',
@@ -274,7 +263,7 @@ export const intereses = [
   { value: 'diagnostico', label: 'Diagnóstico Pyme' },
   { value: 'mentoring', label: 'Mentoring' },
   { value: 'directorio-pyme', label: 'Directorio PYME' },
-  { value: 'valorizacion', label: 'Valorización de empresa' },
+  { value: 'valorizacion-pyme', label: 'Valorización Pyme' },
   { value: 'derecho-de-llave', label: 'Venta de derechos de llave' },
   { value: 'franquicias', label: 'Asesoría en franquicias' },
   { value: 'planilla', label: 'Planillas financieras' },
