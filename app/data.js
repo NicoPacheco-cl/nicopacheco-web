@@ -51,10 +51,10 @@ export const servicios = [
     items: [
       {
         id: 'diagnostico',
-        mosaico: { titulo: 'Diagnóstico Pyme', etiqueta: 'Diagnóstico', fondo: '#123a2c', marca: '90 DÍAS' },
+        mosaico: { titulo: 'Diagnóstico Pyme', etiqueta: 'Diagnóstico', fondo: '#123a2c', marca: '2 SESIONES' },
         nombre: 'Diagnóstico Pyme',
         resena:
-          'En una sesión revisamos tus ventas, costos, márgenes y flujo de caja. Te entrego un informe con lo que está funcionando, lo que se está perdiendo y las tres prioridades para los próximos 90 días.',
+          'Un estudio completo de tu negocio en dos reuniones de 90 a 120 minutos cada una. En la primera analizamos a fondo cómo está funcionando tu empresa y en la segunda te presento un informe con su estado real, los principales problemas y las estrategias para revertir la situación.',
         importancia:
           'La mayoría de las pymes no tiene un problema de ventas, sino de números que nadie mira. Este es el punto de partida.',
         precio: '$149.990',
@@ -144,6 +144,40 @@ export const servicios = [
     ],
   },
 ];
+
+// Detalle ampliado de cada servicio, por id. Se muestra en su ventana de detalle.
+// Cuando tengas los archivos, completa testimonio.video e informe.href.
+export const fichas = {
+  diagnostico: {
+    sesiones: [
+      {
+        titulo: 'Radiografía del negocio',
+        duracion: '90 a 120 minutos',
+        bajada: 'Estudiamos tu empresa por dentro para identificar su estado actual.',
+        puntos: [
+          'La venta y sus canales',
+          'La compra y las distintas familias de costos',
+          'Las cuentas contables y el costo operativo del negocio',
+          'El EBITDA, para ver cuánto genera realmente la operación',
+          'El modelo de negocio',
+        ],
+      },
+      {
+        titulo: 'Diagnóstico y estrategia',
+        duracion: '90 a 120 minutos',
+        bajada: 'Te presento el diagnóstico de la empresa en un informe completo del negocio.',
+        puntos: [
+          'Estado de resultados de los últimos 3 meses',
+          'Proforma financiera de la industria',
+          'Los principales problemas detectados',
+          'Las sugerencias y estrategias más apropiadas para revertir la situación',
+        ],
+      },
+    ],
+    testimonio: { rotulo: 'Video testimonial de prueba', video: '' },
+    informe: { etiqueta: 'Ver informe de diagnóstico de prueba', href: '' },
+  },
+};
 
 export const pasos = [
   {

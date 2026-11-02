@@ -1703,14 +1703,16 @@ a {
 }
 
 .detalle-cerrar {
-  position: absolute;
+  position: sticky;
   top: 1rem;
-  right: 1rem;
+  z-index: 1;
+  float: right;
+  margin: -1.5rem -1.5rem 0 0;
+  background: var(--negro-2);
   width: 2.75rem;
   height: 2.75rem;
   border-radius: 50%;
   border: 1px solid rgba(255, 255, 255, 0.45);
-  background: transparent;
   color: var(--blanco);
   font-size: 1.5rem;
   line-height: 1;
@@ -1782,9 +1784,141 @@ a {
   max-width: 16ch;
 }
 
+/* Detalle ampliado del servicio: sesiones, testimonio e informe */
+.ficha {
+  display: grid;
+  gap: 1.25rem;
+  margin-top: 2rem;
+}
+
+.ficha-rotulo {
+  margin: 0 0 1rem;
+  font-family: var(--cursiva);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 1.5rem;
+}
+
+.ficha-sesiones {
+  display: grid;
+  gap: 0.75rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ficha-sesion {
+  padding: 1.25rem;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+}
+
+.ficha-numero {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.25rem 1rem;
+  font-size: 0.8125rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.ficha-numero span {
+  color: var(--gris-claro);
+  letter-spacing: 0.08em;
+}
+
+.ficha-sesion h5 {
+  margin: 0.75rem 0 0.5rem;
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: 1.5rem;
+  line-height: 1.1;
+  text-transform: uppercase;
+}
+
+.ficha-sesion p:not(.ficha-numero) {
+  color: #e6e6e6;
+}
+
+.ficha-sesion ul {
+  display: grid;
+  gap: 0.4rem;
+  margin: 0.85rem 0 0;
+  padding: 0;
+  list-style: none;
+  color: var(--gris-claro);
+}
+
+.ficha-sesion ul li {
+  position: relative;
+  padding-left: 1.1rem;
+}
+
+.ficha-sesion ul li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.65em;
+  width: 0.5rem;
+  height: 1px;
+  background: var(--blanco);
+}
+
+.ficha-video {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #000;
+}
+
+.ficha-video-vacio {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  background:
+    radial-gradient(120% 90% at 30% 20%, rgba(255, 255, 255, 0.1), transparent 60%),
+    #123a2c;
+  font-size: 0.8125rem;
+  letter-spacing: 0.2em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.ficha-play {
+  position: relative;
+  width: 3.75rem;
+  height: 3.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 50%;
+}
+
+.ficha-play::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 54%;
+  transform: translate(-50%, -50%);
+  border-style: solid;
+  border-width: 0.6rem 0 0.6rem 1rem;
+  border-color: transparent transparent transparent var(--blanco);
+}
+
+.ficha-informe {
+  width: 100%;
+  background: transparent;
+  cursor: pointer;
+}
+
 @media (max-width: 600px) {
   .detalle-cuerpo {
     padding: 2rem 1.25rem 1.5rem;
+  }
+  .detalle-cerrar {
+    margin: -1rem -0.5rem 0 0;
   }
 }
 

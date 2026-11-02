@@ -13,6 +13,56 @@ function Flecha() {
   );
 }
 
+function Ficha({ ficha }) {
+  const { sesiones, testimonio, informe } = ficha;
+  return (
+    <div className="ficha">
+      {sesiones?.length > 0 && (
+        <section aria-labelledby="ficha-sesiones">
+          <h4 id="ficha-sesiones" className="ficha-rotulo">
+            Cómo funciona
+          </h4>
+          <ol className="ficha-sesiones">
+            {sesiones.map((m, n) => (
+              <li key={m.titulo} className="ficha-sesion">
+                <p className="ficha-numero">
+                  Sesión {n + 1} <span>{m.duracion}</span>
+                </p>
+                <h5>{m.titulo}</h5>
+                <p>{m.bajada}</p>
+                <ul>
+                  {m.puntos.map((t) => (
+                    <li key={t}>{t}</li>
+                  ))}
+                </ul>
+              </li>
+            ))}
+          </ol>
+        </section>
+      )}
+      {testimonio &&
+        (testimonio.video ? (
+          <video className="ficha-video" src={testimonio.video} controls preload="metadata" aria-label={testimonio.rotulo} />
+        ) : (
+          <div className="ficha-video ficha-video-vacio" role="img" aria-label={testimonio.rotulo}>
+            <span className="ficha-play" aria-hidden="true" />
+            <span>{testimonio.rotulo}</span>
+          </div>
+        ))}
+      {informe &&
+        (informe.href ? (
+          <a href={informe.href} className="btn btn-linea-clara ficha-informe" target="_blank" rel="noopener noreferrer">
+            {informe.etiqueta}
+          </a>
+        ) : (
+          <button type="button" className="btn btn-linea-clara ficha-informe">
+            {informe.etiqueta}
+          </button>
+        ))}
+    </div>
+  );
+}
+
 export default function Mosaico({ items }) {
   const [abierto, setAbierto] = useState(null);
   const dialogo = useRef(null);
@@ -74,6 +124,7 @@ export default function Mosaico({ items }) {
               <span>Por qué importa</span>
               <p>{s.importancia}</p>
             </div>
+            {s.ficha && <Ficha ficha={s.ficha} />}
             {s.opciones?.length ? (
               <div className="detalle-pago">
                 <PagoServicio key={s.id} opciones={s.opciones} />
