@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import CampoCodigo from './CampoCodigo';
 
 const REGIONES = [
   'Arica y Parinacota',
@@ -21,17 +22,20 @@ const REGIONES = [
   'Magallanes y de la Antártica Chilena',
 ];
 
-const PRECIOS = { fisico: 14990, digital: 7990 };
 const pesos = (n) => `$${n.toLocaleString('es-CL')}`;
 
-export default function LibroCompra() {
+export default function LibroCompra({ precios }) {
+  const PRECIOS = { fisico: precios.fisico, digital: precios.digital };
   const [formato, setFormato] = useState('fisico');
   const [cantidad, setCantidad] = useState(1);
   const [entrega, setEntrega] = useState('despacho');
   const [enviando, setEnviando] = useState(false);
   const [error, setError] = useState('');
+  const [descuento, setDescuento] = useState(null);
+  const productoId = formato === 'fisico' ? 'libro-fisico' : 'libro-digital';
 
-  const total = PRECIOS[formato] * (formato === 'fisico' ? cantidad : 1);
+  const subtotal = PRECIOS[formato] * (formato === 'fisico' ? cantidad : 1);
+  const total = descuento ? descuento.total : subtotal;
 
   async function pagar(e) {
     e.preventDefault();
@@ -39,10 +43,10 @@ export default function LibroCompra() {
     setEnviando(true);
     const datos = Object.fromEntries(new FormData(e.currentTarget));
     try {
-      const r = await fetch('/api/libro/pedido', {
+      const r = await fetch('/api/pedido', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...datos, formato, cantidad, entrega, acepta: datos.acepta === 'on' }),
+        body: JSON.stringify({ ...datos, producto: productoId, cantidad, entrega, codigo: descuento?.codigo, acepta: datos.acepta === 'on' }),
       });
       const res = await r.json();
       if (!r.ok || !res.url) throw new Error(res.error || 'No pudimos iniciar el pago.');
@@ -59,19 +63,19 @@ export default function LibroCompra() {
 
       <div className="lc-opciones" role="radiogroup" aria-label="Formato del libro">
         <label className={formato === 'fisico' ? 'lc-opcion activa' : 'lc-opcion'}>
-          <input type="radio" name="formato-ui" checked={formato === 'fisico'} onChange={() => setFormato('fisico')} />
+          <input type="radio" name="formato-ui" checked={formato === 'fisico'} onChange={() => { setFormato('fisico'); setDescuento(null); }} />
           <span className="lc-op-nombre">Libro físico</span>
           <span className="lb-pill lc-pill">PREVENTA</span>
           <span className="lc-op-precio">
-            <s>$29.990</s> <strong>$14.990</strong>
+            {precios.fisicoAnterior ? <s>{pesos(precios.fisicoAnterior)}</s> : null} <strong>{pesos(precios.fisico)}</strong>
           </span>
           <span className="lc-op-nota">Despacho a todo Chile o retiro gratis</span>
         </label>
         <label className={formato === 'digital' ? 'lc-opcion activa' : 'lc-opcion'}>
-          <input type="radio" name="formato-ui" checked={formato === 'digital'} onChange={() => setFormato('digital')} />
+          <input type="radio" name="formato-ui" checked={formato === 'digital'} onChange={() => { setFormato('digital'); setDescuento(null); }} />
           <span className="lc-op-nombre">Libro digital</span>
           <span className="lc-op-precio">
-            <strong>$7.990</strong>
+            <strong>{pesos(precios.digital)}</strong>
           </span>
           <span className="lc-op-nota">Kindle, Apple Books y PDF · descarga inmediata</span>
         </label>
@@ -96,7 +100,7 @@ export default function LibroCompra() {
         <>
           <label className="lc-campo lc-cantidad">
             <span>Cantidad</span>
-            <select value={cantidad} onChange={(e) => setCantidad(Number(e.target.value))}>
+            <select value={cantidad} onChange={(e) => { setCantidad(Number(e.target.value)); setDescuento(null); }}>
               {[1, 2, 3, 4, 5, 10].map((n) => (
                 <option key={n} value={n}>
                   {n} {n === 1 ? 'ejemplar' : 'ejemplares'}
@@ -157,6 +161,8 @@ export default function LibroCompra() {
           </fieldset>
         </>
       )}
+
+      <CampoCodigo key={`${productoId}-${cantidad}`} productoId={productoId} cantidad={cantidad} onCambio={setDescuento} claro />
 
       <label className="lc-acepto">
         <input type="checkbox" name="acepta" required />

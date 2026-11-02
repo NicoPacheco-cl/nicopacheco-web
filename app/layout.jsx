@@ -5,6 +5,7 @@ import '@fontsource-variable/bricolage-grotesque/wght.css';
 import '@fontsource-variable/public-sans/wght.css';
 import '@fontsource-variable/public-sans/wght-italic.css';
 import './globals.css';
+import Analitica from './Analitica';
 
 export const metadata = {
   metadataBase: new URL('https://nicopacheco.cl'),
@@ -28,7 +29,10 @@ export const viewport = {
 export default function RootLayout({ children }) {
   return (
     <html lang="es-CL">
-      <body>{children}</body>
+      <body>
+        {children}
+        <Analitica />
+      </body>
     </html>
   );
 }

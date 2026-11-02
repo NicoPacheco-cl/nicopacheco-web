@@ -1955,3 +1955,190 @@ a {
     gap: 0;
   }
 }
+
+/* Pago de programas dentro de la ventana de detalle (fondo oscuro) */
+.detalle-pago {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.ps {
+  display: grid;
+  gap: 0.9rem;
+}
+
+.ps-opciones {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.ps-opcion {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.75rem 0.9rem;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  cursor: pointer;
+}
+
+.ps-opcion.activa {
+  border-color: var(--blanco);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.ps-opcion input {
+  accent-color: var(--blanco);
+}
+
+.ps-campos {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.6rem;
+}
+
+.ps-campos input {
+  font: inherit;
+  font-size: 1rem;
+  padding: 0.7rem 0.8rem;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--blanco);
+  min-width: 0;
+}
+
+.ps-campos input::placeholder {
+  color: #9a9a9a;
+}
+
+.ps-acepto {
+  display: flex;
+  gap: 0.6rem;
+  align-items: flex-start;
+  font-size: 0.875rem;
+  color: var(--gris-claro);
+}
+
+.ps-acepto input {
+  margin-top: 0.25rem;
+  accent-color: var(--blanco);
+}
+
+.ps-error {
+  padding: 0.65rem 0.85rem;
+  background: rgba(227, 34, 91, 0.15);
+  color: #ffb3c4;
+  font-weight: 600;
+}
+
+.ps-pie {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.ps-antes {
+  font-family: var(--texto);
+  font-size: 1rem;
+  color: var(--gris-claro);
+}
+
+.ps-pie .btn:disabled {
+  opacity: 0.7;
+  cursor: wait;
+}
+
+.ps-nota {
+  font-size: 0.8125rem;
+  color: var(--gris-claro);
+}
+
+@media (max-width: 600px) {
+  .ps-campos {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Campo de código de descuento */
+.cc-abrir {
+  justify-self: start;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  font-size: 0.9375rem;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  cursor: pointer;
+  opacity: 0.85;
+}
+
+.cc-fila {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.cc input {
+  flex: 1;
+  min-width: 0;
+  font: inherit;
+  font-size: 1rem;
+  letter-spacing: 0.08em;
+  padding: 0.65rem 0.8rem;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--blanco);
+}
+
+.cc button {
+  padding: 0 1.1rem;
+  border: 1px solid var(--blanco);
+  background: transparent;
+  color: var(--blanco);
+  font: inherit;
+  font-weight: 650;
+  cursor: pointer;
+}
+
+.cc button:disabled {
+  opacity: 0.5;
+}
+
+.cc-claro input {
+  border-color: #d8dee8;
+  background: #f5f6f9;
+  color: var(--lb-tinta, #0f1b2d);
+  border-radius: 10px;
+}
+
+.cc-claro button {
+  border-color: var(--lb-rojo, #c0262d);
+  color: var(--lb-rojo, #c0262d);
+  border-radius: 10px;
+}
+
+.cc-ok,
+.cc-error {
+  margin-top: 0.4rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.cc-ok {
+  color: #3ec27a;
+}
+
+.cc-claro .cc-ok {
+  color: #1f7a45;
+}
+
+.cc-error {
+  color: #ff8fa8;
+}
+
+.cc-claro .cc-error {
+  color: #a11f25;
+}

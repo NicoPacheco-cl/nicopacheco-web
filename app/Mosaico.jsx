@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import PagoServicio from './PagoServicio';
 
 const contacto = (interes) => `?interes=${interes}#contacto`;
 
@@ -73,15 +74,21 @@ export default function Mosaico({ items }) {
               <span>Por qué importa</span>
               <p>{s.importancia}</p>
             </div>
-            <div className="detalle-pie">
-              <div>
-                <span className="detalle-precio-rotulo">Valor</span>
-                <span className="detalle-precio">{s.precio}</span>
+            {s.opciones?.length ? (
+              <div className="detalle-pago">
+                <PagoServicio key={s.id} opciones={s.opciones} />
               </div>
-              <a href={s.href ?? contacto(s.id)} className="btn btn-blanco" onClick={() => setAbierto(null)}>
-                {s.accion}
-              </a>
-            </div>
+            ) : (
+              <div className="detalle-pie">
+                <div>
+                  <span className="detalle-precio-rotulo">Valor</span>
+                  <span className="detalle-precio">{s.precio}</span>
+                </div>
+                <a href={s.href ?? contacto(s.id)} className="btn btn-blanco" onClick={() => setAbierto(null)}>
+                  {s.accion}
+                </a>
+              </div>
+            )}
           </div>
         )}
       </dialog>

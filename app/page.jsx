@@ -3,10 +3,9 @@ import ContactForm from './ContactForm';
 import Mosaico from './Mosaico';
 import Garabatos from './Garabatos';
 import LibroCompra from './LibroCompra';
+import { obtenerProductos, itemsMosaico, pesos } from '../lib/productos';
 import {
   cifras,
-  servicios,
-  tienda,
   charlas,
   entradas,
   trayectoria,
@@ -34,7 +33,18 @@ function Titulo({ como: Etiqueta = 'h2', fuerte, suave, id, claro }) {
   );
 }
 
-export default function Home() {
+export const revalidate = 60;
+
+export default async function Home() {
+  const productos = await obtenerProductos();
+  const libroFisico = productos.find((p) => p.id === 'libro-fisico');
+  const libroDigital = productos.find((p) => p.id === 'libro-digital');
+  const precios = {
+    fisico: libroFisico?.precio ?? 14990,
+    fisicoAnterior: libroFisico?.precio_anterior ?? null,
+    digital: libroDigital?.precio ?? 7990,
+  };
+  const planillas = productos.filter((p) => p.tipo === 'planilla');
   return (
     <>
       <a className="saltar" href="#contenido">
@@ -132,7 +142,7 @@ export default function Home() {
         </section>
 
         {/* HERRAMIENTA GRATUITA */}
-        <section className="test" aria-labelledby="titulo-test">
+        <section id="planilla-gratis" className="test" aria-labelledby="titulo-test">
           <div className="contenedor test-grilla">
             <Titulo id="titulo-test" fuerte="¿SABES CUÁNTA PLATA" suave="te queda a fin de mes?" />
             <div>
@@ -153,7 +163,7 @@ export default function Home() {
           <div className="contenedor">
             <p className="rotulo">Líneas de negocio</p>
             <Titulo id="titulo-servicios" fuerte="MIS" suave="servicios" claro />
-            <Mosaico items={servicios.flatMap((g) => g.items).filter((i) => i.mosaico)} />
+            <Mosaico items={itemsMosaico(productos)} />
             <p className="servicios-nota">
               Toca un servicio para ver el detalle y el valor. Si no sabes por dónde partir, parte por el
               Diagnóstico Pyme.
@@ -230,13 +240,13 @@ export default function Home() {
                   <div className="lb-precio">
                     <small>FÍSICO · PREVENTA</small>
                     <div>
-                      <s>$29.990</s> <strong>$14.990</strong>
+                      {precios.fisicoAnterior ? <s>{pesos(precios.fisicoAnterior)}</s> : null} <strong>{pesos(precios.fisico)}</strong>
                     </div>
                   </div>
                   <div className="lb-precio">
                     <small>DIGITAL</small>
                     <div>
-                      <strong>$7.990</strong>
+                      <strong>{pesos(precios.digital)}</strong>
                     </div>
                     <span>Kindle · Apple Books · PDF</span>
                   </div>
@@ -290,7 +300,7 @@ export default function Home() {
             </p>
 
             <div id="comprar-libro" className="lc-ancla">
-              <LibroCompra />
+              <LibroCompra precios={precios} />
             </div>
           </div>
         </section>
@@ -300,18 +310,17 @@ export default function Home() {
           <div className="contenedor">
             <Titulo id="titulo-tienda" fuerte="PLANILLAS PARA" suave="tu negocio" />
             <ul className="productos">
-              {tienda
-                .filter((p) => !p.id.startsWith('libro'))
+              {planillas
                 .map((p) => (
                   <li key={p.id} className="producto">
                     <div>
                       <h4>{p.nombre}</h4>
-                      <p>{p.detalle}</p>
+                      <p>{p.resena}</p>
                     </div>
                     <div className="producto-pie">
-                      <span className="precio precio-grande">{p.precio}</span>
+                      <span className="precio precio-grande">{p.precio_texto || pesos(p.precio)}</span>
                       <a
-                        href={wa(`Hola Nico, quiero comprar: ${p.nombre} (${p.precio}).`)}
+                        href={wa(`Hola Nico, quiero comprar: ${p.nombre} (${p.precio_texto || pesos(p.precio)}).`)}
                         className="btn btn-negro btn-chico"
                         target="_blank"
                         rel="noopener noreferrer"
@@ -432,7 +441,7 @@ export default function Home() {
         </section>
 
         {/* NEWSLETTER */}
-        <section className="boletin" aria-labelledby="titulo-boletin">
+        <section id="boletin" className="boletin" aria-labelledby="titulo-boletin">
           <div className="contenedor boletin-grilla">
             <div>
               <Titulo id="titulo-boletin" fuerte="LA" suave="Bitácora Pyme" />
