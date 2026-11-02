@@ -146,11 +146,15 @@ export default function Mosaico({ items }) {
             <h3 id="detalle-titulo" className="detalle-titulo">
               {s.nombre}
             </h3>
-            <p className="detalle-resena">{s.resena}</p>
-            <div className="detalle-importa">
-              <span>Por qué importa</span>
-              <p>{s.importancia}</p>
-            </div>
+            {!s.ficha?.planes && (
+              <>
+                <p className="detalle-resena">{s.resena}</p>
+                <div className="detalle-importa">
+                  <span>Por qué importa</span>
+                  <p>{s.importancia}</p>
+                </div>
+              </>
+            )}
             {(s.ficha?.sesiones || s.ficha?.testimonio || s.ficha?.informe) && <Ficha ficha={s.ficha} />}
             {s.ficha?.planes ? (
               <Planes planes={s.ficha.planes} href={s.href} />
