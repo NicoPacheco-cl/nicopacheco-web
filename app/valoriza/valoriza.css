@@ -516,7 +516,6 @@
   background: var(--bg);
   color: var(--fg);
   font-family: var(--body);
-  & .wrap { width: min(100% - 2rem, var(--ancho)); margin-inline: auto; }
   & h1, & h2, & h3 { font-family: var(--display); font-weight: 400; text-transform: uppercase; letter-spacing: 0.01em; }
   & .eyebrow { display: block; letter-spacing: 0.2em; text-transform: uppercase; font-size: 0.8125rem; color: var(--muted); }
   & .btn { border-radius: var(--radio); font-family: var(--display); font-weight: 400; letter-spacing: 0.06em; text-transform: uppercase; cursor: pointer; }
@@ -531,7 +530,4 @@
 .vp .tb-fondo { fill: #f4f8fa; }
 .vp .tb-linea { stroke: #2c546a; fill: none; }
 .vp .tb-arco, .vp .tb-sigla, .vp .tb-folio, .vp .tb-fecha { fill: #2c546a; }
-
-/* Certificado elegido */
-.vp .va-elegido { margin-top: 1rem; padding: 0.9rem 1rem; border-left: 3px solid var(--acento); background: var(--surface); }
-.vp .va-elegido a { color: var(--brass-text); white-space: nowrap; }
+.vp .va-total strong, .vp .va-barra strong, .vp .va-total-pts b { color: #fff; }

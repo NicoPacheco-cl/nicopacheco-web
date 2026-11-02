@@ -1907,61 +1907,6 @@ a {
   border-color: transparent transparent transparent var(--blanco);
 }
 
-.ficha-planes {
-  display: grid;
-  gap: 0.75rem;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.ficha-plan {
-  display: grid;
-  gap: 0.5rem;
-  padding: 1.25rem;
-  border: 1px solid rgba(255, 255, 255, 0.22);
-  color: var(--gris-claro);
-  text-decoration: none;
-  transition: border-color 0.15s ease, background-color 0.15s ease;
-}
-
-a.ficha-plan:hover,
-a.ficha-plan:focus-visible {
-  border-color: var(--blanco);
-  background: rgba(255, 255, 255, 0.06);
-}
-
-.ficha-plan-cabeza {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  gap: 0.25rem 0.75rem;
-  color: var(--blanco);
-}
-
-.ficha-plan-cabeza strong {
-  font-family: var(--display);
-  font-weight: 400;
-  font-size: 1.5rem;
-  text-transform: uppercase;
-}
-
-.ficha-plan-cabeza em {
-  padding: 0.1rem 0.5rem;
-  background: var(--acento);
-  font-style: normal;
-  font-size: 0.75rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-.ficha-plan-cabeza b {
-  margin-left: auto;
-  font-family: var(--display);
-  font-weight: 400;
-  font-size: 1.25rem;
-}
-
 .ficha-informe {
   width: 100%;
   background: transparent;

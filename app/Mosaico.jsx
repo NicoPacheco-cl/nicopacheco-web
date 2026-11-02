@@ -13,30 +13,18 @@ function Flecha() {
   );
 }
 
-// Valorización Pyme: al elegir un certificado se abre su formulario.
-function Planes({ planes, href }) {
+function Celda({ m }) {
   return (
-    <section className="ficha" aria-labelledby="ficha-planes">
-      <h4 id="ficha-planes" className="ficha-rotulo">
-        Elige tu certificado
-      </h4>
-      <ul className="ficha-planes">
-        {planes.map((p) => {
-          return (
-            <li key={p.id}>
-              <a className="ficha-plan" href={`${href}?plan=${p.id}`}>
-                <span className="ficha-plan-cabeza">
-                  <strong>{p.nombre}</strong>
-                  {p.recomendado && <em>Recomendada</em>}
-                  <b>{p.precio}</b>
-                </span>
-                <span>{p.resumen}</span>
-              </a>
-            </li>
-          );
-        })}
-      </ul>
-    </section>
+    <>
+      <span className="mosaico-marca" aria-hidden="true">
+        {m.marca}
+      </span>
+      <span className="mosaico-flecha" aria-hidden="true">
+        <Flecha />
+      </span>
+      <span className="mosaico-titulo">{m.titulo}</span>
+      <span className="mosaico-etiqueta">{m.etiqueta}</span>
+    </>
   );
 }
 
@@ -108,22 +96,21 @@ export default function Mosaico({ items }) {
       <ul className="mosaico">
         {items.map((i) => (
           <li key={i.id} id={i.id}>
-            <button
-              type="button"
-              className="mosaico-celda"
-              style={{ '--fondo': i.mosaico.fondo }}
-              onClick={() => setAbierto(i.id)}
-              aria-haspopup="dialog"
-            >
-              <span className="mosaico-marca" aria-hidden="true">
-                {i.mosaico.marca}
-              </span>
-              <span className="mosaico-flecha" aria-hidden="true">
-                <Flecha />
-              </span>
-              <span className="mosaico-titulo">{i.mosaico.titulo}</span>
-              <span className="mosaico-etiqueta">{i.mosaico.etiqueta}</span>
-            </button>
+            {i.ficha?.directo ? (
+              <a className="mosaico-celda" style={{ '--fondo': i.mosaico.fondo }} href={i.href}>
+                <Celda m={i.mosaico} />
+              </a>
+            ) : (
+              <button
+                type="button"
+                className="mosaico-celda"
+                style={{ '--fondo': i.mosaico.fondo }}
+                onClick={() => setAbierto(i.id)}
+                aria-haspopup="dialog"
+              >
+                <Celda m={i.mosaico} />
+              </button>
+            )}
           </li>
         ))}
       </ul>
@@ -146,19 +133,13 @@ export default function Mosaico({ items }) {
             <h3 id="detalle-titulo" className="detalle-titulo">
               {s.nombre}
             </h3>
-            {!s.ficha?.planes && (
-              <>
-                <p className="detalle-resena">{s.resena}</p>
-                <div className="detalle-importa">
-                  <span>Por qué importa</span>
-                  <p>{s.importancia}</p>
-                </div>
-              </>
-            )}
-            {(s.ficha?.sesiones || s.ficha?.testimonio || s.ficha?.informe) && <Ficha ficha={s.ficha} />}
-            {s.ficha?.planes ? (
-              <Planes planes={s.ficha.planes} href={s.href} />
-            ) : s.opciones?.length ? (
+            <p className="detalle-resena">{s.resena}</p>
+            <div className="detalle-importa">
+              <span>Por qué importa</span>
+              <p>{s.importancia}</p>
+            </div>
+            {s.ficha && <Ficha ficha={s.ficha} />}
+            {s.opciones?.length ? (
               <div className="detalle-pago">
                 <PagoServicio key={s.id} opciones={s.opciones} />
               </div>

@@ -73,7 +73,7 @@ export function InventarioDetalle({ d, cambiar, notaVehiculos = "Los años de us
         <h3 id="inv-titulo">Detalle del inventario <span>(opcional)</span></h3>
         <p className="inv-consejo" role="note">
           <span aria-hidden="true">📈</span>
-          <span><strong>Completa tu inventario con el mayor detalle posible.</strong> Sube el valor de tu negocio y tu dossier de presentación queda más completo.</span>
+          <span><strong>Completa tu inventario con el mayor detalle posible.</strong> Sube el valor de tu negocio y tu certificado queda más completo.</span>
         </p>
         <p className="pf-ayuda">
           Toca cada categoría y anota equipo, marca, unidades y precio nuevo. El precio de venta se calcula solo con los años de uso que pusiste arriba
