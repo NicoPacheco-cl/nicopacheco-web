@@ -92,8 +92,8 @@ export default async function Home() {
                 PACHECO.
               </h1>
               <p className="portada-mision">
-                Mentor de pymes, director de empresas y conferencista. Te ayudo a que tu negocio gane
-                más, valga más y se pueda vender.
+                Ayudo e inspiro a emprendedores a transformar sus negocios en grandes empresas,
+                enseñándoles a leer sus números: el activo más valioso que tienen.
               </p>
               <div className="botones">
                 <a href="#servicios" className="btn btn-negro">
