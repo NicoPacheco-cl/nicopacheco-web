@@ -10,11 +10,13 @@ export async function crearPdf(estado) {
   // Las fuentes estándar no admiten todos los caracteres; una cuenta con un emoji no debe romper la descarga.
   const limpio = (t) => [...String(t).replace(/−/g, '-')].map((x) => (permitidos.has(x.codePointAt(0)) ? x : '?')).join('');
 
-  const NEGRO = rgb(13 / 255, 13 / 255, 13 / 255);
-  const GRIS = rgb(92 / 255, 92 / 255, 92 / 255);
-  const LINEA = rgb(222 / 255, 218 / 255, 210 / 255);
-  const SUAVE = rgb(242 / 255, 239 / 255, 233 / 255);
-  const ROJO = rgb(181 / 255, 70 / 255, 42 / 255);
+  const color = (hex) => rgb(parseInt(hex.slice(0, 2), 16) / 255, parseInt(hex.slice(2, 4), 16) / 255, parseInt(hex.slice(4, 6), 16) / 255);
+  const NEGRO = color('10282d');
+  const BANDA = color('103f47');
+  const GRIS = color('546a6e');
+  const LINEA = color('cfdbdb');
+  const SUAVE = color('e2eaea');
+  const ROJO = color('b3261e');
   const BLANCO = rgb(1, 1, 1);
   const ANCHO = 595.28, ALTO = 841.89, MARGEN = 40, FONDO = 58;
   const X_MONTO = ANCHO - MARGEN - 66, X_PCT = ANCHO - MARGEN - 6;
@@ -53,7 +55,7 @@ export async function crearPdf(estado) {
   y -= 38;
 
   const encabezado = () => {
-    hoja.drawRectangle({ x: MARGEN, y: y - 6, width: ANCHO - MARGEN * 2, height: 19, color: NEGRO });
+    hoja.drawRectangle({ x: MARGEN, y: y - 6, width: ANCHO - MARGEN * 2, height: 19, color: BANDA });
     texto('Cuenta', MARGEN + 6, y, { f: negrita, s: 9, color: BLANCO });
     texto('Monto', X_MONTO, y, { f: negrita, s: 9, color: BLANCO, derecha: true });
     texto('% ventas', X_PCT, y, { f: negrita, s: 9, color: BLANCO, derecha: true });

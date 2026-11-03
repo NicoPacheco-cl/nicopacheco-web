@@ -352,7 +352,7 @@ export default function Diagnostico() {
           <table>
             <tbody>
               {filasEstado(e, c).map((f, i) => (
-                <tr className={f.tipo} key={`${i}-${f.etiqueta}`}>
+                <tr className={`dp-fila-${f.tipo}`} key={`${i}-${f.etiqueta}`}>
                   <td>{f.etiqueta}</td>
                   <td className={f.monto < 0 ? 'negativo' : ''}>{f.monto === null || f.monto === undefined ? '' : clp(f.monto)}</td>
                   <td>{f.porcentaje || ''}</td>
