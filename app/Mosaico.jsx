@@ -56,7 +56,17 @@ function Ficha({ ficha }) {
         </section>
       )}
       {testimonio &&
-        (testimonio.video ? (
+        (testimonio.youtube ? (
+          <iframe
+            className="ficha-video ficha-video-vertical"
+            src={`https://www.youtube-nocookie.com/embed/${testimonio.youtube}`}
+            title={testimonio.rotulo}
+            loading="lazy"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerPolicy="strict-origin-when-cross-origin"
+            allowFullScreen
+          />
+        ) : testimonio.video ? (
           <video className="ficha-video" src={testimonio.video} controls preload="metadata" aria-label={testimonio.rotulo} />
         ) : (
           <div className="ficha-video ficha-video-vacio" role="img" aria-label={testimonio.rotulo}>

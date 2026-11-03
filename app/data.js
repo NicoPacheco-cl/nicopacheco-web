@@ -148,7 +148,8 @@ export const servicios = [
 ];
 
 // Detalle ampliado de cada servicio, por id. Se muestra en su ventana de detalle.
-// Cuando tengas los archivos, completa testimonio.video e informe.href.
+// testimonio.youtube es el código del video de YouTube; testimonio.video, un archivo propio.
+// Cuando tengas el informe, completa informe.href.
 export const fichas = {
   'valorizacion-pyme': { href: '/valoriza', directo: true },
   diagnostico: {
@@ -177,7 +178,7 @@ export const fichas = {
         ],
       },
     ],
-    testimonio: { rotulo: 'Video testimonial de prueba', video: '' },
+    testimonio: { rotulo: 'Video testimonial', youtube: '-eZIogL3XjM' },
     informe: { etiqueta: 'Ver informe de diagnóstico de prueba', href: '' },
   },
 };

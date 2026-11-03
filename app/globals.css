@@ -1897,6 +1897,12 @@ a {
   background: #000;
 }
 
+.ficha-video-vertical {
+  width: min(100%, 320px);
+  aspect-ratio: 9 / 16;
+  margin-inline: auto;
+  border: 0;
+}
 .ficha-video-vacio {
   display: flex;
   flex-direction: column;
