@@ -10,10 +10,12 @@ export const nav = [
 
 // Respaldo discreto bajo la portada
 export const cifras = [
-  { valor: '+100', texto: 'pymes acompañadas' },
+  { valor: '+50', texto: 'pymes asesoradas' },
   { valor: '14', texto: 'franquicias creadas' },
-  { valor: '7', texto: 'empresas donde soy director' },
+  { valor: '7', texto: 'empresas donde soy CEO' },
+  { valor: '1', texto: 'compañía valorada en USD 12,5 MM' },
   { valor: '+50', texto: 'conferencias en 10 años' },
+  { valor: 'Autor', texto: 'del libro “Franquicia Justa”' },
 ];
 
 // Problemas típicos del visitante y qué servicio los resuelve
