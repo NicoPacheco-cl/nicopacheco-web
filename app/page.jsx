@@ -148,7 +148,7 @@ export default async function Home() {
               <p className="rotulo dg-rotulo">Diagnóstico financiero gratis</p>
               <Titulo id="titulo-dg" fuerte="SABER LOS NÚMEROS DE TU NEGOCIO NO ES IMPORTANTE," suave="es imprescindible." />
             </div>
-            <a href={contacto('diagnostico-gratis')} className="btn btn-negro">
+            <a href="/diagnostico" className="btn btn-negro">
               Realiza este diagnóstico gratis
             </a>
           </div>
