@@ -98,6 +98,43 @@ export function mesTexto(periodo) {
   return new Date(+m[1], +m[2] - 1, 1).toLocaleDateString('es-CL', { month: 'long', year: 'numeric' });
 }
 
+// Barras de «De cada $100 que vendes».
+export function barrasResumen(c) {
+  const por100 = (n) => (c.ingresos > 0 ? (n / c.ingresos) * 100 : 0);
+  const filas = [
+    ['Costos directos', c.totales.directos],
+    ...OPERACION.map((id) => [DIMENSION[id].nombre, c.totales[id]]),
+    ['Créditos', c.totales.creditos],
+    ['Impuestos', c.impuestos],
+  ].map(([etiqueta, n]) => ({ etiqueta, valor: por100(n), clase: '' }));
+  filas.push({ etiqueta: 'Te queda', valor: por100(c.neta), clase: c.neta < 0 ? 'mala' : 'buena' });
+  const maximo = Math.max(...filas.map((f) => Math.abs(f.valor)), 0);
+  return filas.map((f) => ({ ...f, ancho: maximo > 0 ? Math.abs(f.valor) / maximo : 0 }));
+}
+export const pesos100 = (n) =>
+  `${n < 0 ? '−' : ''}$${Math.abs(n).toLocaleString('es-CL', { minimumFractionDigits: 1, maximumFractionDigits: 1 })}`;
+
+// Cuadro resumen de proforma financiera, de ingresos a EBITDA.
+export function filasProforma(e, c = calcular(e)) {
+  const fila = (tipo, etiqueta, monto) => ({ tipo, etiqueta, monto, porcentaje: pct(c.sobreVentas(monto)) });
+  return [
+    fila('ingresos', e.modoIva === 'sin' ? 'Ingresos netos' : 'Ingresos', c.ingresos),
+    fila('directos', 'Costos directos de venta', c.totales.directos),
+    fila('margen', 'Margen de contribución (margen bruto)', c.margen),
+    fila('cuenta', 'Payroll / RRHH', c.totales.rrhh),
+    fila('cuenta', 'Real estate / Renta', c.totales.renta),
+    fila('cuenta', 'Gastos fijos', c.totales.fijos),
+    fila('cuenta', 'Marketing', c.totales.marketing),
+    fila('cuenta', 'Administración', c.totales.admin),
+    fila('cuenta', 'Higiene e inocuidad', c.totales.higiene),
+    fila('cuenta', 'Comunicación', c.totales.comunicacion),
+    fila('cuenta', 'Logística', c.totales.logistica),
+    fila('cuenta', 'Inversiones', c.totales.inversiones),
+    fila('operacion', 'Costos de operación', c.operacion),
+    fila('ebitda', 'EBITDA', c.ebitda),
+  ];
+}
+
 // Filas del estado de resultados completo, usadas en pantalla, en Excel y en el PDF.
 export function filasEstado(e, c = calcular(e)) {
   const filas = [];

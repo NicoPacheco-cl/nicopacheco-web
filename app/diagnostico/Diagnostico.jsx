@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
-import { DIMENSION, OPERACION, ORDEN, calcular, clp, estadoInicial, filasEstado, mesTexto, pct, tasaTexto } from './calculo';
+import { DIMENSION, OPERACION, ORDEN, barrasResumen, calcular, clp, estadoInicial, filasEstado, filasProforma, mesTexto, pct, pesos100, tasaTexto } from './calculo';
 import { crearPdf, nombreArchivo } from './pdf';
 
 const CLAVE = 'np_diagnostico_v1';
@@ -316,34 +316,41 @@ export default function Diagnostico() {
         </>
       );
     }
-    const por100 = (n) => (n / c.ingresos) * 100;
-    const items = [['Costos directos', c.totales.directos], ...OPERACION.map((id) => [DIMENSION[id].nombre, c.totales[id]]), ['Créditos', c.totales.creditos], ['Impuestos', c.impuestos]];
-    const maximo = Math.max(...items.map((i) => por100(i[1])), Math.abs(por100(c.neta)));
-    const f100 = (n) => `${n < 0 ? '−' : ''}$${Math.abs(n).toLocaleString('es-CL', { minimumFractionDigits: 1, maximumFractionDigits: 1 })}`;
-    const barra = (etiqueta, n, clase = '') => (
-      <div className={`dp-barra ${clase}`} key={etiqueta}>
-        <span>{etiqueta}</span>
-        <span className="dp-pista"><i style={{ width: `${maximo > 0 ? (Math.abs(n) / maximo) * 100 : 0}%` }} /></span>
-        <span className={n < 0 ? 'dp-b-val negativo' : 'dp-b-val'}>{f100(n)}</span>
-      </div>
-    );
     const titulo = [e.negocio.nombre, mesTexto(e.negocio.periodo)].filter(Boolean).join(' · ');
     return (
       <>
         {titulo ? <p className="dp-pregunta">{titulo}</p> : null}
         <div className="dp-kpis">
           <div><span>Margen de contribución</span><b className={c.margen < 0 ? 'negativo' : ''}>{sv(c.margen)}</b></div>
-          <div><span>EBITDA</span><b className={c.ebitda < 0 ? 'negativo' : ''}>{clp(c.ebitda)}</b></div>
+          <div><span>EBITDA</span><b className={c.ebitda < 0 ? 'negativo' : ''}>{clp(c.ebitda)} <small>({sv(c.ebitda)})</small></b></div>
           <div><span>Utilidad neta final</span><b className={c.neta < 0 ? 'negativo' : 'positivo'}>{clp(c.neta)}</b></div>
         </div>
         <div className="dp-barras" role="group" aria-label="De cada 100 pesos vendidos">
           <h3>De cada $100 que vendes</h3>
-          {items.map((i) => barra(i[0], por100(i[1])))}
-          {barra('Te queda', por100(c.neta), c.neta < 0 ? 'mala' : 'buena')}
+          {barrasResumen(c).map((b) => (
+            <div className={`dp-barra ${b.clase}`} key={b.etiqueta}>
+              <span>{b.etiqueta}</span>
+              <span className="dp-pista"><i style={{ width: `${b.ancho * 100}%` }} /></span>
+              <span className={b.valor < 0 ? 'dp-b-val negativo' : 'dp-b-val'}>{pesos100(b.valor)}</span>
+            </div>
+          ))}
+        </div>
+        <div className="dp-proforma">
+          <table>
+            <thead><tr><th colSpan="3">Proforma financiera</th></tr></thead>
+            <tbody>
+              {filasProforma(e, c).map((f) => (
+                <tr className={`dp-pf-${f.tipo}`} key={f.etiqueta}>
+                  <td>{f.etiqueta}</td>
+                  <td className={f.monto < 0 ? 'negativo' : ''}>{clp(f.monto)}</td>
+                  <td className={f.monto < 0 ? 'negativo' : ''}>{f.porcentaje}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
         {e.modoIva === 'con' ? <p className="dp-ayuda">Ingresos, costos, margen y EBITDA incluyen IVA, porque así se ingresaron los montos. El IVA pagado al SII se descuenta antes de la utilidad neta.</p> : null}
         <div className="dp-res-cab">
-          <h3>Estado de resultados completo</h3>
           <span className="dp-opciones">
             <button className="btn btn-negro btn-chico" type="button" disabled={generando} onClick={() => descargarPdf(false)}>{generando ? 'Generando…' : 'Descargar PDF'}</button>
             <button className="dp-sec" type="button" onClick={copiarExcel}>Copiar para Excel</button>
@@ -351,6 +358,7 @@ export default function Diagnostico() {
         </div>
         {aviso && !avisoAbajo ? <p className="dp-ayuda" aria-live="polite">{aviso}</p> : null}
         {respaldo ? <textarea className="dp-respaldo" readOnly value={respaldo} aria-label="Estado de resultados para copiar" /> : null}
+        <h3>Estado de resultados completo</h3>
         <div className="dp-tabla">
           <table>
             <tbody>

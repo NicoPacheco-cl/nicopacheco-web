@@ -1,4 +1,4 @@
-import { calcular, clp, filasEstado, mesTexto, pct } from './calculo';
+import { barrasResumen, calcular, clp, filasEstado, filasProforma, mesTexto, pct, pesos100 } from './calculo';
 
 // PDF del estado de resultados, generado en el navegador: los datos no salen del equipo del visitante.
 export async function crearPdf(estado) {
@@ -17,6 +17,9 @@ export async function crearPdf(estado) {
   const LINEA = color('cfdbdb');
   const SUAVE = color('e2eaea');
   const ROJO = color('b3261e');
+  const VERDE = color('17694a');
+  const NARANJA = color('a8541a');
+  const BARRA = color('5c9aa2');
   const BLANCO = rgb(1, 1, 1);
   const ANCHO = 595.28, ALTO = 841.89, MARGEN = 40, FONDO = 76;
   const X_MONTO = ANCHO - MARGEN - 66, X_PCT = ANCHO - MARGEN - 6;
@@ -96,9 +99,52 @@ export async function crearPdf(estado) {
   [['Margen de contribución', pct(c.sobreVentas(c.margen)), c.margen], ['EBITDA', clp(c.ebitda), c.ebitda], ['Utilidad neta final', clp(c.neta), c.neta]].forEach(([rotulo, valor, n], i) => {
     const x = MARGEN + (i * (ANCHO - MARGEN * 2)) / 3;
     texto(rotulo, x, y, { s: 9, color: GRIS });
-    texto(valor, x, y - 17, { f: negrita, s: 14, color: n < 0 ? ROJO : NEGRO });
+    const tono = n < 0 ? ROJO : NEGRO;
+    texto(valor, x, y - 17, { f: negrita, s: 14, color: tono });
+    if (i === 1) texto(`(${pct(c.sobreVentas(c.ebitda))})`, x + negrita.widthOfTextAtSize(limpio(valor), 14) + 4, y - 17, { f: negrita, s: 10, color: tono });
   });
-  y -= 38;
+  y -= 44;
+
+  // Resumen: gráfico y proforma financiera, en la primera hoja.
+  texto('De cada $100 que vendes', MARGEN, y, { f: negrita, s: 11 });
+  y -= 16;
+  const X_PISTA = MARGEN + 118, X_VALOR = ANCHO - MARGEN, ANCHO_PISTA = X_VALOR - 44 - X_PISTA;
+  barrasResumen(c).forEach((b) => {
+    texto(b.etiqueta, MARGEN, y, { s: 8.5 });
+    hoja.drawRectangle({ x: X_PISTA, y: y - 1, width: ANCHO_PISTA, height: 7.5, color: SUAVE });
+    const relleno = b.clase === 'buena' ? VERDE : b.clase === 'mala' ? ROJO : BARRA;
+    if (b.ancho > 0) hoja.drawRectangle({ x: X_PISTA, y: y - 1, width: ANCHO_PISTA * b.ancho, height: 7.5, color: relleno });
+    texto(pesos100(b.valor), X_VALOR, y, { f: negrita, s: 8.5, derecha: true, color: b.valor < 0 ? ROJO : NEGRO });
+    y -= 13;
+  });
+  y -= 12;
+
+  const filasPf = filasProforma(estado, c);
+  const ALTO_PF = 15, TOPE_PF = y, X_ETQ = X_MONTO - 86;
+  hoja.drawRectangle({ x: MARGEN, y: y - 6, width: ANCHO - MARGEN * 2, height: 20, color: BANDA });
+  texto('Proforma financiera', MARGEN + 8, y, { f: negrita, s: 10.5, color: BLANCO });
+  y -= 20;
+  filasPf.forEach((f) => {
+    const principal = f.tipo !== 'cuenta';
+    const tono = f.monto < 0 ? ROJO : f.tipo === 'margen' ? VERDE : f.tipo === 'operacion' ? NARANJA : NEGRO;
+    if (f.tipo === 'ebitda') hoja.drawRectangle({ x: MARGEN, y: y - 5, width: ANCHO - MARGEN * 2, height: ALTO_PF, color: SUAVE });
+    if (f.tipo === 'cuenta' || f.tipo === 'ebitda') texto(f.etiqueta, X_ETQ, y, { f: negrita, s: 9, derecha: true });
+    else texto(f.etiqueta, MARGEN + 8, y, { f: negrita, s: 9.5, color: tono });
+    texto(clp(f.monto), X_MONTO, y, { f: negrita, s: principal ? 9.5 : 9, derecha: true, color: f.tipo === 'cuenta' ? NEGRO : tono });
+    texto(f.porcentaje, X_PCT, y, { f: negrita, s: principal ? 9.5 : 9, derecha: true, color: f.tipo === 'cuenta' ? NEGRO : tono });
+    if (['ingresos', 'margen', 'operacion'].includes(f.tipo)) {
+      hoja.drawLine({ start: { x: MARGEN, y: y - 5 }, end: { x: ANCHO - MARGEN, y: y - 5 }, thickness: 0.6, color: BANDA });
+    }
+    y -= ALTO_PF;
+  });
+  const BASE_PF = y + ALTO_PF - 5;
+  [X_ETQ + 5, X_MONTO + 6].forEach((x) => hoja.drawLine({ start: { x, y: TOPE_PF - 6 }, end: { x, y: BASE_PF }, thickness: 0.5, color: LINEA }));
+  hoja.drawRectangle({ x: MARGEN, y: BASE_PF, width: ANCHO - MARGEN * 2, height: TOPE_PF + 14 - BASE_PF, borderColor: BANDA, borderWidth: 0.75 });
+
+  // Detalle: parte en una hoja nueva.
+  abrirHoja();
+  texto('Estado de resultados completo', MARGEN, y, { f: negrita, s: 14 });
+  y -= 24;
 
   const encabezado = () => {
     hoja.drawRectangle({ x: MARGEN, y: y - 6, width: ANCHO - MARGEN * 2, height: 19, color: BANDA });
