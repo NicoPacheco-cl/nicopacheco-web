@@ -59,7 +59,7 @@ export const servicios = [
           'Un estudio completo de tu negocio en dos reuniones de 90 a 120 minutos cada una. En la primera analizamos a fondo cómo está funcionando tu empresa y en la segunda te presento un informe con su estado real, los principales problemas y las estrategias para revertir la situación.',
         importancia:
           'La mayoría de las pymes no tiene un problema de ventas, sino de números que nadie mira. Este es el punto de partida.',
-        precio: '$149.990',
+        precio: '$199.000',
         accion: 'Agendar diagnóstico',
         destacado: true,
       },
