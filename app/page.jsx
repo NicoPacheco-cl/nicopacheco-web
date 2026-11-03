@@ -92,8 +92,8 @@ export default async function Home() {
                 PACHECO.
               </h1>
               <p className="portada-mision">
-                Ayudo e inspiro a emprendedores a transformar sus negocios en grandes empresas,
-                enseñándoles a leer sus números: el activo más valioso que tienen.
+                Ayudo e inspiro a emprendedores a pensar como empresarios, a escalar sus negocios y a
+                reconocer sus números como el activo estratégico más valioso de la compañía.
               </p>
               <div className="botones">
                 <a href="#servicios" className="btn btn-negro">
