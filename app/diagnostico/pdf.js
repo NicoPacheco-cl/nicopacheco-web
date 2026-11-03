@@ -2,7 +2,7 @@ import { calcular, clp, filasEstado, mesTexto, pct } from './calculo';
 
 // PDF del estado de resultados, generado en el navegador: los datos no salen del equipo del visitante.
 export async function crearPdf(estado) {
-  const { PDFDocument, StandardFonts, rgb } = await import('pdf-lib');
+  const { PDFDocument, StandardFonts, degrees, rgb } = await import('pdf-lib');
   const pdf = await PDFDocument.create();
   const normal = await pdf.embedFont(StandardFonts.Helvetica);
   const negrita = await pdf.embedFont(StandardFonts.HelveticaBold);
@@ -18,12 +18,23 @@ export async function crearPdf(estado) {
   const SUAVE = color('e2eaea');
   const ROJO = color('b3261e');
   const BLANCO = rgb(1, 1, 1);
-  const ANCHO = 595.28, ALTO = 841.89, MARGEN = 40, FONDO = 58;
+  const ANCHO = 595.28, ALTO = 841.89, MARGEN = 40, FONDO = 76;
   const X_MONTO = ANCHO - MARGEN - 66, X_PCT = ANCHO - MARGEN - 6;
 
   const c = calcular(estado);
-  let hoja = pdf.addPage([ANCHO, ALTO]);
-  let y = ALTO - 52;
+  const imagen = async (ruta) => {
+    try {
+      const r = await fetch(ruta);
+      if (!r.ok) return null;
+      return await pdf.embedPng(await r.arrayBuffer());
+    } catch {
+      return null;
+    }
+  };
+  // Si una imagen no carga, el PDF se entrega igual con la marca escrita.
+  const [logo, sello] = await Promise.all([imagen('/marca/nico-pacheco.png'), imagen('/marca/sello-nicopacheco.png')]);
+  let hoja;
+  let y;
 
   const texto = (t, x, yy, { f = normal, s = 9.5, color = NEGRO, derecha = false } = {}) => {
     const valor = limpio(t);
@@ -41,6 +52,41 @@ export async function crearPdf(estado) {
     return lineas;
   };
 
+  const marca = (x, yy, alto) => {
+    if (logo) hoja.drawImage(logo, { x, y: yy, width: (logo.width / logo.height) * alto, height: alto });
+    else texto('NICO PACHECO', x, yy + 1, { f: negrita, s: alto * 0.8 });
+  };
+  // El sello va primero para quedar detrás de los números.
+  const dibujarSello = () => {
+    const angulo = 38;
+    const rad = (angulo * Math.PI) / 180;
+    if (sello) {
+      const w = 600;
+      const h = (sello.height / sello.width) * w;
+      hoja.drawImage(sello, {
+        x: ANCHO / 2 - (w / 2) * Math.cos(rad) + (h / 2) * Math.sin(rad),
+        y: ALTO / 2 - (w / 2) * Math.sin(rad) - (h / 2) * Math.cos(rad),
+        width: w, height: h, rotate: degrees(angulo), opacity: 0.07,
+      });
+    } else {
+      const s = 62;
+      const w = negrita.widthOfTextAtSize('NICOPACHECO.CL', s);
+      hoja.drawText('NICOPACHECO.CL', {
+        x: ANCHO / 2 - (w / 2) * Math.cos(rad), y: ALTO / 2 - (w / 2) * Math.sin(rad),
+        size: s, font: negrita, color: NEGRO, rotate: degrees(angulo), opacity: 0.07,
+      });
+    }
+  };
+  const abrirHoja = () => {
+    hoja = pdf.addPage([ANCHO, ALTO]);
+    dibujarSello();
+    marca(MARGEN, ALTO - 42, 18);
+    texto('www.nicopacheco.cl', ANCHO - MARGEN, ALTO - 37, { s: 9, color: GRIS, derecha: true });
+    hoja.drawLine({ start: { x: MARGEN, y: ALTO - 50 }, end: { x: ANCHO - MARGEN, y: ALTO - 50 }, thickness: 0.75, color: LINEA });
+    y = ALTO - 76;
+  };
+
+  abrirHoja();
   texto('Diagnóstico Pyme', MARGEN, y, { f: negrita, s: 20 });
   y -= 18;
   const datos = [estado.negocio.nombre, estado.negocio.rubro, mesTexto(estado.negocio.periodo)].filter(Boolean).join(' · ');
@@ -61,7 +107,7 @@ export async function crearPdf(estado) {
     texto('% ventas', X_PCT, y, { f: negrita, s: 9, color: BLANCO, derecha: true });
     y -= 21;
   };
-  const nuevaHoja = () => { hoja = pdf.addPage([ANCHO, ALTO]); y = ALTO - 48; encabezado(); };
+  const nuevaHoja = () => { abrirHoja(); encabezado(); };
   encabezado();
 
   filasEstado(estado, c).forEach((f) => {
@@ -85,9 +131,10 @@ export async function crearPdf(estado) {
   const hojas = pdf.getPages();
   hojas.forEach((h, i) => {
     hoja = h;
-    cortar(nota, normal, 8, ANCHO - MARGEN * 2 - 70).forEach((l, n) => texto(l, MARGEN, 36 - n * 10, { s: 8, color: GRIS }));
-    texto(`Página ${i + 1} de ${hojas.length}`, ANCHO - MARGEN, 36, { s: 8, color: GRIS, derecha: true });
-    texto('nicopacheco.cl', ANCHO - MARGEN, 26, { s: 8, color: GRIS, derecha: true });
+    hoja.drawLine({ start: { x: MARGEN, y: 64 }, end: { x: ANCHO - MARGEN, y: 64 }, thickness: 0.75, color: LINEA });
+    cortar(nota, normal, 8, ANCHO - MARGEN * 2).forEach((l, n) => texto(l, MARGEN, 53 - n * 10, { s: 8, color: GRIS }));
+    marca(MARGEN, 18, 13);
+    texto(`www.nicopacheco.cl · Página ${i + 1} de ${hojas.length}`, ANCHO - MARGEN, 21, { s: 8, color: GRIS, derecha: true });
   });
   return pdf.save();
 }

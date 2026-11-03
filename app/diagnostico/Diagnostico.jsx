@@ -97,6 +97,7 @@ export default function Diagnostico() {
   const [deshacer, setDeshacer] = useState(null);
   const [cargado, setCargado] = useState(false);
   const [aviso, setAviso] = useState('');
+  const [avisoAbajo, setAvisoAbajo] = useState(false);
   const [respaldo, setRespaldo] = useState('');
   const [generando, setGenerando] = useState(false);
   const [confirmarBorrado, setConfirmarBorrado] = useState(false);
@@ -190,9 +191,10 @@ export default function Diagnostico() {
     window.scrollTo(0, 0);
   };
 
-  async function descargarPdf() {
+  async function descargarPdf(abajo = false) {
     setGenerando(true);
     setAviso('');
+    setAvisoAbajo(abajo);
     try {
       const bytes = await crearPdf(e);
       const url = URL.createObjectURL(new Blob([bytes], { type: 'application/pdf' }));
@@ -213,6 +215,7 @@ export default function Diagnostico() {
 
   async function copiarExcel() {
     const texto = filasEstado(e, c).map((f) => [f.etiqueta, f.monto === null || f.monto === undefined ? '' : Math.round(f.monto), f.porcentaje && f.porcentaje !== '—' ? f.porcentaje : ''].join('\t')).join('\n');
+    setAvisoAbajo(false);
     try {
       await navigator.clipboard.writeText(texto);
       setRespaldo('');
@@ -342,11 +345,11 @@ export default function Diagnostico() {
         <div className="dp-res-cab">
           <h3>Estado de resultados completo</h3>
           <span className="dp-opciones">
-            <button className="btn btn-negro btn-chico" type="button" disabled={generando} onClick={descargarPdf}>{generando ? 'Generando…' : 'Descargar PDF'}</button>
+            <button className="btn btn-negro btn-chico" type="button" disabled={generando} onClick={() => descargarPdf(false)}>{generando ? 'Generando…' : 'Descargar PDF'}</button>
             <button className="dp-sec" type="button" onClick={copiarExcel}>Copiar para Excel</button>
           </span>
         </div>
-        {aviso ? <p className="dp-ayuda" aria-live="polite">{aviso}</p> : null}
+        {aviso && !avisoAbajo ? <p className="dp-ayuda" aria-live="polite">{aviso}</p> : null}
         {respaldo ? <textarea className="dp-respaldo" readOnly value={respaldo} aria-label="Estado de resultados para copiar" /> : null}
         <div className="dp-tabla">
           <table>
@@ -360,6 +363,14 @@ export default function Diagnostico() {
               ))}
             </tbody>
           </table>
+        </div>
+        <div className="dp-final">
+          <div>
+            <h3>Descarga tu estado de resultados</h3>
+            <p>Un PDF con tus montos y porcentajes, listo para guardar o compartir.</p>
+            {aviso && avisoAbajo ? <p className="dp-ayuda" aria-live="polite">{aviso}</p> : null}
+          </div>
+          <button className="btn btn-negro" type="button" disabled={generando} onClick={() => descargarPdf(true)}>{generando ? 'Generando…' : 'Descargar PDF'}</button>
         </div>
         <div className="dp-siguiente-paso">
           <div>
