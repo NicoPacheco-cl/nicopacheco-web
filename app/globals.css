@@ -326,7 +326,7 @@ a {
 
 .portada-grilla {
   display: grid;
-  grid-template-columns: 1.15fr 0.85fr;
+  grid-template-columns: 1fr 1fr;
   align-items: end;
   gap: 2rem;
   padding-top: 3rem;
@@ -340,7 +340,7 @@ a {
 .portada-nombre {
   font-family: var(--display);
   font-weight: 400;
-  font-size: clamp(5rem, 14vw, 12rem);
+  font-size: clamp(4.5rem, 12vw, 10.25rem);
   line-height: 0.86;
   letter-spacing: 0.005em;
 }
@@ -359,7 +359,7 @@ a {
 
 .portada-foto img {
   width: 100%;
-  max-width: 520px;
+  max-width: 620px;
   margin-left: auto;
 }
 
