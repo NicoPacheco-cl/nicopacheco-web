@@ -2,7 +2,7 @@ import Diagnostico from './Diagnostico';
 import './diagnostico.css';
 
 export const metadata = {
-  title: 'Diagnóstico financiero gratis · Nico Pacheco',
+  title: 'Diagnóstico Pyme gratis · Nico Pacheco',
   description: 'Ingresa los números de un mes y arma el estado de resultados de tu pyme. Gratis, sin registro y con descarga en PDF.',
 };
 
@@ -18,13 +18,9 @@ export default function PaginaDiagnostico() {
       <main className="dp">
         <div className="dp-cont">
           <div className="dp-cab">
-            <p className="rotulo">Diagnóstico financiero gratis</p>
-            <h1 className="titulo">
-              <span className="titulo-fuerte">SABER LOS NÚMEROS DE TU NEGOCIO NO ES IMPORTANTE,</span>{' '}
-              <span className="titulo-suave">es imprescindible.</span>
-            </h1>
+            <h1>Diagnóstico Pyme</h1>
             <p className="dp-bajada">
-              Abre cada dimensión e ingresa los montos de un mes. Cada una trae cuentas de ejemplo que puedes renombrar, eliminar o complementar con las tuyas. Al final descargas tu estado de resultados en PDF.
+              Abre cada dimensión e ingresa los montos del mes. Cada una trae cuentas de ejemplo que puedes renombrar, eliminar o complementar con las tuyas.
             </p>
           </div>
           <Diagnostico />

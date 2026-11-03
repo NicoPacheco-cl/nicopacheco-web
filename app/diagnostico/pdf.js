@@ -41,7 +41,7 @@ export async function crearPdf(estado) {
     return lineas;
   };
 
-  texto('Diagnóstico financiero', MARGEN, y, { f: negrita, s: 20 });
+  texto('Diagnóstico Pyme', MARGEN, y, { f: negrita, s: 20 });
   y -= 18;
   const datos = [estado.negocio.nombre, estado.negocio.rubro, mesTexto(estado.negocio.periodo)].filter(Boolean).join(' · ');
   if (datos) { texto(datos, MARGEN, y, { s: 10 }); y -= 14; }
@@ -96,5 +96,5 @@ export function nombreArchivo(estado) {
   const nombre = (estado.negocio.nombre || '')
     .normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase()
     .replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
-  return `${['diagnostico-financiero', nombre, estado.negocio.periodo].filter(Boolean).join('-')}.pdf`;
+  return `${['diagnostico-pyme', nombre, estado.negocio.periodo].filter(Boolean).join('-')}.pdf`;
 }
