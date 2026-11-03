@@ -99,6 +99,14 @@ export default function Mosaico({ items }) {
     if (!abierto && d.open) d.close();
   }, [abierto]);
 
+  // Permite llegar con la ficha abierta desde otra página (?servicio=id).
+  useEffect(() => {
+    const id = new URLSearchParams(window.location.search).get('servicio');
+    if (id && items.some((i) => i.id === id && !i.ficha?.directo)) setAbierto(id);
+    // Solo al abrir la página.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const s = items.find((i) => i.id === abierto);
 
   return (

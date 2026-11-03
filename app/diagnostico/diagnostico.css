@@ -136,9 +136,19 @@
 .dp-final { display: flex; flex-wrap: wrap; gap: 0.75rem 1.5rem; align-items: center; justify-content: space-between; border-top: 2px solid var(--acento); padding-top: 1rem; }
 .dp-final > div { flex: 1 1 300px; min-width: 0; display: grid; gap: 0.25rem; }
 .dp-final p { font-size: 0.9375rem; color: var(--gris); }
-.dp-siguiente-paso { display: flex; flex-wrap: wrap; gap: 0.75rem 1.5rem; align-items: center; justify-content: space-between; background: var(--acento-suave); border-radius: var(--radio); padding: 1rem; }
-.dp-siguiente-paso > div { flex: 1 1 300px; min-width: 0; display: grid; gap: 0.25rem; }
-.dp-siguiente-paso p { font-size: 0.9375rem; color: var(--gris); }
+.dp-recomienda { display: flex; flex-wrap: wrap; gap: 0.9rem 1.5rem; align-items: center; justify-content: space-between; background: var(--acento); color: var(--blanco); border-radius: var(--radio); padding: 1.1rem 1.2rem; }
+.dp-recomienda > div { flex: 1 1 320px; min-width: 0; display: grid; gap: 0.3rem; }
+.dp-recomienda p { font-size: 0.9375rem; }
+
+.dp-ventana { width: min(100% - 2rem, 520px); max-height: calc(100dvh - 2rem); padding: 0; border: 0; border-radius: 6px; background: var(--banda); color: var(--banda-texto); box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45); }
+.dp-ventana::backdrop { background: rgba(6, 26, 30, 0.72); }
+.dp-ventana-cuerpo { position: relative; display: grid; gap: 0.9rem; padding: 2rem 1.75rem 1.5rem; }
+.dp-ventana h2 { margin: 0; padding-right: 1.5rem; font-family: var(--display); font-weight: 400; font-size: clamp(1.75rem, 6vw, 2.35rem); line-height: 1.08; letter-spacing: 0.01em; text-transform: uppercase; text-wrap: balance; }
+.dp-ventana-listo { font-size: 0.8125rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gris-claro); }
+.dp-ventana .btn { margin-top: 0.35rem; }
+.dp-ventana-cerrar { position: absolute; top: 0.6rem; right: 0.6rem; width: 2.5rem; height: 2.5rem; background: none; border: 0; color: var(--banda-texto); font-size: 1.5rem; line-height: 1; cursor: pointer; }
+.dp-ventana-ahora-no { justify-self: center; background: none; border: 0; padding: 0.4rem 0.75rem; color: var(--gris-claro); font: inherit; font-size: 0.9375rem; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
+.dp-ventana button:focus-visible, .dp-ventana a:focus-visible { outline: 2px solid var(--blanco); outline-offset: 2px; }
 
 @media (max-width: 600px) {
   .dp-negocio, .dp-kpis { grid-template-columns: minmax(0, 1fr); }

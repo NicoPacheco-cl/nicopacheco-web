@@ -5,6 +5,8 @@ import { DIMENSION, OPERACION, ORDEN, barrasResumen, calcular, clp, estadoInicia
 import { crearPdf, nombreArchivo } from './pdf';
 
 const CLAVE = 'np_diagnostico_v1';
+const ENLACE_SERVICIO = '/?servicio=diagnostico#servicios';
+const TEXTO_RECOMENDACION = 'Para leer, entender e interpretar esta información y tomar decisiones estratégicas en tu empresa, te recomiendo un Diagnóstico Modelo de Negocio. Con él creamos el plan estratégico para escalar tu compañía.';
 const digitos = (t) => Number(String(t).replace(/\D/g, '')) || 0;
 const miles = (n) => (n ? Number(n).toLocaleString('es-CL') : '');
 
@@ -103,6 +105,7 @@ export default function Diagnostico() {
   const [confirmarBorrado, setConfirmarBorrado] = useState(false);
   const enfocar = useRef(null);
   const desplazar = useRef(null);
+  const ventana = useRef(null);
 
   useEffect(() => {
     try {
@@ -206,6 +209,7 @@ export default function Diagnostico() {
       a.remove();
       setTimeout(() => URL.revokeObjectURL(url), 10000);
       setAviso('PDF listo. Revisa tus descargas.');
+      ventana.current?.showModal();
     } catch {
       setAviso('No se pudo generar el PDF. Inténtalo de nuevo.');
     } finally {
@@ -358,6 +362,13 @@ export default function Diagnostico() {
         </div>
         {aviso && !avisoAbajo ? <p className="dp-ayuda" aria-live="polite">{aviso}</p> : null}
         {respaldo ? <textarea className="dp-respaldo" readOnly value={respaldo} aria-label="Estado de resultados para copiar" /> : null}
+        <div className="dp-recomienda">
+          <div>
+            <h3>Tus números son el punto de partida</h3>
+            <p>{TEXTO_RECOMENDACION}</p>
+          </div>
+          <a className="btn btn-blanco" href={ENLACE_SERVICIO}>Ver Diagnóstico Modelo de Negocio</a>
+        </div>
         <h3>Estado de resultados completo</h3>
         <div className="dp-tabla">
           <table>
@@ -379,13 +390,6 @@ export default function Diagnostico() {
             {aviso && avisoAbajo ? <p className="dp-ayuda" aria-live="polite">{aviso}</p> : null}
           </div>
           <button className="btn btn-negro" type="button" disabled={generando} onClick={() => descargarPdf(true)}>{generando ? 'Generando…' : 'Descargar PDF'}</button>
-        </div>
-        <div className="dp-siguiente-paso">
-          <div>
-            <h3>¿Quieres revisar estos números conmigo?</h3>
-            <p>En el Diagnóstico Modelo de Negocio analizamos tu empresa en dos reuniones y te entrego un informe con los problemas y las estrategias para revertirlos.</p>
-          </div>
-          <a className="btn btn-linea" href="/?interes=diagnostico#contacto">Agendar Diagnóstico Modelo de Negocio</a>
         </div>
       </>
     );
@@ -434,6 +438,22 @@ export default function Diagnostico() {
           <button className="dp-sec" type="button" onClick={() => { if (confirmarBorrado) reiniciar(false); else setConfirmarBorrado(true); }}>{confirmarBorrado ? 'Confirmar borrado' : 'Borrar datos'}</button>
         </span>
       </div>
+
+      <dialog
+        className="dp-ventana"
+        ref={ventana}
+        aria-labelledby="dp-ventana-titulo"
+        onClick={(ev) => { if (ev.target === ventana.current) ventana.current.close(); }}
+      >
+        <div className="dp-ventana-cuerpo">
+          <button className="dp-ventana-cerrar" type="button" aria-label="Cerrar" onClick={() => ventana.current?.close()}>×</button>
+          <p className="dp-ventana-listo">Tu PDF ya se descargó</p>
+          <h2 id="dp-ventana-titulo">Ahora, convierte estos números en decisiones</h2>
+          <p>{TEXTO_RECOMENDACION}</p>
+          <a className="btn btn-blanco" href={ENLACE_SERVICIO}>Ver Diagnóstico Modelo de Negocio</a>
+          <button className="dp-ventana-ahora-no" type="button" onClick={() => ventana.current?.close()}>Ahora no</button>
+        </div>
+      </dialog>
 
       <div className="dp-resumen" aria-label="Resumen">
         <div>Ventas<b>{clp(c.ingresos)}</b></div>
