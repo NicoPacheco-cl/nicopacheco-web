@@ -1676,6 +1676,11 @@ a {
 }
 
 @media (max-width: 860px) {
+  /* Títulos de tres líneas: no deben tocar la flecha de la esquina. */
+  .mosaico-titulo-largo {
+    font-size: 1.2rem;
+    margin-top: 1.5rem;
+  }
   .mosaico {
     grid-template-columns: repeat(2, 1fr);
   }

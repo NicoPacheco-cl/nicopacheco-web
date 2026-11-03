@@ -24,7 +24,7 @@ export const problemas = [
     frase: 'Vendo bien, pero a fin de mes no queda plata.',
     respuesta: 'Ordenamos tu estado de resultados y tu flujo de caja para encontrar dónde se va el margen.',
     href: '#diagnostico',
-    accion: 'Ver Diagnóstico Pyme',
+    accion: 'Ver Diagnóstico Modelo de Negocio',
   },
   {
     frase: 'No sé cuánto vale mi negocio.',
@@ -53,8 +53,8 @@ export const servicios = [
     items: [
       {
         id: 'diagnostico',
-        mosaico: { titulo: 'Diagnóstico Pyme', etiqueta: 'Diagnóstico', fondo: '#123a2c', marca: '2 SESIONES' },
-        nombre: 'Diagnóstico Pyme',
+        mosaico: { titulo: 'Diagnóstico Modelo de Negocio', etiqueta: 'Diagnóstico', fondo: '#123a2c', marca: '2 SESIONES' },
+        nombre: 'Diagnóstico Modelo de Negocio',
         resena:
           'Un estudio completo de tu negocio en dos reuniones de 90 a 120 minutos cada una. En la primera analizamos a fondo cómo está funcionando tu empresa y en la segunda te presento un informe con su estado real, los principales problemas y las estrategias para revertir la situación.',
         importancia:
@@ -262,7 +262,7 @@ export const medios = [
 ];
 
 export const intereses = [
-  { value: 'diagnostico', label: 'Diagnóstico Pyme' },
+  { value: 'diagnostico', label: 'Diagnóstico Modelo de Negocio' },
   { value: 'mentoring', label: 'Mentoring' },
   { value: 'directorio-pyme', label: 'Directorio PYME' },
   { value: 'valorizacion-pyme', label: 'Valorización Pyme' },

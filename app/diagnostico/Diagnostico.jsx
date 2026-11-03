@@ -383,9 +383,9 @@ export default function Diagnostico() {
         <div className="dp-siguiente-paso">
           <div>
             <h3>¿Quieres revisar estos números conmigo?</h3>
-            <p>En el Diagnóstico Pyme analizamos tu empresa en dos reuniones y te entrego un informe con los problemas y las estrategias para revertirlos.</p>
+            <p>En el Diagnóstico Modelo de Negocio analizamos tu empresa en dos reuniones y te entrego un informe con los problemas y las estrategias para revertirlos.</p>
           </div>
-          <a className="btn btn-linea" href="/?interes=diagnostico#contacto">Agendar Diagnóstico Pyme</a>
+          <a className="btn btn-linea" href="/?interes=diagnostico#contacto">Agendar Diagnóstico Modelo de Negocio</a>
         </div>
       </>
     );

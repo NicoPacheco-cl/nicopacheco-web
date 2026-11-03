@@ -11,7 +11,7 @@ export const metadata = {
   metadataBase: new URL('https://nicopacheco.cl'),
   title: 'Nico Pacheco · Mentor de pymes, director de empresas y conferencista',
   description:
-    'Ayudo a dueños de pymes a ganar más, valorizar su negocio y venderlo o franquiciarlo. Mentoring, Diagnóstico Pyme, valorización de empresas, franquicias y conferencias.',
+    'Ayudo a dueños de pymes a ganar más, valorizar su negocio y venderlo o franquiciarlo. Mentoring, Diagnóstico Modelo de Negocio, valorización de empresas, franquicias y conferencias.',
   openGraph: {
     title: 'Nico Pacheco',
     description:

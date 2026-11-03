@@ -22,7 +22,7 @@ function Celda({ m }) {
       <span className="mosaico-flecha" aria-hidden="true">
         <Flecha />
       </span>
-      <span className="mosaico-titulo">{m.titulo}</span>
+      <span className={m.titulo.length > 22 ? 'mosaico-titulo mosaico-titulo-largo' : 'mosaico-titulo'}>{m.titulo}</span>
       <span className="mosaico-etiqueta">{m.etiqueta}</span>
     </>
   );

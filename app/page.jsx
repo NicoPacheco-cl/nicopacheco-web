@@ -179,7 +179,7 @@ export default async function Home() {
             <Mosaico items={itemsMosaico(productos)} />
             <p className="servicios-nota">
               Toca un servicio para ver el detalle y el valor. Si no sabes por dónde partir, parte por el
-              Diagnóstico Pyme.
+              Diagnóstico Modelo de Negocio.
             </p>
           </div>
         </section>
