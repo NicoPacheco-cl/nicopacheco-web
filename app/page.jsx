@@ -106,10 +106,10 @@ export default async function Home() {
             </div>
             <div className="portada-foto">
               <Image
-                src="/fotos/recortes/nico-sentado.png"
+                src="/fotos/recortes/nico-chaqueta-beige.png"
                 alt="Nico Pacheco, mentor de pymes y conferencista"
-                width={1100}
-                height={1482}
+                width={1280}
+                height={1395}
                 priority
                 sizes="(max-width: 860px) 100vw, 520px"
               />
