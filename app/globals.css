@@ -319,8 +319,8 @@ a {
 
 /* Portada */
 .portada {
-  background: var(--negro);
-  color: var(--blanco);
+  background: var(--hueso);
+  color: var(--negro);
   overflow: hidden;
 }
 
@@ -349,7 +349,7 @@ a {
   margin: 2rem 0 2.25rem;
   max-width: 46ch;
   font-size: 1.1875rem;
-  color: #d9d9d9;
+  color: var(--negro-2);
 }
 
 .portada-foto {
@@ -361,12 +361,6 @@ a {
   width: 100%;
   max-width: 520px;
   margin-left: auto;
-  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 14%, #000 70%, transparent 98%),
-    linear-gradient(to right, transparent 0%, #000 20%, #000 80%, transparent 100%);
-  -webkit-mask-composite: source-in;
-  mask-image: linear-gradient(to bottom, transparent 0%, #000 14%, #000 70%, transparent 98%),
-    linear-gradient(to right, transparent 0%, #000 20%, #000 80%, transparent 100%);
-  mask-composite: intersect;
 }
 
 /* Cifras de respaldo */
@@ -377,7 +371,7 @@ a {
   margin: 0;
   padding: 2.5rem 0 3rem;
   list-style: none;
-  border-top: 1px solid var(--linea-oscura);
+  border-top: 1px solid rgba(13, 13, 13, 0.18);
 }
 
 .cifra-valor {
@@ -385,20 +379,20 @@ a {
   font-family: var(--display);
   font-size: clamp(2.75rem, 5vw, 4rem);
   line-height: 1;
-  color: var(--blanco);
+  color: var(--negro);
 }
 
 .cifra-texto {
   display: block;
   margin-top: 0.5rem;
   font-size: 0.975rem;
-  color: var(--gris-claro);
+  color: var(--gris);
   max-width: 18ch;
 }
 
 /* Medios en cinta continua */
 .medios {
-  border-top: 1px solid var(--linea-oscura);
+  border-top: 1px solid rgba(13, 13, 13, 0.18);
   padding-block: 1.75rem 2rem;
   overflow: hidden;
 }
@@ -407,7 +401,7 @@ a {
   font-size: 0.875rem;
   letter-spacing: 0.32em;
   text-transform: uppercase;
-  color: #8a8a8a;
+  color: var(--gris);
   margin-bottom: 1.25rem;
 }
 
@@ -430,7 +424,7 @@ a {
   font-size: clamp(1.75rem, 3vw, 2.5rem);
   letter-spacing: 0.02em;
   text-transform: uppercase;
-  color: #9a9a9a;
+  color: var(--gris);
   white-space: nowrap;
 }
 

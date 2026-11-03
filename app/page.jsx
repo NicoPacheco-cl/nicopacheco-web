@@ -96,20 +96,20 @@ export default async function Home() {
                 más, valga más y se pueda vender.
               </p>
               <div className="botones">
-                <a href="#servicios" className="btn btn-blanco">
+                <a href="#servicios" className="btn btn-negro">
                   Conoce mis servicios
                 </a>
-                <a href="#eventos" className="btn btn-linea-clara">
+                <a href="#eventos" className="btn btn-linea">
                   Llévame a tu evento
                 </a>
               </div>
             </div>
             <div className="portada-foto">
               <Image
-                src="/fotos/hero-movil.jpg"
+                src="/fotos/recortes/nico-sentado.png"
                 alt="Nico Pacheco, mentor de pymes y conferencista"
-                width={1200}
-                height={1800}
+                width={1100}
+                height={1482}
                 priority
                 sizes="(max-width: 860px) 100vw, 520px"
               />
