@@ -332,10 +332,40 @@ export const prensa = {
   // Agrega aquí cada nota: { medio, titulo, fecha, url }. Las que tengan url se muestran como enlace.
   apariciones: [
     {
+      medio: 'Revista PM',
+      titulo: 'Mammaterra: una propuesta gastronómica saludable, vegana y deliciosa',
+      fecha: 'Feb 2021',
+      url: 'https://www.revistapm.cl/reportajes/mammaterra/',
+    },
+    {
       medio: 'Diario Financiero',
       titulo: 'La fórmula "justa" de Mammaterra para crecer en pandemia',
       fecha: '2021',
       url: 'https://www.df.cl/empresas/consumo/la-formula-justa-de-mammaterra-para-crecer-en-pandemia-un-2021-con',
+    },
+    {
+      medio: 'Diario Financiero',
+      titulo: 'Mammaterra: la cadena de restaurantes vegetariana que apostó por el delivery para no perder su stock',
+      fecha: 'Mar 2020',
+      url: 'https://www.df.cl/df-lab/innovacion-y-startups/mammaterra-la-cadena-de-restaurantes-vegetariana-que-aposto-por-el',
+    },
+    {
+      medio: 'Diario Concepción',
+      titulo: 'Abrió en Concepción Mammaterra, la cadena de comida rápida saludable',
+      fecha: 'Ago 2018',
+      url: 'https://www.diarioconcepcion.cl/economia-y-negocios/2018/08/18/abrio-en-concepcion-mamaterra-la-cadena-de-comida-rapida-saludable.html',
+    },
+    {
+      medio: 'SoyChile',
+      titulo: 'Emprendimiento puertomontino Mammaterra se expande y abre franquicias',
+      fecha: 'Jun 2018',
+      url: 'https://www.soychile.cl/Puerto-Montt/Economia-y-Negocios/2018/06/26/541571/Emprendimiento-puertomontino-Mammaterra-se-expande-y-abre-franquicias.aspx',
+    },
+    {
+      medio: 'La Tercera, Finde',
+      titulo: 'Mammaterra, la hamburguesería regalona de los veggie',
+      fecha: '',
+      url: 'https://www.latercera.com/finde/noticia/mammaterra-la-hamburgueseria-regalona-de-los-veggie/',
     },
   ],
 };

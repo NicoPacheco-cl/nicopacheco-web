@@ -175,7 +175,7 @@ export default function Prensa() {
                 </li>
               ))}
             </ul>
-            <p className="pk-nota">También ha sido entrevistado en {medios.filter((m) => !prensa.apariciones.some((a) => a.medio === m)).join(', ')}.</p>
+            <p className="pk-nota">También ha sido entrevistado en {medios.filter((m) => !prensa.apariciones.some((a) => a.medio.startsWith(m))).join(', ')}.</p>
           </div>
         </section>
 
