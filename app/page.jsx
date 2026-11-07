@@ -76,6 +76,7 @@ export default async function Home() {
               ))}
               <a href="#eventos">Conferencias y seminarios</a>
               <a href="#contacto">Contacto</a>
+              <a href="/prensa">Prensa</a>
             </nav>
           </details>
         </div>
@@ -419,16 +420,26 @@ export default async function Home() {
               Sobre mí
             </p>
             <p className="sobre-grande">
-              Dueños de pymes que trabajan todo el día y aun así no ven crecer su negocio. No por falta
-              de esfuerzo, sino por números que nadie les enseñó a leer. Por eso hago lo que hago:
-              ayudar a que tu negocio gane más, valga más y se pueda vender.
+              Me pagué la universidad manejando un taxi de noche. Construí una cadena de 14 locales, la
+              perdí en la pandemia y volví a empezar. Lo que aprendí cabe en una frase: primero los
+              números, después crecer.
             </p>
             <div className="sobre-detalle">
               <p>
-                Soy director de empresas, mentor y conferencista. He dirigido negocios de gastronomía,
-                hotelería y turismo en el sur de Chile, y llevé una cadena de comida rápida saludable a
-                14 franquicias. Tengo un MBA de la Universidad Europea de Madrid y un Mágister en
-                Dirección Comercial, Marketing e Innovación de la Universidad Andrés Bello.
+                Soy empresario, director de empresas y conferencista. Antes de los 30 fundé y vendí
+                negocios de transporte y turismo en el sur de Chile. En 2017 cofundé Mammaterra, cadena
+                pionera de comida rápida saludable, que llegó a 14 locales con un modelo propio: la
+                franquicia justa, donde el royalty se cobra solo si el franquiciado gana.
+              </p>
+              <p>
+                La pandemia nos obligó a cerrar. Sostuvimos al equipo y a los franquiciados casi dos
+                años y perdimos la cadena. De esa experiencia nació mi método, el mismo con el que
+                transformamos una cafetería en quiebra en Kingdom Coffee, que hoy vende diez veces más.
+                Lo escribí en mi libro <em>Franquicia Justa</em>.
+              </p>
+              <p>
+                Tengo un MBA de la Universidad Europea de Madrid y un Mágister en Dirección Comercial,
+                Marketing e Innovación de la Universidad Andrés Bello.
               </p>
               <p className="sobre-medios">
                 Me han entrevistado en {medios.slice(0, -1).join(', ')} y {medios.at(-1)}.
@@ -510,6 +521,7 @@ export default async function Home() {
               </a>
             ))}
             <a href="#eventos">Conferencias</a>
+            <a href="/prensa">Prensa</a>
             <a href={LINKEDIN} target="_blank" rel="noopener noreferrer">
               LinkedIn
             </a>

@@ -165,3 +165,27 @@
   .dp-pf-ebitda td { font-size: 0.875rem; }
 }
 @media (prefers-reduced-motion: reduce) { .dp-flecha { transition: none; } }
+
+/* Registro previo al diagnóstico */
+.dp-reg-espera { min-height: 320px; }
+.dp-reg { background: var(--blanco); border: 1px solid var(--linea); border-radius: var(--radio); padding: clamp(1.25rem, 4vw, 2rem); display: grid; gap: 1.25rem; }
+.dp-reg-cab { display: grid; gap: 0.5rem; }
+.dp-reg-rotulo { font-size: 0.8125rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--acento); }
+.dp-reg-cab h2 { font-family: var(--texto); font-size: clamp(1.35rem, 3.5vw, 1.7rem); font-weight: 700; font-stretch: 100%; line-height: 1.2; text-transform: none; letter-spacing: -0.01em; }
+.dp-reg-cab p:last-child { color: var(--gris); max-width: 60ch; }
+.dp-reg-campos { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.75rem; }
+.dp-reg-campos label { display: grid; gap: 0.3rem; font-size: 0.875rem; color: var(--gris); min-width: 0; }
+.dp-reg-campos .dp-txt { font-size: 1rem; padding: 0.7rem 0.75rem; }
+.dp-reg-casillas { display: grid; gap: 0.6rem; font-size: 0.875rem; color: var(--gris); }
+.dp-reg-casillas label { display: flex; gap: 0.6rem; align-items: flex-start; }
+.dp-reg-casillas input { margin-top: 0.2rem; accent-color: var(--acento); width: 1rem; height: 1rem; flex: none; }
+.dp-reg-casillas span { color: var(--negro); }
+.dp-reg-casillas .opcional span { color: var(--gris); }
+.dp-reg-error { color: var(--negativo); font-weight: 600; }
+.dp-reg-btn { justify-self: start; font: inherit; font-weight: 700; color: var(--blanco); background: var(--acento); border: 0; border-radius: var(--radio); padding: 0.85rem 1.4rem; cursor: pointer; }
+.dp-reg-btn:hover { background: var(--banda); }
+.dp-reg-btn:disabled { opacity: 0.6; cursor: wait; }
+@media (max-width: 700px) {
+  .dp-reg-campos { grid-template-columns: 1fr; }
+  .dp-reg-btn { justify-self: stretch; }
+}

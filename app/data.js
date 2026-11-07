@@ -227,14 +227,19 @@ export const tienda = [
 
 export const charlas = [
   {
-    titulo: 'Motivación y liderazgo',
+    titulo: 'Crecer sin quebrar',
     detalle:
-      'Para equipos que necesitan pasar de la idea al plan y del plan a los resultados, con historias reales de negocios que se levantaron.',
+      'Cómo construí una cadena de 14 locales, la perdí en la pandemia y volví a empezar. Lo que cada dueño debería revisar antes de abrir su próximo local. Para empresas, gremios y universidades.',
   },
   {
-    titulo: 'Innovación y emprendimiento',
+    titulo: 'Franquicia Justa',
     detalle:
-      'Para emprendedores, estudiantes y gremios: modelos de negocio, propuesta de valor y cómo crecer desde regiones.',
+      'Cómo crear, elegir y hacer crecer franquicias donde ganan las dos partes. El modelo del royalty que solo se cobra si el franquiciado gana. Para franquiciadores, inversionistas y emprendedores.',
+  },
+  {
+    titulo: 'Primero los números',
+    detalle:
+      'Rentabilidad por local, EBITDA y las decisiones que llevaron a una cafetería en quiebra a vender diez veces más. Para dueños de pymes y equipos de gestión.',
   },
 ];
 
@@ -288,3 +293,49 @@ export const YOUTUBE = '';
 export const LIBRO_COMPRA = 'https://www.portalcomercios.cl/franquicias/libro';
 
 export const LINKEDIN = 'https://www.linkedin.com/in/maximiliano-pacheco-o/';
+
+// Kit de prensa (/prensa). Las bios van en tercera persona para que los medios las copien tal cual.
+export const prensa = {
+  nombre: 'Nico Pacheco',
+  nombreLegal: 'Maximiliano Pacheco Ortiz',
+  ciudad: 'Puerto Montt y Puerto Varas, Chile',
+  bioCorta:
+    'Nico Pacheco es empresario, director de empresas y autor de Franquicia Justa. Cofundó Mammaterra, cadena pionera de comida rápida saludable que llegó a 14 locales en Chile, y hoy dirige Kingdom Coffee. Asesora a dueños de pymes que quieren crecer sin poner en riesgo lo construido.',
+  bioLarga: [
+    'Nico Pacheco (Maximiliano Pacheco Ortiz) creció en Arauco y se pagó la universidad manejando un taxi de noche durante cuatro años. Se tituló de ingeniero acuícola en 2010 y antes de los 30 fundó y vendió negocios de transporte y turismo en el sur de Chile.',
+    'En 2017 cofundó Mammaterra, cadena pionera de comida rápida saludable, que creció hasta 14 locales y dos plantas de producción con un modelo propio: la franquicia justa, donde el royalty se cobra solo si el franquiciado tiene utilidad. La pandemia obligó a cerrar la cadena después de casi dos años sosteniendo a su equipo y a sus franquiciados.',
+    'De esa experiencia nació su método de crecimiento con disciplina financiera. Con él transformó una cafetería en quiebra en Kingdom Coffee, que hoy vende diez veces más que en 2024, y asesora a pymes y cadenas que quieren crecer, franquiciar o vender. En diciembre de 2026 lanza su libro Franquicia Justa.',
+    'Es director ejecutivo de Plan Innova Puerto Montt y columnista de emprendimiento e innovación en El Llanquihue. Tiene un MBA de la Universidad Europea de Madrid y un Mágister en Dirección Comercial, Marketing e Innovación de la Universidad Andrés Bello.',
+  ],
+  temasEntrevista: [
+    'Por qué fracasan las franquicias y cómo evaluar una antes de firmar',
+    'Rentabilidad por local: el error de crecer sin mirar los números',
+    'Perder una empresa y volver a empezar',
+    'Emprender y crecer desde regiones',
+    'Gastronomía: food cost, márgenes y el negocio detrás del plato',
+  ],
+  fotos: [
+    { archivo: '/fotos/retrato-perfil.jpg', titulo: 'Retrato horizontal' },
+    { archivo: '/fotos/speaker-azul-brazos.jpg', titulo: 'Retrato vertical' },
+    { archivo: '/fotos/hero-escritorio.jpg', titulo: 'En su escritorio' },
+    { archivo: '/fotos/conferencia-en-vivo.jpg', titulo: 'En conferencia' },
+    { archivo: '/fotos/recortes/nico-brazos-cruzados.png', titulo: 'Recorte sin fondo (PNG)' },
+    { archivo: '/fotos/libro/franquicia-justa-portada.jpg', titulo: 'Portada del libro' },
+  ],
+  libro: {
+    titulo: 'Franquicia Justa',
+    subtitulo: 'Reemplazando la subordinación por la colaboración',
+    detalle: 'Los 7 pilares para crear, elegir y hacer crecer franquicias donde todos ganan.',
+    datos: ['Prólogo de Gerardo Wijnant S.M.', '15 × 24 cm', 'ISBN 978-956-03-1419-2', 'Impreso y digital (Kindle, Apple Books y PDF)'],
+    lanzamiento: 'Lanzamiento: sábado 12 de diciembre de 2026, 10:30, en Kingdom Coffee.',
+  },
+  // Agrega aquí cada nota: { medio, titulo, fecha, url }. Las que tengan url se muestran como enlace.
+  apariciones: [
+    {
+      medio: 'Diario Financiero',
+      titulo: 'La fórmula "justa" de Mammaterra para crecer en pandemia',
+      fecha: '2021',
+      url: 'https://www.df.cl/empresas/consumo/la-formula-justa-de-mammaterra-para-crecer-en-pandemia-un-2021-con',
+    },
+  ],
+};
