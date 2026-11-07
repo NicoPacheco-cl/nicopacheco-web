@@ -273,49 +273,53 @@ export default async function Home() {
           </div>
 
           <div className="contenedor lb-cuerpo">
-            <h3 className="lb-h">Para quién es</h3>
-            <p className="lb-p">
-              Para quien está pensando en invertir en una franquicia, para el emprendedor que quiere
-              franquiciar su marca y transformarla en una cadena, y para quienes ya están dentro del
-              sistema y sienten que algo no está funcionando como debería.
-            </p>
-            <div className="lb-rutas">
-              <div>
-                <strong>Ruta del franquiciado</strong>
-                <p>Distingue una franquicia real de una que solo se hace llamar así, y elige sin equivocarte.</p>
-              </div>
-              <div>
-                <strong>Ruta del franquiciador</strong>
-                <p>Transforma tu marca en una Franquicia Justa, paso a paso.</p>
-              </div>
-            </div>
-
-            <h3 className="lb-h">Los 7 pilares de la Franquicia Justa</h3>
-            <ol className="lb-pilares">
-              {[
-                'Transparencia financiera',
-                'Una estructura que respalda',
-                'El franquiciado como socio',
-                'Propósito compartido',
-                'Proveedores que suman',
-                'Un contrato que se adapta',
-                'Una salida digna',
-              ].map((p, i) => (
-                <li key={p}>
-                  <span>{i + 1}</span>
-                  {p}
-                </li>
-              ))}
-            </ol>
-            <p className="lb-nota">
-              Incluye el autodiagnóstico «¿Es justa tu franquicia?», las proformas de los 8 negocios más
-              franquiciados, 10 casos reales, plantilla de proforma financiera y checklist de due
-              diligence.
-            </p>
-
             <div id="comprar-libro" className="lc-ancla">
               <LibroCompra precios={precios} />
             </div>
+            <details className="lb-mas">
+              <summary>Saber más sobre el libro</summary>
+              <div className="lb-mas-cuerpo">
+                <h3 className="lb-h">Para quién es</h3>
+                <p className="lb-p">
+                  Para quien está pensando en invertir en una franquicia, para el emprendedor que quiere
+                  franquiciar su marca y transformarla en una cadena, y para quienes ya están dentro del
+                  sistema y sienten que algo no está funcionando como debería.
+                </p>
+                <div className="lb-rutas">
+                  <div>
+                    <strong>Ruta del franquiciado</strong>
+                    <p>Distingue una franquicia real de una que solo se hace llamar así, y elige sin equivocarte.</p>
+                  </div>
+                  <div>
+                    <strong>Ruta del franquiciador</strong>
+                    <p>Transforma tu marca en una Franquicia Justa, paso a paso.</p>
+                  </div>
+                </div>
+
+                <h3 className="lb-h">Los 7 pilares de la Franquicia Justa</h3>
+                <ol className="lb-pilares">
+                  {[
+                    'Transparencia financiera',
+                    'Una estructura que respalda',
+                    'El franquiciado como socio',
+                    'Propósito compartido',
+                    'Proveedores que suman',
+                    'Un contrato que se adapta',
+                    'Una salida digna',
+                  ].map((p, i) => (
+                    <li key={p}>
+                      <span>{i + 1}</span>
+                      {p}
+                    </li>
+                  ))}
+                </ol>
+                <p className="lb-nota">
+                  Incluye el autodiagnóstico «¿Es justa tu franquicia?», las proformas de los 8 negocios más
+                  franquiciados, 10 casos reales, plantilla de proforma financiera y checklist de due
+                  diligence.
+                </p>
+              </div>
+            </details>
           </div>
         </section>
 

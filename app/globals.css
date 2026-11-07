@@ -2393,3 +2393,16 @@ a {
 }
 
 .sobre-detalle > p + p { margin-top: 1rem; }
+
+/* Libro compacto: la compra aparece al tocar "Comprar ahora" y el detalle queda plegado */
+.lb-cuerpo { padding-block: 0 3rem; }
+.lc-ancla { margin-top: 3rem; }
+.lc-ancla:not(:target) { display: none; }
+.lb-mas { margin-top: 2.5rem; border-top: 1px solid var(--linea); }
+.lb-mas > summary { cursor: pointer; list-style: none; display: inline-flex; align-items: center; gap: 0.6rem; padding-block: 1.1rem; font-weight: 700; text-decoration: underline; text-underline-offset: 4px; }
+.lb-mas > summary::-webkit-details-marker { display: none; }
+.lb-mas > summary::after { content: '+'; font-size: 1.25rem; line-height: 1; text-decoration: none; }
+.lb-mas[open] > summary::after { content: '−'; }
+.lb-mas[open] > summary { text-decoration: none; }
+.lb-mas-cuerpo { padding-bottom: 1rem; }
+.lb-mas-cuerpo > .lb-h:first-child { margin-top: 0.5rem; }
