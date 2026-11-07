@@ -277,7 +277,7 @@ export default async function Home() {
               <LibroCompra precios={precios} />
             </div>
             <details className="lb-mas">
-              <summary>Saber más sobre el libro</summary>
+              <summary>Saber más del libro</summary>
               <div className="lb-mas-cuerpo">
                 <h3 className="lb-h">Para quién es</h3>
                 <p className="lb-p">
