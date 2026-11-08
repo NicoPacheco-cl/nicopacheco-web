@@ -425,8 +425,8 @@ export default async function Home() {
             </p>
             <p className="sobre-grande">
               Me pagué la universidad manejando un taxi de noche. Construí una cadena de 14 locales, la
-              perdí en la pandemia y volví a empezar. Lo que aprendí cabe en una frase: primero los
-              números, después crecer.
+              perdí en la pandemia y volví a empezar. Lo que aprendí cabe en una frase: primero el
+              modelo, después el valor.
             </p>
             <div className="sobre-detalle">
               <p>

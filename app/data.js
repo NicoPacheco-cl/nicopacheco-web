@@ -227,7 +227,7 @@ export const tienda = [
 
 export const charlas = [
   {
-    titulo: 'Crecer sin quebrar',
+    titulo: 'Construir, caer y volver a construir',
     detalle:
       'Cómo construí una cadena de 14 locales, la perdí en la pandemia y volví a empezar. Lo que cada dueño debería revisar antes de abrir su próximo local. Para empresas, gremios y universidades.',
   },
@@ -237,7 +237,7 @@ export const charlas = [
       'Cómo crear, elegir y hacer crecer franquicias donde ganan las dos partes. El modelo del royalty que solo se cobra si el franquiciado gana. Para franquiciadores, inversionistas y emprendedores.',
   },
   {
-    titulo: 'Primero los números',
+    titulo: 'Primero el modelo, después el valor',
     detalle:
       'Rentabilidad por local, EBITDA y las decisiones que llevaron a una cafetería en quiebra a vender diez veces más. Para dueños de pymes y equipos de gestión.',
   },
