@@ -29,13 +29,17 @@ function Celda({ m }) {
 }
 
 // Ficha con perfiles: el visitante elige y se despliega solo lo suyo.
-function Perfiles({ ficha, alContactar }) {
+function Perfiles({ ficha, opciones, alContactar }) {
   const [elegido, setElegido] = useState(null);
   const p = ficha.perfiles.find((x) => x.id === elegido);
   return (
     <div className="perfiles">
-      <p className="perfiles-pregunta">{ficha.pregunta}</p>
-      <div className="perfiles-opciones" role="group" aria-label={ficha.pregunta}>
+      {ficha.pregunta ? <p className="perfiles-pregunta">{ficha.pregunta}</p> : null}
+      <div
+        className={ficha.perfiles.length === 1 ? 'perfiles-opciones perfiles-opciones-uno' : 'perfiles-opciones'}
+        role="group"
+        aria-label={ficha.pregunta || ficha.perfiles[0].boton}
+      >
         {ficha.perfiles.map((x) => (
           <button
             key={x.id}
@@ -59,12 +63,48 @@ function Perfiles({ ficha, alContactar }) {
               <li key={t}>{t}</li>
             ))}
           </ul>
+          {p.etapas?.length ? (
+            <ol className="ficha-sesiones perfil-etapas">
+              {p.etapas.map((m) => (
+                <li key={m.paso} className="ficha-sesion">
+                  <p className="ficha-numero">
+                    {m.paso} <span>{m.detalle}</span>
+                  </p>
+                  <h5>{m.titulo}</h5>
+                  {m.texto ? <p>{m.texto}</p> : null}
+                  {m.puntos ? (
+                    <ul>
+                      {m.puntos.map((t) => (
+                        <li key={t}>{t}</li>
+                      ))}
+                    </ul>
+                  ) : null}
+                </li>
+              ))}
+            </ol>
+          ) : null}
           <blockquote className="perfil-frase">
-            <p>“{ficha.frase}”</p>
+            <p>“{p.frase || ficha.frase}”</p>
             <footer>Nico Pacheco</footer>
           </blockquote>
-          <a href={contacto(p.interes)} className="btn btn-blanco perfil-accion" onClick={alContactar}>
-            {ficha.accion}
+          {p.precio ? (
+            <div className="perfil-precio">
+              <span className="detalle-precio-rotulo">Valor</span>
+              <span className="detalle-precio">{p.precio}</span>
+              {p.precioDetalle ? <span className="perfil-precio-detalle">{p.precioDetalle}</span> : null}
+            </div>
+          ) : null}
+          {p.pago && opciones?.length ? (
+            <div className="detalle-pago perfil-pago">
+              <PagoServicio opciones={opciones} />
+            </div>
+          ) : null}
+          <a
+            href={contacto(p.interes)}
+            className={p.pago && opciones?.length ? 'btn btn-linea-clara perfil-accion' : 'btn btn-blanco perfil-accion'}
+            onClick={alContactar}
+          >
+            {p.pago && opciones?.length ? '¿Tienes dudas? Contáctanos' : ficha.accion}
           </a>
         </div>
       ) : null}
@@ -196,7 +236,7 @@ export default function Mosaico({ items }) {
               {s.nombre}
             </h3>
             {s.ficha?.perfiles ? (
-              <Perfiles key={s.id} ficha={s.ficha} alContactar={() => setAbierto(null)} />
+              <Perfiles key={s.id} ficha={s.ficha} opciones={s.opciones} alContactar={() => setAbierto(null)} />
             ) : (
               <>
                 <p className="detalle-resena">{s.resena}</p>

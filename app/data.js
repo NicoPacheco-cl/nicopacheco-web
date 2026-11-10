@@ -123,13 +123,13 @@ export const servicios = [
       {
         id: 'franquicias',
         mosaico: { titulo: 'Franquicias', etiqueta: 'Expansión', fondo: '#4a4a4a', marca: 'FRANQUICIA' },
-        nombre: 'Asesoría en franquicias',
+        nombre: 'Asesoramiento integral Franquicias 360°',
         resena:
           'Evaluamos si tu negocio es franquiciable y construimos el modelo completo: números del franquiciado, manuales de operación, contrato y plan de expansión.',
         importancia:
           'Una franquicia mal diseñada quema la marca y a los socios. Bien hecha, es la forma más rápida de crecer sin poner todo el capital.',
-        precio: 'Desde $2.500.000 por proyecto',
-        accion: 'Pedir cotización',
+        precio: '$490.000',
+        accion: 'Pagar y agendar',
         destacado: true,
       },
       {
@@ -191,6 +191,51 @@ export const fichas = {
       },
     ],
     frase: FRASE_LLAVE,
+    accion: 'Contáctanos',
+  },
+  // Franquicias: un solo botón que despliega la asesoría 360°, con precio y pago.
+  franquicias: {
+    perfiles: [
+      {
+        id: 'franquicias-360',
+        boton: 'Asesoramiento integral Franquicias 360°',
+        titulo: 'Compra una franquicia con los ojos abiertos',
+        intro:
+          'Comprar una franquicia es comprar una promesa: ventas, márgenes y el apoyo de la marca. Mi trabajo es comprobar si esa promesa se cumple en la realidad. Lo hago con la experiencia de haber creado marcas franquiciadoras, de haber vendido franquicias y de haber escrito el libro Franquicia Justa.',
+        rotulo: 'Qué hacemos',
+        puntos: [
+          'Te ayudo a elegir la franquicia que mejor se ajusta a tu capital, tu perfil y tus objetivos',
+          'Auditamos por completo la oportunidad de negocio: números, contrato y modelo de la marca',
+          'Comprobamos con franquiciados reales si la promesa de venta se cumple',
+        ],
+        etapas: [
+          {
+            paso: 'Reunión 1',
+            detalle: 'Online o presencial',
+            titulo: 'La oferta de franquicia',
+            texto: 'Revisamos juntos la oferta y estudiamos a fondo la promesa de la marca: inversión, ventas esperadas, márgenes, costos y obligaciones.',
+          },
+          {
+            paso: 'Semana de análisis',
+            detalle: '1 semana',
+            titulo: 'La marca en terreno',
+            puntos: ['Análisis de mercado', 'Entrevistas a franquiciados reales', 'Informe de conclusiones y análisis de la marca'],
+          },
+          {
+            paso: 'Reunión 2',
+            detalle: 'Online o presencial',
+            titulo: 'Informe y veredicto',
+            texto: 'Te presento el informe de análisis de la marca: la veracidad de su promesa, sus alcances y las oportunidades reales de inversión.',
+          },
+        ],
+        frase:
+          'Ahorrarte la asesoría puede salir carísimo. Más vale invertir en la mirada de un experto que arriesgar todo tu capital en una marca que nunca fue rentable y cuya promesa resultó ser casi un engaño.',
+        precio: '$490.000',
+        precioDetalle: 'Incluye 2 reuniones, la semana de análisis y el informe final',
+        pago: true,
+        interes: 'franquicias',
+      },
+    ],
     accion: 'Contáctanos',
   },
   diagnostico: {
