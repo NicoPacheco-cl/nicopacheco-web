@@ -39,10 +39,10 @@ export const problemas = [
     accion: 'Ver venta de derechos de llave',
   },
   {
-    frase: 'Mi marca funciona y quiero replicarla.',
-    respuesta: 'Evaluamos si tu negocio es franquiciable y armamos el modelo para crecer con socios.',
+    frase: 'Quiero comprar una franquicia y no sé si es buen negocio.',
+    respuesta: 'Te ayudo a elegir la franquicia correcta y comprobamos si su promesa se cumple antes de que inviertas.',
     href: '#franquicias',
-    accion: 'Ver asesoría en franquicias',
+    accion: 'Ver Franquicias 360°',
   },
 ];
 
@@ -118,16 +118,16 @@ export const servicios = [
   },
   {
     id: 'franquiciar',
-    necesidad: 'Quiero franquiciar mi marca',
+    necesidad: 'Quiero comprar una franquicia',
     items: [
       {
         id: 'franquicias',
-        mosaico: { titulo: 'Franquicias', etiqueta: 'Expansión', fondo: '#4a4a4a', marca: 'FRANQUICIA' },
-        nombre: 'Asesoramiento integral Franquicias 360°',
+        mosaico: { titulo: 'Franquicias 360°', etiqueta: 'Para franquiciados', fondo: '#4a4a4a', marca: 'FRANQUICIA' },
+        nombre: 'Franquicias 360°: asesoría para comprar una franquicia',
         resena:
-          'Evaluamos si tu negocio es franquiciable y construimos el modelo completo: números del franquiciado, manuales de operación, contrato y plan de expansión.',
+          'Te ayudo a elegir la franquicia que mejor se ajusta a tus posibilidades y auditamos por completo la oportunidad antes de que inviertas, para comprobar si la promesa de la marca se cumple en la realidad.',
         importancia:
-          'Una franquicia mal diseñada quema la marca y a los socios. Bien hecha, es la forma más rápida de crecer sin poner todo el capital.',
+          'Una franquicia bien elegida es una forma segura de emprender. Una marca que no es rentable puede costarte todo tu capital. Antes de firmar, conviene saber si los números que te prometen son reales.',
         precio: '$490.000',
         accion: 'Pagar y agendar',
         destacado: true,
@@ -361,7 +361,7 @@ export const intereses = [
   { value: 'derecho-de-llave', label: 'Derechos de llave' },
   { value: 'llave-vendedor', label: 'Derechos de llave: quiero vender' },
   { value: 'llave-comprador', label: 'Derechos de llave: quiero comprar' },
-  { value: 'franquicias', label: 'Asesoría en franquicias' },
+  { value: 'franquicias', label: 'Franquicias 360°: quiero comprar una franquicia' },
   { value: 'planilla', label: 'Planillas financieras' },
   { value: 'planilla-gratis', label: 'Planilla de flujo de caja gratis' },
   { value: 'libro', label: 'Libro Franquicia Justa' },
