@@ -106,7 +106,7 @@ export const servicios = [
       {
         id: 'derecho-de-llave',
         mosaico: { titulo: 'Derechos de llave', etiqueta: 'Compraventa', fondo: '#151b2b', marca: 'LLAVE' },
-        nombre: 'Venta de derechos de llave',
+        nombre: 'Derechos de llave',
         resena:
           'Preparo tu negocio para la venta, fijamos un precio defendible, buscamos compradores y te acompaño en la negociación hasta el cierre.',
         importancia:
@@ -150,8 +150,49 @@ export const servicios = [
 // Detalle ampliado de cada servicio, por id. Se muestra en su ventana de detalle.
 // testimonio.youtube es el código del video de YouTube; testimonio.video, un archivo propio.
 // Cuando tengas el informe, completa informe.href.
+// Frase de cierre que comparten vendedor y comprador de derechos de llave.
+const FRASE_LLAVE = 'Lo más inteligente antes de invertir es asesorarse para invertir con inteligencia. Que no te gane la ansiedad: detente un minuto, déjate asesorar y te darás cuenta de que es la mejor inversión que harás.';
+
 export const fichas = {
   'valorizacion-pyme': { href: '/valoriza', directo: true },
+  // Derechos de llave: el visitante elige su perfil. Sin precios por ahora: solo contacto.
+  'derecho-de-llave': {
+    pregunta: '¿Vas a vender o a comprar?',
+    perfiles: [
+      {
+        id: 'vendedor',
+        boton: 'Soy vendedor',
+        titulo: 'Vende tu negocio, no solo tu local',
+        intro:
+          'Esto no es corretaje de propiedades: es una asesoría comercial para vender tu negocio. Quien compra no se lleva un local, sino un negocio en marcha, con flujos proyectados y un plan para que le vaya bien.',
+        rotulo: 'Qué incluye',
+        puntos: [
+          'Análisis completo del estado actual del negocio',
+          'Diagnóstico actualizado de la operación y sus números',
+          'Valorización del negocio, con un precio que puedas defender',
+          'Estrategia de venta para encontrar al comprador ideal',
+          'Flujos proyectados que muestran lo que el negocio puede generar',
+          'Estrategia de lanzamiento y modelo de gestión para que al nuevo dueño le vaya bien',
+        ],
+        interes: 'llave-vendedor',
+      },
+      {
+        id: 'comprador',
+        boton: 'Soy comprador',
+        titulo: 'Compra una oportunidad de crecimiento',
+        intro:
+          'Invierte en un negocio rentable y con proyección, donde lo que realmente compras es una oportunidad de crecimiento. Paga el precio justo y comienza a emprender como lo hacen los que saben.',
+        rotulo: 'Cómo te ayudamos',
+        puntos: [
+          'Analizamos el derecho de llave que estás a punto de comprar: sus números reales, el precio justo y los riesgos',
+          'O buscamos el negocio que mejor se ajuste a lo que buscas y necesitas',
+        ],
+        interes: 'llave-comprador',
+      },
+    ],
+    frase: FRASE_LLAVE,
+    accion: 'Contáctanos',
+  },
   diagnostico: {
     sesiones: [
       {
@@ -272,7 +313,9 @@ export const intereses = [
   { value: 'mentoring', label: 'Mentoring' },
   { value: 'directorio-pyme', label: 'Directorio PYME' },
   { value: 'valorizacion-pyme', label: 'Valorización Pyme' },
-  { value: 'derecho-de-llave', label: 'Venta de derechos de llave' },
+  { value: 'derecho-de-llave', label: 'Derechos de llave' },
+  { value: 'llave-vendedor', label: 'Derechos de llave: quiero vender' },
+  { value: 'llave-comprador', label: 'Derechos de llave: quiero comprar' },
   { value: 'franquicias', label: 'Asesoría en franquicias' },
   { value: 'planilla', label: 'Planillas financieras' },
   { value: 'planilla-gratis', label: 'Planilla de flujo de caja gratis' },

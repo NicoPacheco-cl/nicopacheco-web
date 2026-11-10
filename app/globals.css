@@ -1810,6 +1810,110 @@ a {
   max-width: 16ch;
 }
 
+/* Ficha con perfiles (derechos de llave): vendedor o comprador */
+.perfiles {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+.perfiles-pregunta {
+  font-family: var(--cursiva);
+  font-style: italic;
+  font-size: 1.35rem;
+}
+.perfiles-opciones {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+.perfiles-opcion {
+  padding: 1rem 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  background: transparent;
+  color: var(--blanco);
+  font-family: var(--display);
+  font-size: 1.15rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+.perfiles-opcion:hover {
+  border-color: var(--blanco);
+}
+.perfiles-opcion.activa {
+  background: var(--blanco);
+  border-color: var(--blanco);
+  color: var(--negro);
+}
+.perfiles-opcion:focus-visible {
+  outline: 2px solid var(--blanco);
+  outline-offset: 3px;
+}
+.perfil {
+  display: grid;
+  gap: 0.9rem;
+  padding-top: 0.5rem;
+}
+.perfil-titulo {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(1.5rem, 5vw, 2rem);
+  line-height: 1.1;
+  text-transform: uppercase;
+  text-wrap: balance;
+}
+.perfil-intro {
+  color: #e6e6e6;
+}
+.perfil-puntos {
+  display: grid;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.perfil-puntos li {
+  position: relative;
+  padding-left: 1.25rem;
+  color: #e6e6e6;
+}
+.perfil-puntos li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.7em;
+  width: 0.6rem;
+  height: 1px;
+  background: var(--blanco);
+}
+.perfil-frase {
+  margin: 0.75rem 0 0;
+  padding: 1.25rem;
+  border-left: 2px solid var(--acento);
+  background: rgba(255, 255, 255, 0.06);
+}
+.perfil-frase p {
+  font-family: var(--cursiva);
+  font-style: italic;
+  font-size: 1.2rem;
+  line-height: 1.4;
+}
+.perfil-frase footer {
+  margin-top: 0.6rem;
+  font-size: 0.8125rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gris-claro);
+}
+.perfil-accion {
+  justify-self: start;
+  margin-top: 0.5rem;
+}
+@media (prefers-reduced-motion: reduce) {
+  .perfiles-opcion { transition: none; }
+}
+
 /* Detalle ampliado del servicio: sesiones, testimonio e informe */
 .ficha {
   display: grid;

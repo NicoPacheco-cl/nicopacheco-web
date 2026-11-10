@@ -28,6 +28,50 @@ function Celda({ m }) {
   );
 }
 
+// Ficha con perfiles: el visitante elige y se despliega solo lo suyo.
+function Perfiles({ ficha, alContactar }) {
+  const [elegido, setElegido] = useState(null);
+  const p = ficha.perfiles.find((x) => x.id === elegido);
+  return (
+    <div className="perfiles">
+      <p className="perfiles-pregunta">{ficha.pregunta}</p>
+      <div className="perfiles-opciones" role="group" aria-label={ficha.pregunta}>
+        {ficha.perfiles.map((x) => (
+          <button
+            key={x.id}
+            type="button"
+            className={x.id === elegido ? 'perfiles-opcion activa' : 'perfiles-opcion'}
+            aria-pressed={x.id === elegido}
+            aria-controls="perfil-detalle"
+            onClick={() => setElegido(x.id)}
+          >
+            {x.boton}
+          </button>
+        ))}
+      </div>
+      {p ? (
+        <div className="perfil" id="perfil-detalle" key={p.id}>
+          <h4 className="perfil-titulo">{p.titulo}</h4>
+          <p className="perfil-intro">{p.intro}</p>
+          <p className="ficha-rotulo">{p.rotulo}</p>
+          <ul className="perfil-puntos">
+            {p.puntos.map((t) => (
+              <li key={t}>{t}</li>
+            ))}
+          </ul>
+          <blockquote className="perfil-frase">
+            <p>“{ficha.frase}”</p>
+            <footer>Nico Pacheco</footer>
+          </blockquote>
+          <a href={contacto(p.interes)} className="btn btn-blanco perfil-accion" onClick={alContactar}>
+            {ficha.accion}
+          </a>
+        </div>
+      ) : null}
+    </div>
+  );
+}
+
 function Ficha({ ficha }) {
   const { sesiones, testimonio, informe } = ficha;
   return (
@@ -151,13 +195,19 @@ export default function Mosaico({ items }) {
             <h3 id="detalle-titulo" className="detalle-titulo">
               {s.nombre}
             </h3>
-            <p className="detalle-resena">{s.resena}</p>
-            <div className="detalle-importa">
-              <span>Por qué importa</span>
-              <p>{s.importancia}</p>
-            </div>
-            {s.ficha && <Ficha ficha={s.ficha} />}
-            {s.opciones?.length ? (
+            {s.ficha?.perfiles ? (
+              <Perfiles key={s.id} ficha={s.ficha} alContactar={() => setAbierto(null)} />
+            ) : (
+              <>
+                <p className="detalle-resena">{s.resena}</p>
+                <div className="detalle-importa">
+                  <span>Por qué importa</span>
+                  <p>{s.importancia}</p>
+                </div>
+              </>
+            )}
+            {s.ficha && !s.ficha.perfiles && <Ficha ficha={s.ficha} />}
+            {s.ficha?.perfiles ? null : s.opciones?.length ? (
               <div className="detalle-pago">
                 <PagoServicio key={s.id} opciones={s.opciones} />
               </div>
